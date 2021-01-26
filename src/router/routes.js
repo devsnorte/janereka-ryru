@@ -28,6 +28,11 @@ const routes = [
         path: '/arquivos',
         name: 'arquivos',
         component: () => import('pages/Arquivos.vue')
+      },
+      {
+        path: '/mapa',
+        name: 'mapa',
+        component: () => import('pages/Mapa.vue')
       }
     ]
   },
