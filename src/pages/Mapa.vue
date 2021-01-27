@@ -1,6 +1,11 @@
 <template>
-  <q-page>
-    <l-map style="height: 88vh" :zoom="zoom" :center="center">
+  <q-page padding>
+    <l-map
+      v-if="show"
+      style="height:85vh"
+      :zoom="zoom"
+      :center.sync="center"
+    >
       <l-tile-layer :url="url"></l-tile-layer>
         <l-marker
           v-for="(maker, index) in makers"
@@ -13,15 +18,6 @@
             Troco por: <strong>Pagamento PicPay</strong>
           </l-tooltip>
         </l-marker>
-      <!-- <l-marker
-        :lat-lng="center2"
-        :icon="icon"
-      >
-        <l-tooltip>
-          Ofereço: <strong>Madeira </strong><br>
-          Troco por: <strong>Tijolo</strong>
-        </l-tooltip>
-      </l-marker> -->
     </l-map>
   </q-page>
 </template>
@@ -35,7 +31,7 @@ export default {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       zoom: 20,
       center: [0, 0],
-      makers: [0, 0],
+      makers: [{ lat: 0, long: 0 }],
       icon: L.icon({
         iconUrl: 'cocar2.png',
         iconSize: [40, 40],
@@ -43,14 +39,15 @@ export default {
       }),
       staticAnchor: [16, 37],
       customText: 'Foobar',
-      iconSize: 64
+      iconSize: 64,
+      show: false
     }
   },
   mounted () {
     this.getGeolocation()
   },
   methods: {
-    getGeolocation () {
+    async getGeolocation () {
       if (navigator.geolocation) {
         this.$q.loading.show()
         navigator.geolocation.getCurrentPosition(this.setPosition, this.errorPosition)
@@ -58,9 +55,9 @@ export default {
         this.errorPosition()
       }
     },
-    setPosition (position) {
-      const { latitude, longitude } = position.coords
-      this.center = [latitude, longitude]
+    async setPosition (position) {
+      const { latitude, longitude } = await position.coords
+      this.setCenter(latitude, longitude)
       this.makers.push({ lat: latitude, long: longitude })
       this.makers.push(
         { lat: latitude + 0.0005, long: longitude + 0.0005 },
@@ -85,6 +82,12 @@ export default {
         message: 'Não foi possível recupera sua posição!'
       })
       this.$q.loading.hide()
+    },
+    setCenter (latitude, longitude) {
+      console.log('CHAMOU CENTRALIZAR:', { latitude, longitude })
+      this.center = [latitude, longitude]
+      // this.$refs.map.mapObject.panTo([latitude, longitude])
+      this.show = true
     }
   }
 }
