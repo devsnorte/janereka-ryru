@@ -3,14 +3,19 @@
   <l-tile-layer :url="url"></l-tile-layer>
   <l-marker :lat-lng="center" >
     <l-tooltip>
-      Ofereço: <strong>Serviço de pedreiro </strong><br>
-      Troco por:  <strong> Almoço</strong>
+      Ofereço: <strong>Banana </strong><br>
+      Troco por: <strong>Peixe</strong>
     </l-tooltip>
   </l-marker>
-  <!-- <l-marker
-    :lat-lng="center"
+  <l-marker
+    :lat-lng="center2"
     :icon="icon"
-  /> -->
+  >
+    <l-tooltip>
+      Ofereço: <strong>Madeira </strong><br>
+      Troco por: <strong>Tijolo</strong>
+    </l-tooltip>
+  </l-marker>
 </l-map>
 </template>
 
@@ -31,7 +36,8 @@ export default {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       zoom: 20,
-      center: [-23.622160599999997, -46.638571999999996],
+      center: [-1.4092054999999999, -48.468170099999995],
+      center2: [-1.4082054999999999, -48.467170099999995],
       icon: L.icon({
         iconUrl: 'icons/favicon-32x32.png',
         iconSize: [40, 40],
