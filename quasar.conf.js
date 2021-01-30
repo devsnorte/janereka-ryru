@@ -90,9 +90,7 @@ module.exports = function (/* ctx */) {
           primary: '#2d7e36',
           secondary: '#f0ebeb',
           accent: '#9C27B0',
-  
           dark: '#1d1d1d',
-  
           positive: '#21BA45',
           negative: '#C10015',
           info: '#31CCEC',
