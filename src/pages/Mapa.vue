@@ -4,7 +4,7 @@
       v-if="show"
       style="height:85vh"
       :zoom="zoom"
-      :center.sync="center"
+      :center="center"
     >
       <l-tile-layer :url="url"></l-tile-layer>
         <l-marker
@@ -50,7 +50,12 @@ export default {
     async getGeolocation () {
       if (navigator.geolocation) {
         this.$q.loading.show()
-        navigator.geolocation.getCurrentPosition(this.setPosition, this.errorPosition)
+        const options = { timeout: 60000 }
+        navigator.geolocation.getCurrentPosition(
+          this.setPosition,
+          this.errorPosition,
+          options
+        )
       } else {
         this.errorPosition()
       }
