@@ -101,6 +101,12 @@ const linksData = [
     caption: '',
     icon: 'picture_as_pdf',
     route: 'arquivos'
+  },
+  {
+    title: 'Mapa',
+    caption: '',
+    icon: 'map',
+    route: 'mapa'
   }
 ]
 
