@@ -2,6 +2,17 @@
 const routes = [
   {
     path: '/',
+    component: () => import('layouts/LoginLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'login',
+        component: () => import('pages/Login.vue')
+      }
+    ]
+  },
+  {
+    path: '/dashboard',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
@@ -33,17 +44,6 @@ const routes = [
         path: '/mapa',
         name: 'mapa',
         component: () => import('pages/Mapa.vue')
-      }
-    ]
-  },
-  {
-    path: '/login',
-    component: () => import('layouts/LoginLayout.vue'),
-    children: [
-      {
-        path: '',
-        name: 'login',
-        component: () => import('pages/Login.vue')
       }
     ]
   },

@@ -91,6 +91,9 @@ export default {
   methods: {
     login () {
       this.loading = true
+      setTimeout(() => {
+        this.$router.push('dashboard')
+      }, 2000)
     }
   }
 }
