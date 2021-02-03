@@ -38,6 +38,11 @@
                   oncut="return false"
                 />
               </div>
+              <div class="q-my-md text-center">
+                <a href="">
+                  Esqueceu a senha?
+                </a>
+              </div>
               <div class="q-mt-sm col-xs-10 col-sm-7">
                 <q-btn
                   color="primary"

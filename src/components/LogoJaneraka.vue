@@ -1,5 +1,5 @@
 <template>
-  <div class="fit column wrap content-center">
+  <div class="column wrap content-center inline">
     <div class="logo">
       <div class="logo-img">
           <img src="~/assets/janeraka.svg" alt="">
@@ -21,24 +21,23 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (max-width: 760px) {
-  .logo {
-      margin-top: 80px;
-  }
-  .logo-text {
-    font-size: 32px !important;
-  }
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
+
 .logo {
   text-transform: uppercase;
   filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.1));
   fill: black;
+  max-width: 100%;
 }
 
 .logo-text {
   font-family: monument;
-  padding-top: 20px;
-  font-size: 42px;
+  padding-top: 0.5em;
+  font-size: 2.7em;
   line-height: 1;
 }
 </style>
