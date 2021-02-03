@@ -2,20 +2,33 @@
   <q-layout view="hHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
+        <!-- <q-btn
           flat
           dense
           round
           icon="menu"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+        /> -->
 
         <q-toolbar-title>
-          Quasar Acervo Digital
+          <div style="font-family: monument;">
+            Janeraka
+          </div>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div class="gt-xs">
+          <q-tabs align="right" shrink>
+            <q-route-tab
+              v-for="(tab, index) in essentialLinks"
+              :key="index"
+              :label="tab.title"
+              exact
+              content-class="text-weight-thin"
+              :to="{ name: tab.route }"
+            />
+          </q-tabs>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -69,7 +82,7 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+import EssentialLink from 'components/EssentialLink'
 
 const linksData = [
   {
