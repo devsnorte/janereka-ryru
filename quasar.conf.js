@@ -87,10 +87,10 @@ module.exports = function (/* ctx */) {
       lang: 'en-us', // Quasar language pack
       config: {
         brand: {
-          primary: '#2d7e36',
-          secondary: '#f0ebeb',
-          accent: '#9C27B0',
-          dark: '#1d1d1d',
+          primary: '#a40000',
+          secondary: '#ec9822',
+          accent: '#551000',
+          dark: '#000000',
           positive: '#21BA45',
           negative: '#C10015',
           info: '#31CCEC',
@@ -113,7 +113,8 @@ module.exports = function (/* ctx */) {
       // Quasar plugins
       plugins: [
         'Loading',
-        'Notify'
+        'Notify',
+        'Meta'
       ]
     },
 

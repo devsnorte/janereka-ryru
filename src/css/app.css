@@ -1,4 +1,9 @@
 @font-face {
-    font-family: monument;
-    src: url(./fonts/monument.woff);
-  }
+  font-family: monument;
+  src: url(./fonts/monument.woff);
+}
+
+.q-tab {
+  padding: 0px;
+  margin: 0px;
+}

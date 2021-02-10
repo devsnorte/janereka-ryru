@@ -1,14 +1,11 @@
 <template>
   <q-page class="container">
     <div class="row full-height">
-      <div
-        class="col"
-      >
+      <div class="col">
         <div class="column justify-center q-pa-md window-height">
           <div class="row justify-center q-col-gutter-md">
             <q-form @submit="login">
               <div class="col-12 text-center">
-                <LogoJaneraka />
                 <h1 class="text-weight-bold text-h4 q-mt-xl">
                   Entre com sua conta
                 </h1>
@@ -74,11 +71,9 @@
 </template>
 
 <script>
-import LogoJaneraka from 'components/LogoJaneraka'
 
 export default {
   name: 'Login',
-  components: { LogoJaneraka },
   data () {
     return {
       user: {
