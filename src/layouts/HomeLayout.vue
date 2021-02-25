@@ -20,6 +20,12 @@
             no-caps
           />
         </q-tabs>
+        <q-btn
+          color="white"
+          text-color="black"
+          no-caps
+          label="Login/Cadastro"
+        />
       </q-toolbar>
     </q-header>
 
