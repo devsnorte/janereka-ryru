@@ -74,7 +74,7 @@ export default {
       customText: 'Foobar',
       iconSize: 64,
       show: false,
-      dialogInfo: true
+      dialogInfo: false
     }
   },
   mounted () {
@@ -106,7 +106,10 @@ export default {
         { lat: latitude - 0.0005, long: longitude - 0.0005 },
         { lat: latitude - 0.0008, long: longitude - 0.0008 },
         { lat: latitude - 0.0003, long: longitude - 0.0008 },
-        { lat: latitude - 0.0013, long: longitude - 0.0011 }
+        { lat: latitude - 0.0013, long: longitude - 0.0011 },
+        { lat: -1.503906, long: -48.464650 },
+        { lat: -0.814872, long: -48.585722 },
+        { lat: -7.289569, long: -67.224424 }
       )
       this.$q.loading.hide()
     },
@@ -139,12 +142,13 @@ export default {
 <style scoped>
 .map-size {
   /* Firefox */
-  height: -moz-calc(100% - 50px);
+  height: -moz-calc(100vh - 50px);
   /* WebKit */
-  height: -webkit-calc(100% - 50px);
+  height: -webkit-calc(100vh - 50px);
   /* Opera */
-  height: -o-calc(100% - 50px);
+  height: -o-calc(100vh - 50px);
   /* Standard */
-  height: calc(100% - 50px);
+  height: calc(100vh - 50px);
+  /* min-height: 90vh; */
 }
 </style>
