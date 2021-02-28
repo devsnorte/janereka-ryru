@@ -4,8 +4,9 @@
       <div class="col-12">
         <q-table
           grid
+          :loading="loading"
           title="Acervo de Vídeos"
-          :data="video"
+          :data="videos"
           :columns="columns"
           row-key="id"
           :filter="filter"
@@ -14,7 +15,7 @@
           :pagination="initialPagination"
         >
         <template v-slot:top-right>
-          <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+          <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
             <template v-slot:append>
               <q-icon name="search" />
             </template>
@@ -33,7 +34,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line
 export default {
   name: 'PageImagens',
   components: {
@@ -54,24 +54,25 @@ export default {
         { name: 'name', label: 'Name', field: 'name' },
         { name: 'author', label: 'Autor', field: 'author' }
       ],
-      video: []
+      videos: [],
+      loading: false
     }
   },
   mounted () {
     this.getvideos()
   },
   methods: {
-    getvideos () {
-      this.$q.loading.show()
-      this.$axios.get('https://cors-anywhere.herokuapp.com/https://baobaxia.mocambos.net/api/mocambos/rede/bbx/search/video/limit/20/20')
-        .then((suc) => {
-          this.video = suc.data
-          this.$q.loading.hide()
-          console.log(suc)
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+    async getvideos () {
+      this.loading = true
+      try {
+        const response = await this.$axios.get('/video/limit/20/20')
+        this.videos = response.data
+      } catch (err) {
+        this.$q.notify('Erro ao recuperar informações')
+        console.error(err)
+      } finally {
+        this.loading = false
+      }
     }
   }
 }

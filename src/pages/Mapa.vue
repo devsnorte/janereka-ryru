@@ -1,10 +1,10 @@
 <template>
-  <q-page padding>
+  <q-page>
     <l-map
       v-if="show"
-      style="height:85vh"
       :zoom="zoom"
       :center="center"
+      class="map-size"
     >
       <l-tile-layer :url="url"></l-tile-layer>
         <l-marker
@@ -12,6 +12,7 @@
           :key="index"
           :lat-lng="[maker.lat, maker.long]"
           :icon="icon"
+          @click="showDialog"
         >
           <l-tooltip>
             Ofereço: <strong>Aulas de Quasar Framework </strong><br>
@@ -19,6 +20,38 @@
           </l-tooltip>
         </l-marker>
     </l-map>
+    <q-dialog
+      v-model="dialogInfo"
+      position="right"
+      full-height
+    >
+      <q-card style="width: 700px; max-width: 80vw;">
+        <q-card-section class="bg-primary">
+          <div class="text-h6 text-white">
+            Detalhes
+            <q-btn
+              icon="close"
+              class="text-white float-right"
+              v-close-popup
+              flat
+            />
+          </div>
+
+        </q-card-section>
+
+        <q-card-section class="text-body1">
+          Nossa comunidade oferece peixe em troca de lenha para fogão, tijolo e telha.
+        </q-card-section>
+
+        <q-card-section class="text-body1">
+          Comunidade: Janekara
+        </q-card-section>
+
+        <q-card-actions align="right" class="bg-white text-teal absolute-bottom q-pb-sm">
+          <q-btn flat label="OK" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -29,7 +62,7 @@ export default {
   data () {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 20,
+      zoom: 5,
       center: [0, 0],
       makers: [{ lat: 0, long: 0 }],
       icon: L.icon({
@@ -40,7 +73,8 @@ export default {
       staticAnchor: [16, 37],
       customText: 'Foobar',
       iconSize: 64,
-      show: false
+      show: false,
+      dialogInfo: true
     }
   },
   mounted () {
@@ -93,7 +127,24 @@ export default {
       this.center = [latitude, longitude]
       // this.$refs.map.mapObject.panTo([latitude, longitude])
       this.show = true
+    },
+    showDialog () {
+      this.dialogInfo = true
+      console.log('show')
     }
   }
 }
 </script>
+
+<style scoped>
+.map-size {
+  /* Firefox */
+  height: -moz-calc(100% - 50px);
+  /* WebKit */
+  height: -webkit-calc(100% - 50px);
+  /* Opera */
+  height: -o-calc(100% - 50px);
+  /* Standard */
+  height: calc(100% - 50px);
+}
+</style>
