@@ -4,6 +4,7 @@
       <div class="col-12">
         <q-table
           grid
+          :loading="loading"
           title="Acervo de Arquivos"
           :data="arquivos"
           :columns="columns"
@@ -14,7 +15,7 @@
           :pagination="initialPagination"
         >
         <template v-slot:top-right>
-          <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+          <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
             <template v-slot:append>
               <q-icon name="search" />
             </template>
@@ -48,30 +49,30 @@ export default {
         descending: false,
         page: 1,
         rowsPerPage: 9
-        // rowsNumber: xx if getting data from a server
       },
       columns: [
         { name: 'name', label: 'Name', field: 'name' },
         { name: 'author', label: 'Autor', field: 'author' }
       ],
-      arquivos: []
+      arquivos: [],
+      loading: false
     }
   },
   mounted () {
     this.getArquivos()
   },
   methods: {
-    getArquivos () {
-      this.$q.loading.show()
-      this.$axios.get('https://cors-anywhere.herokuapp.com/https://baobaxia.mocambos.net/api/mocambos/rede/bbx/search/arquivo/limit/100/100')
-        .then((suc) => {
-          this.arquivos = suc.data
-          this.$q.loading.hide()
-          console.log(suc)
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+    async getArquivos () {
+      this.loading = true
+      try {
+        const response = await this.$axios.get('/arquivo/limit/20/20')
+        this.arquivos = response.data
+      } catch (err) {
+        this.$q.notify('Erro ao recuperar informações')
+        console.error(err)
+      } finally {
+        this.loading = false
+      }
     }
   }
 }

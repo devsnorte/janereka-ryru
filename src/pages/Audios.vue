@@ -4,6 +4,7 @@
       <div class="col-12">
         <q-table
           grid
+          :loading="loading"
           title="Acervo de Áudios"
           :data="audios"
           :columns="columns"
@@ -14,7 +15,7 @@
           :pagination="initialPagination"
         >
         <template v-slot:top-right>
-          <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+          <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
             <template v-slot:append>
               <q-icon name="search" />
             </template>
@@ -33,7 +34,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line
 export default {
   name: 'PageImagens',
   components: {
@@ -54,24 +54,25 @@ export default {
         { name: 'name', label: 'Name', field: 'name' },
         { name: 'author', label: 'Autor', field: 'author' }
       ],
-      audios: []
+      audios: [],
+      loading: false
     }
   },
   mounted () {
     this.getAudios()
   },
   methods: {
-    getAudios () {
-      this.$q.loading.show()
-      this.$axios.get('https://cors-anywhere.herokuapp.com/https://baobaxia.mocambos.net/api/mocambos/rede/bbx/search/audio/limit/20/20')
-        .then((suc) => {
-          this.audios = suc.data
-          this.$q.loading.hide()
-          console.log(suc)
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+    async getAudios () {
+      this.loading = true
+      try {
+        const response = await this.$axios.get('/audio/limit/20/20')
+        this.audios = response.data
+      } catch (err) {
+        this.$q.notify('Erro ao recuperar informações')
+        console.error(err)
+      } finally {
+        this.loading = false
+      }
     }
   }
 }
