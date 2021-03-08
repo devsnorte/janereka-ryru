@@ -6,39 +6,23 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'init',
-        component: () => import('pages/Home.vue')
-      }
-    ]
-  },
-  {
-    path: '/dashboard',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      {
-        path: '',
         name: 'home',
-        component: () => import('pages/Index.vue')
+        component: () => import('pages/Home.vue')
       },
       {
-        path: '/imagens',
-        name: 'imagens',
-        component: () => import('pages/Imagens.vue')
+        path: '/sobre',
+        name: 'sobre',
+        component: () => import('pages/Sobre.vue')
       },
       {
-        path: '/videos',
-        name: 'videos',
-        component: () => import('pages/Video.vue')
+        path: '/acervo',
+        name: 'acervo',
+        component: () => import('pages/Acervo.vue')
       },
       {
-        path: '/audios',
-        name: 'audios',
-        component: () => import('pages/Audios.vue')
-      },
-      {
-        path: '/arquivos',
-        name: 'arquivos',
-        component: () => import('pages/Arquivos.vue')
+        path: '/contato',
+        name: 'contato',
+        component: () => import('pages/Contato.vue')
       },
       {
         path: '/mapa',
@@ -47,6 +31,32 @@ const routes = [
       }
     ]
   },
+  // {
+  //   path: '/dashboard',
+  //   component: () => import('layouts/MainLayout.vue'),
+  //   children: [
+  //     {
+  //       path: '/imagens',
+  //       name: 'imagens',
+  //       component: () => import('pages/Imagens.vue')
+  //     },
+  //     {
+  //       path: '/videos',
+  //       name: 'videos',
+  //       component: () => import('pages/Video.vue')
+  //     },
+  //     {
+  //       path: '/audios',
+  //       name: 'audios',
+  //       component: () => import('pages/Audios.vue')
+  //     },
+  //     {
+  //       path: '/arquivos',
+  //       name: 'arquivos',
+  //       component: () => import('pages/Arquivos.vue')
+  //     }
+  //   ]
+  // },
   // Always leave this as last one,
   // but you can also remove it
   {

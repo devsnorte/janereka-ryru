@@ -1,8 +1,8 @@
 {
-  "name": "quasar-acervo",
+  "name": "janeraka-ryru",
   "version": "0.0.1",
-  "description": "Uma plataforma de acervos digitais.",
-  "productName": "Quasar Acervo Digital",
+  "description": "Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete",
+  "productName": "Plataforma Janeraka Ryru",
   "author": "Patrick Monteiro <eng.patrickmonteiro@gmail.com>",
   "private": true,
   "scripts": {
