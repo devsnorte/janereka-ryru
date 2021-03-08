@@ -4,8 +4,14 @@
   "description": "Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete",
   "productName": "Plataforma Janeraka Ryru",
   "author": "Patrick Monteiro <eng.patrickmonteiro@gmail.com>",
+  "contributors": [
+    "Thayana Corrêa Mamoré <thayanacmamore@gmail.com>"
+  ],
   "private": true,
   "scripts": {
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "build:pwa": "quasar build -m pwa",
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },
