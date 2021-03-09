@@ -1,14 +1,10 @@
 <template>
-  <q-page-sticky>
-      <AssetHeader />
-  </q-page-sticky>
+<q-page></q-page>
 </template>
 
 <script>
-import AssetHeader from 'components/AssetHeader'
 
 export default {
-  name: 'Acervo',
-  components: { AssetHeader }
+  name: 'Acervo'
 }
 </script>
