@@ -16,6 +16,7 @@
                   push
                   label="Acesse o Acervo"
                   size="lg"
+                  to="/acervo"
                 />
               </div>
               <small class="absolute-bottom q-ma-xl">
