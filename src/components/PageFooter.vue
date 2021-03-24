@@ -10,7 +10,7 @@
             </div>
             <q-img
                 src="~/assets/marcas-apoio.svg"
-                style=""
+                width="90%"
             />
         </div>
     </q-footer>
