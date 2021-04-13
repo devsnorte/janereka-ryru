@@ -33,11 +33,11 @@ module.exports = function (/* ctx */) {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v5',
-      // 'eva-icons',
       // 'themify',
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
       
+      'eva-icons',
       'fontawesome-v5',
       'roboto-font', // optional, you are not bound to it
       'material-icons' // optional, you are not bound to it
@@ -95,6 +95,9 @@ module.exports = function (/* ctx */) {
           negative: '#C10015',
           info: '#31CCEC',
           warning: '#F2C037'
+        },
+        screen: {
+          bodyClasses: true
         }
       },
 
@@ -102,6 +105,8 @@ module.exports = function (/* ctx */) {
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
       // * 'all'  - Manually specify what to import
       importStrategy: 'auto',
+
+      cssAddon: true,
 
       // For special cases outside of where "auto" importStrategy can have an impact
       // (like functional components as one of the examples),

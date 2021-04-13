@@ -1,5 +1,5 @@
 <template>
-  <q-page class="container">
+  <q-page>
     <div class="bg-accent q-pb-lg">
         <div class="row q-mx-xl text-justify">
             <div class="col-5 q-py-xl q-my-xl">

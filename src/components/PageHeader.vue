@@ -67,18 +67,6 @@ const linksData = [
     caption: '',
     icon: 'video_library',
     route: 'acervo'
-  },
-  {
-    title: 'Contato',
-    caption: '',
-    icon: 'audiotrack',
-    route: 'contato'
-  },
-  {
-    title: 'Mapa',
-    caption: '',
-    icon: 'picture_as_pdf',
-    route: 'mapa'
   }
 ]
 
