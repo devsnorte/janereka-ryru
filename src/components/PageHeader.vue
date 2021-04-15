@@ -2,8 +2,7 @@
     <div>
         <q-header elevated class="bg-grey-1">
             <q-toolbar class="text-dark">
-
-                <q-toolbar-title shrink>
+                <q-toolbar-title class="q-ml-md" shrink>
                   <q-img src="~/assets/janeraka.svg" width="3.2em" />
                 </q-toolbar-title>
 
