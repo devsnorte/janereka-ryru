@@ -34,9 +34,9 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git checkout --orphan gh-pages
-          git --work-tree dist add --all
-          git --work-tree dist commit -m 'Deploy'
+          git --work-tree dist/spa add --all
+          git --work-tree dist/spa commit -m 'Deploy'
           git push origin HEAD:gh-pages --force
-          rm -r dist
+          rm -r dist/spa
           git checkout -f develop
           git branch -D gh-pages
