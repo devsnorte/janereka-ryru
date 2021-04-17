@@ -1,9 +1,9 @@
 <template>
-    <div class="container">
+    <div class="container gt-sm">
         <div class="q-pa-none q-ma-none grafismo">
-            <img class="sobre gt-sm" src="~assets/sobre.png" width="750px" />
+            <img class="sobre" src="~assets/sobre.png" width="750px" />
         </div>
-        <div class="sobre yellow gt-sm"></div>
+        <div class="sobre yellow"></div>
     </div>
 </template>
 

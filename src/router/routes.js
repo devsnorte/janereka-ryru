@@ -20,17 +20,11 @@ const routes = [
         component: () => import('pages/Acervo.vue')
       },
       {
-        path: '/contato',
-        name: 'contato',
-        component: () => import('pages/Contato.vue')
-      },
-      {
-        path: '/mapa',
-        name: 'mapa',
-        component: () => import('pages/Mapa.vue')
+        path: '*',
+        component: () => import('pages/Error404.vue')
       }
     ]
-  },
+  }
   // {
   //   path: '/dashboard',
   //   component: () => import('layouts/MainLayout.vue'),
@@ -59,10 +53,6 @@ const routes = [
   // },
   // Always leave this as last one,
   // but you can also remove it
-  {
-    path: '*',
-    component: () => import('pages/Error404.vue')
-  }
 ]
 
 export default routes

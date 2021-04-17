@@ -1,16 +1,16 @@
 <template>
-  <q-footer class="bg-grey-9 text-white text-center">
-    <div class="constrain">
+  <q-footer class="bg-grey-9 text-white text-center" >
+    <div class="constrain q-px-xs-lg">
       <div class="row items-end q-py-xl">
-        <div class="col-sm-12 col-md-4 q-gutter-md-lg q-gutter-xs-sm q-pb-md-xs q-pt-sm-lg text-right">
+        <div class="col-sm-12 col-md-4 q-gutter-md-lg q-gutter-xs-sm q-pb-md-xs" :class="$q.screen.lt.md ? 'order-last q-pt-lg' : ''">
             <q-btn class="btn-fixed-width" size="md" outline label="TERMOS DE SUBMISSÃO" />
             <q-btn class="btn-fixed-width" size="md" outline label="ÁREA DO ADMINISTRADOR" />
         </div>
         <div class="col-xs-12 col-md-4 ">
-          <img src="~/assets/logo-completa.svg" alt="" />
+          <img src="~/assets/logo-completa.svg" alt="Logo Instituto Janeraka" />
         </div>
-        <div class="col-xs-12 col-md-4 text-left q-pt-xs-lg">
-          <div class="">
+        <div class="col-xs-12 col-md-4 q-pt-xs-lg" :class="$q.screen.lt.md ? 'text-center' : 'text-left'">
+          <div>
             <p>Contato: </p>
             <p>nononono@nono.com <br />
             +55 91 91234-5678</p>
@@ -23,10 +23,16 @@
           </div>
         </div>
       </div>
-      <q-img src="~/assets/marcas-apoio.svg" class="gt-sm" />
+      <q-img src="~/assets/marcas-apoio.svg" />
     </div>
   </q-footer>
 </template>
+
+<script>
+export default {
+  name: 'PageFooter'
+}
+</script>
 
 <style scoped>
 .btn-fixed-width {

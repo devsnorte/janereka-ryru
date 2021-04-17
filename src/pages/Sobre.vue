@@ -31,21 +31,28 @@
                     <p>
                         Um ponto comum da bibliografia acerca desta região é de que o termo “asuriní” ao qual Coudreau se refere provavelmente designava uma quantidade maior de povos indígenas que circulavam por essa região. Esse termo tem origem no termo juruna asóreni que designa vermelho. Embora ele seja atualmente aplicado aos Asuriní do Xingu é mais provável que esse termo designasse o grupo indígena Arawaté, pois estes últimos utilizam de forma abundante o urucum, de cor vermelha, enquanto que os Asuriní do Xingu utilizam jenipapo, de cor preta.”
                     </p>
-                    <p class="text-grey-6">
+                    <p class="text-grey-7">
                         NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61
                     </p>
                 </div>
             </div>
         </div>
     </div>
+    <Map />
+    <Equipe />
   </q-page>
 </template>
 
 <script>
 import Sobre from '../components/SobreImg'
+import Map from '../components/SobreMap'
+import Equipe from '../components/EquipeTecnica'
+
 export default {
   components: {
-    Sobre
+    Sobre,
+    Map,
+    Equipe
   }
 }
 </script>
