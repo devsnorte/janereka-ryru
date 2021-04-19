@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-light">
+    <div class="bg-light q-px-xs-lg">
         <div class="row constrain q-py-xl">
           <div class="col-xs-12 col-md-6 q-pr-lg">
             <q-img src="~assets/map.svg" alt="pictures" />

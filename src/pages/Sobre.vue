@@ -14,7 +14,7 @@
     </div>
     <Sobre />
     <div class="bg-grey-12 q-px-xs-lg">
-        <div class="constrain row q-py-xl">
+        <div class="constrain row q-py-xs-lg q-py-md-xl">
             <div class="row">
                 <h1 class="text-h2 text-weight-bolder text-primary">
                     A Etnia <br /> Awaete
