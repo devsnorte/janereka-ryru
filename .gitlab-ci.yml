@@ -5,7 +5,7 @@ deploy:
   stage: deploy
   script:
     - npm run build
-    - scripts/rsync-script.sh root@janeraka.org:/mnt/volume_nyc3_01/ryru-stage dist/pwa/*
+    - scripts/rsync.sh root@janeraka.org:/mnt/volume_nyc3_01/ryru-stage dist/pwa/*
 before_script:
   - npm install
   - apt update -y && apt install rsync -y
