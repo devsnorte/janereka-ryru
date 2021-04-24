@@ -5,7 +5,7 @@
           <img src="~/assets/janeraka.svg" alt="">
       </div>
       <div class="logo-text">
-          Janeraka Ryru
+          Janereka Ryru
       </div>
       <div class="logo-bottom">
           <img src="~/assets/janeraka_.svg" alt="">
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'LogoJaneraka'
+  name: 'LogoJanereka'
 }
 </script>
 
