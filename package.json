@@ -1,12 +1,13 @@
 {
-  "name": "janeraka-ryru",
+  "name": "janereka-ryru",
   "version": "0.0.1",
   "description": "Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete",
-  "productName": "Plataforma Janeraka Ryru",
-  "author": "Patrick Monteiro <eng.patrickmonteiro@gmail.com>",
-  "contributors": [
+  "productName": "Plataforma Janereka Ryru",
+  "authors": [
+    "Patrick Monteiro <eng.patrickmonteiro@gmail.com>",
     "Thayana Corrêa Mamoré <thayanacmamore@gmail.com>"
   ],
+  "contributors": [],
   "private": true,
   "scripts": {
     "dev": "quasar dev",

@@ -2,7 +2,7 @@
   <q-footer class="bg-grey-9 text-white text-center" >
     <div class="constrain q-px-xs-lg">
       <div class="row items-end q-py-xl">
-        <div class="col-sm-12 col-md-4 q-gutter-md-lg q-gutter-xs-sm q-pb-md-xs" :class="$q.screen.lt.md ? 'order-last q-pt-lg' : ''">
+        <div class="col-sm-12 col-md-4 q-gutter-md-lg q-gutter-xs-sm q-pb-md-xs" :class="$q.screen.lt.md ? 'order-last q-pt-lg' : 'text-right'">
             <q-btn class="btn-fixed-width" size="md" outline label="TERMOS DE SUBMISSÃO" />
             <q-btn class="btn-fixed-width" size="md" outline label="ÁREA DO ADMINISTRADOR" />
         </div>

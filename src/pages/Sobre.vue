@@ -1,8 +1,8 @@
 <template>
   <q-page>
     <div class="bg-accent q-pb-lg q-px-xs-lg">
-        <div class="constrain row text-justify">
-            <div class="col-xs-12 col-md-5 q-py-xl q-my-xl">
+        <div class="constrain row">
+            <div class="col-xs-12 col-md-5 q-pt-xs-xl q-py-md-xl q-my-md-xl">
                 <p class="text-h5 text-weight-bold text-white">
                     Um ponto de conexão, para promover nossa resistência, além da troca de saberes e práticas de nossa educação patrimonial, tradicional e local que também dará oportunidade ao diálogo com demais povos das águas, terras e florestas e demais grupos e instituições.
                 </p>
@@ -20,7 +20,7 @@
                     A Etnia <br /> Awaete
                 </h1>
             </div>
-            <div class="row justify-evenly text-justify">
+            <div class="row justify-evenly">
                 <div class="col-xs-12 col-md-6 q-pr-md-xl">
                     <p>
                         Localizados no Médio Xingu, no estado do Pará, no interior da Amazônia, os Asuriní do Xingu, ou Awaete como se autodenominam, são um povo de apenas 250 pessoas e 40 anos de contato. Artesãos, construtores, caçadores, agricultores, coletores, conhecedores da fauna e flora local, os Awaete possuíam sua autonomia baseada num sistema cultural complexo e equilibrado. Viviam parte do ano nômades, dispersos pelo território em núcleos familiares e na outra parte encontrava-se numa intensa festa celebrada na Tawywa, casa grande. Nestes encontros construíam e renovavam sua cultura e expandiam seu conhecimento sobre os territórios e seus habitantes pelas trocas entre seus clãs e muitas vezes acolhendo viajantes numa grande troca de saberes.
@@ -44,15 +44,12 @@
 </template>
 
 <script>
-import Sobre from '../components/SobreImg'
-import Map from '../components/SobreMap'
-import Equipe from '../components/EquipeTecnica'
 
 export default {
   components: {
-    Sobre,
-    Map,
-    Equipe
+    Sobre: () => import('components/SobreImg'),
+    Map: () => import('components/SobreMap'),
+    Equipe: () => import('components/EquipeTecnica')
   }
 }
 </script>

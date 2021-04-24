@@ -1,29 +1,30 @@
 <template>
   <q-page>
-      <div class="row">
-        <div class="col-xs-12 col-md-6 relative-position q-py-xs-xl q-pl-md-xl">
-            <div class="column-md fit wrap content-center q-px-xs-lg" :class="$q.screen.lt.md ? 'justify-center text-center' : 'justify-end'">
-              <q-img src="~/assets/janeraka.svg" width="15em" class=" lt-md" />
-              <h1 class="text-weight-bold text-h3" style="font-family: monument;">
-                  Janeraka Ryru
-              </h1>
-              <div class="text-subtitle">
-                Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete
-              </div>
-              <div class="q-pt-lg col-xs-10 col-sm-7">
-                <q-btn
-                  color="primary"
-                  no-caps
-                  push
-                  label="Acesse o Acervo"
-                  size="xl"
-                  to="/acervo"
-                />
-              </div>
-              <small class="absolute-bottom q-mx-xl q-mb-lg gt-sm">
-                Projeto desenvolvido através da Lei Federal no 14.017/20, do Edital Museus e Memoriais de Base Comunitária – Lei Aldir Blanc Pará 2020
-              </small>
+      <div class="row items-center">
+        <div class="col-xs-12 col-md-6 q-py-xs-xl q-pl-md-xl">
+          <div class="q-px-xs-lg q-px-md-xl" :class="$q.screen.lt.md ? 'justify-center text-center' : 'justify-end'">
+            <q-img src="~/assets/janeraka.svg" width="15em" class="lt-md" />
+            <h1 class="text-weight-bolder" :class="$q.screen.lt.md ? 'text-h3' : 'text-h2'">
+                Janereka Ryru
+            </h1>
+            <div class="text-h6 text-weight-regular">
+              Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete
             </div>
+            <div class="q-py-xl q-mb-md-xl">
+              <q-btn
+                color="primary"
+                no-caps
+                push
+                label="Acesse o Acervo"
+                size="xl"
+                to="/acervo"
+                class="text-weight-regular"
+              />
+            </div>
+            <small class="gt-sm">
+              Projeto desenvolvido através da Lei Federal no 14.017/20, do Edital Museus e Memoriais de Base Comunitária – Lei Aldir Blanc Pará 2020
+            </small>
+          </div>
         </div>
         <div class="col-md-6 gt-sm">
           <q-img
@@ -44,10 +45,10 @@
             <h1 class="text-h3 text-weight-bold">
               Sobre a Plataforma
             </h1>
-            <p class="text-justify q-pb-lg">
+            <p class="q-pb-lg">
               Essa plataforma tem o objetivo de organizar, facilitar o acesso e documentar, registrar nossos saberes, estimular suas práticas, para a preservação e o fortalecimento de nossas memórias ancestrais em especial ritualística, medicinal, artesanal e construtiva a partir do diálogo com nossos jovens e anciãos.
             </p>
-            <small class="text-justify lt-md ">
+            <small class="lt-md ">
                 Projeto desenvolvido através da Lei Federal no 14.017/20, do Edital Museus e Memoriais de Base Comunitária – Lei Aldir Blanc Pará 2020
             </small>
           </div>
@@ -66,7 +67,14 @@ export default {
 <style scoped>
 .photo {
   object-fit: cover;
-  height: 80vh;
+  height: 100vh;
+}
+
+@media screen and (min-width: 2500px) {
+  .photo {
+    object-fit: cover;
+    height: 60vh;
+  }
 }
 
 .grafismo {

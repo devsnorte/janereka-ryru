@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="q-pa-none q-ma-none grafismo"></div>
         <q-img class="sobre" src="~assets/sobre.png" />
+        <div class="q-pa-none q-ma-none grafismo"></div>
     </div>
 </template>
 

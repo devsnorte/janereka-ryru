@@ -37,7 +37,6 @@ module.exports = function (/* ctx */) {
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
       'eva-icons',
       'fontawesome-v5',
-      'roboto-font', // optional, you are not bound to it
       'material-icons' // optional, you are not bound to it
     ],
 
@@ -133,10 +132,13 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
+      workboxOptions: {
+        skipWaiting: true,
+        clientsClaim: true
+      }, // only for GenerateSW
       manifest: {
-        name: 'Plataforma Janeraka Ryru',
-        short_name: 'Janeraka Ryru',
+        name: 'Plataforma Janereka Ryru',
+        short_name: 'Janereka Ryru',
         description: 'Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete',
         display: 'standalone',
         orientation: 'portrait',

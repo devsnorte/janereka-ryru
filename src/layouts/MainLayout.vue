@@ -13,7 +13,7 @@
 
         <q-toolbar-title>
           <div style="font-family: monument;">
-            Janeraka
+            Janereka
           </div>
         </q-toolbar-title>
 
