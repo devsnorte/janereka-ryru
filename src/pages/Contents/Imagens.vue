@@ -63,7 +63,7 @@ export default {
     async getImages () {
       this.loading = true
       try {
-        const response = await this.$axios.get('/imagem/limit/20/20')
+        const response = await this.$axios.get('/imagens/limit/20/20')
         this.imagens = response.data
       } catch (err) {
         this.$q.notify('Erro ao recuperar informações')

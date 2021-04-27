@@ -20,6 +20,11 @@ const routes = [
         component: () => import('pages/Acervo.vue')
       },
       {
+        path: '/submissao',
+        name: 'submissao',
+        component: () => import('pages/Submissao.vue')
+      },
+      {
         path: '*',
         component: () => import('pages/Error404.vue')
       }
