@@ -1,30 +1,35 @@
 <template>
 <q-page padding>
   <div class="row q-col-gutter-md">
-    <div class="col-3" v-for="info in midiaInfos" :key="info.smid">
-      <q-card>
-        <img v-if="info.data.tipo == 'imagem'" :src="`${baseUrl}${info.path}`">
-
-        <q-media-player
-          v-if="info.data.tipo == 'video'"
-          type="video"
-          :sources="[{
-            src: `${baseUrl}${info.path}`,
-          }]"
-          content-style="height: 200px;"
-        />
-
-        <q-card-section>
-          <div class="text-h6"> {{ info.data.titulo }}</div>
-          <div class="text-subtitle2">{{ info.creator.username }}</div>
-          <div class="text-subtitle2">{{  info.data.tipo }}</div>
-        </q-card-section>
-
-        <!-- <q-card-section class="q-pt-none">
-          TEXTO
-        </q-card-section> -->
-      </q-card>
+    <div class="col-12">
+      <q-table
+        grid
+        :loading="loading"
+        title="Acervo"
+        :data="midiaInfos"
+        :columns="columns"
+        row-key="id"
+        :filter="filter"
+        hide-header
+        card-container-class="q-col-gutter-sm"
+        :pagination="initialPagination"
+      >
+        <template v-slot:top-right>
+          <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </template>
+        <template v-slot:item="props">
+          <card-items-table
+            class="col-xs-12 col-sm-4 col-md-4"
+            :card="props.row"
+          />
+        </template>
+      </q-table>
     </div>
+
   </div>
 </q-page>
 </template>
@@ -33,10 +38,26 @@
 
 export default {
   name: 'Acervo',
+  components: {
+    CardItemsTable: () => import('components/CardItemsTable')
+  },
   data () {
     return {
       baseUrl: 'http://mucuas.taina.net.br:8067/acervo/download/',
-      midiaInfos: []
+      midiaInfos: [],
+      filter: '',
+      initialPagination: {
+        sortBy: 'desc',
+        descending: false,
+        page: 1,
+        rowsPerPage: 6
+      },
+      columns: [
+        { name: 'titulo', label: 'titulo', field: 'titulo' },
+        { name: 'descricao', label: 'descricao', field: 'descricao' }
+      ],
+      imagens: [],
+      loading: false
     }
   },
   mounted () {
@@ -44,9 +65,11 @@ export default {
   },
   methods: {
     async getMidia () {
+      this.loading = true
       try {
         const { data } = await this.$axios.get('/acervo/midia')
         this.midiaInfos = data
+        this.loading = false
         console.log(data)
       } catch (error) {
         console.error(error)
