@@ -70,7 +70,7 @@ export default {
   },
   data () {
     return {
-      baseUrl: 'https://baobaxia.mocambos.net/',
+      baseUrl: this.$axios.defaults.baseURL,
       modal: false
     }
   }

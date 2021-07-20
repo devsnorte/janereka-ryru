@@ -3,7 +3,7 @@
     <q-card class="cursor-pointer fit" @click="modal = !modal">
       <q-img
         v-if="card.data.tipo == 'imagem'"
-        :src="`${baseUrlImg}${card.path}`"
+        :src="`${baseUrlImg}/acervo/download/${card.path}`"
         basic
         :ratio="16/9"
       >
@@ -64,7 +64,7 @@
 
 <script>
 export default {
-  name: 'CardItemTable',
+  name: 'CardItemsTable',
   props: {
     card: {
       type: Object,
@@ -73,7 +73,7 @@ export default {
   },
   data () {
     return {
-      baseUrlImg: 'http://mucuas.taina.net.br:8067/acervo/download/',
+      baseUrlImg: this.$axios.defaults.baseURL,
       modal: false
     }
   }

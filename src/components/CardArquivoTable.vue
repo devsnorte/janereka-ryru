@@ -61,7 +61,7 @@ export default {
   },
   data () {
     return {
-      baseUrl: 'https://cors-anywhere.herokuapp.com/https://baobaxia.mocambos.net/',
+      baseUrl: this.$axios.defaults.baseURL,
       modal: false
     }
   },

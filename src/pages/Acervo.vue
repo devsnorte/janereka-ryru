@@ -6,7 +6,7 @@
         grid
         :loading="loading"
         title="Acervo"
-        :data="midiaInfos"
+        :data="allMidias"
         :columns="columns"
         row-key="id"
         :filter="filter"
@@ -43,8 +43,7 @@ export default {
   },
   data () {
     return {
-      baseUrl: 'http://mucuas.taina.net.br:8067/acervo/download/',
-      midiaInfos: [],
+      allMidias: [],
       filter: '',
       initialPagination: {
         sortBy: 'desc',
@@ -56,8 +55,11 @@ export default {
         { name: 'titulo', label: 'titulo', field: 'titulo' },
         { name: 'descricao', label: 'descricao', field: 'descricao' }
       ],
+      loading: false,
+      arquivos: [],
       imagens: [],
-      loading: false
+      videos: [],
+      audios: []
     }
   },
   mounted () {
@@ -66,13 +68,40 @@ export default {
   methods: {
     async getMidia () {
       this.loading = true
+      console.log(this.$axios.defaults)
+      console.log(this.$axios.defaults.baseURL)
       try {
         const { data } = await this.$axios.get('/acervo/midia')
-        this.midiaInfos = data
         this.loading = false
-        console.log(data)
+        this.allMidias = data
+        console.log(this.allMidias)
+
+        this.allMidias.forEach(midia => {
+          switch (midia.data.tipo) {
+            case 'imagem':
+              this.imagens.push(midia)
+              break
+            case 'arquivo':
+              this.arquivos.push(midia)
+              break
+            case 'video':
+              this.videos.push(midia)
+              break
+            case 'audio':
+              this.audios.push(midia)
+              break
+          }
+        })
+
+        console.log(this.imagens)
       } catch (error) {
         console.error(error)
+        this.loading = false
+        this.displayError = true
+        this.$q.notify({
+          type: 'negative',
+          message: 'Ocorreu um erro'
+        })
       }
     }
   }
