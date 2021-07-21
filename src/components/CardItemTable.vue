@@ -1,6 +1,5 @@
 <template>
   <div class="col-xs-12 col-sm-4 col-md-4">
-    <p>hi</p>
     <q-card class="cursor-pointer" @click="modal = !modal">
       <q-img
         :src="`${baseUrl}${card.url}`"

@@ -1,6 +1,11 @@
 <template>
 <q-page padding>
-  <div class="row q-col-gutter-md">
+  <main-table
+    :loading="loading"
+    :midias="filteredMidias"
+    @filterContent="filterContent($event)"
+   />
+  <!-- <div class="row q-col-gutter-md">
     <div class="col-12">
       <q-table
         grid
@@ -15,6 +20,7 @@
         :pagination="initialPagination"
       >
         <template v-slot:top-right>
+
           <q-input borderless dense debounce="300" v-model="filter" placeholder="Pesquisar">
             <template v-slot:append>
               <q-icon name="search" />
@@ -29,8 +35,7 @@
         </template>
       </q-table>
     </div>
-
-  </div>
+  </div> -->
 </q-page>
 </template>
 
@@ -39,27 +44,25 @@
 export default {
   name: 'Acervo',
   components: {
-    CardItemsTable: () => import('components/CardItemsTable')
+    // CardItemsTable: () => import('components/CardItemsTable'),
+    MainTable: () => import('components/MainTable')
   },
   data () {
     return {
       allMidias: [],
-      filter: '',
-      initialPagination: {
-        sortBy: 'desc',
-        descending: false,
-        page: 1,
-        rowsPerPage: 6
-      },
-      columns: [
-        { name: 'titulo', label: 'titulo', field: 'titulo' },
-        { name: 'descricao', label: 'descricao', field: 'descricao' }
-      ],
-      loading: false,
-      arquivos: [],
-      imagens: [],
-      videos: [],
-      audios: []
+      filteredMidias: [],
+      // filter: '',
+      // initialPagination: {
+      //   sortBy: 'desc',
+      //   descending: false,
+      //   page: 1,
+      //   rowsPerPage: 6
+      // },
+      // columns: [
+      //   { name: 'titulo', label: 'titulo', field: 'titulo' },
+      //   { name: 'descricao', label: 'descricao', field: 'descricao' }
+      // ],
+      loading: false
     }
   },
   mounted () {
@@ -68,39 +71,29 @@ export default {
   methods: {
     async getMidia () {
       this.loading = true
-      console.log(this.$axios.defaults)
-      console.log(this.$axios.defaults.baseURL)
       try {
         const { data } = await this.$axios.get('/acervo/midia')
-        this.loading = false
         this.allMidias = data
-        console.log(this.allMidias)
-
-        this.allMidias.forEach(midia => {
-          switch (midia.data.tipo) {
-            case 'imagem':
-              this.imagens.push(midia)
-              break
-            case 'arquivo':
-              this.arquivos.push(midia)
-              break
-            case 'video':
-              this.videos.push(midia)
-              break
-            case 'audio':
-              this.audios.push(midia)
-              break
-          }
-        })
-
-        console.log(this.imagens)
+        this.filteredMidias = data
+        this.loading = false
       } catch (error) {
         console.error(error)
         this.loading = false
-        this.displayError = true
         this.$q.notify({
           type: 'negative',
           message: 'Ocorreu um erro'
+        })
+      }
+    },
+
+    filterContent (contentType) {
+      console.log(`Filtering data by content type: ${contentType}.`)
+
+      if (contentType === 'all') {
+        this.filteredMidias = this.allMidias
+      } else {
+        this.filteredMidias = this.allMidias.filter(midia => {
+          return midia.data.tipo === contentType
         })
       }
     }
