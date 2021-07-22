@@ -6,7 +6,7 @@
     :loading="loading"
     :columns="columns"
     :data="$props.midias"
-    :pagination="initialPagination"
+    :pagination="pagination"
     :rows-per-page-options="[6, 12, 18, 24, 30, 0]"
     card-container-class="q-col-gutter-md"
   >
@@ -47,6 +47,50 @@
         :card="props.row"
       />
     </template>
+
+    <template v-slot:pagination="scope">
+        <q-btn
+          icon="first_page"
+          style="border: 1px solid brown"
+          dense
+          flat
+          :disable="scope.isFirstPage"
+          @click="scope.firstPage"
+        />
+
+        <q-btn
+          icon="chevron_left"
+          dense
+          flat
+          :disable="scope.isFirstPage"
+          @click="scope.prevPage"
+        />
+
+        <q-btn
+          icon="chevron_right"
+          dense
+          flat
+          :disable="scope.isLastPage"
+          @click="scope.nextPage"
+        />
+
+        <q-btn
+          icon="last_page"
+          dense
+          flat
+          :disable="scope.isLastPage"
+          @click="scope.lastPage"
+        />
+      </template>
+
+    <!-- <template v-slot:pagination>
+      <q-pagination
+        :current="pagination.page"
+        :max="5"
+        direction-links
+        boundary-links
+      />
+    </template> -->
 
   </q-table>
 </template>
@@ -90,7 +134,7 @@ export default {
           field: midia => midia.smid
         }
       ],
-      initialPagination: {
+      pagination: {
         sortBy: 'desc',
         descending: false,
         page: 1,

@@ -12,7 +12,7 @@
       <card-video v-if="card.data.tipo == 'video'" :midia="card" />
 
       <!-- Audio card -->
-      <card-audio id="AUDIO-CARD-DIV-0" v-if="card.data.tipo == 'audio'" :midia="card" />
+      <card-audio v-if="card.data.tipo == 'audio'" :midia="card" />
 
       <!-- Title/Author overlay -->
       <q-card-section class="absolute-bottom text-white bottom-overlay">
