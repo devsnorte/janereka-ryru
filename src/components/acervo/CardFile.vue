@@ -1,11 +1,16 @@
 <template>
-  <div class="full-height bg-accent">
+  <div class="bg-accent" style="height: 300px;">
 
     <div class="fit media-buttons-overlay">
       <div class="row absolute-center text-secondary">
         <q-icon name="description" style="font-size: 4rem;" />
       </div>
     </div>
+    <q-pdfviewer
+      :src="`${baseUrl}/acervo/download/${midia.path}`"
+      type="pdfjs"
+      style="height: 500px"
+    />
 
     <q-pdfviewer
       :src="`${baseUrl}/acervo/download/${midia.path}`"

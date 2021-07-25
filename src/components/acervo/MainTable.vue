@@ -6,8 +6,7 @@
     :loading="loading"
     :columns="columns"
     :data="$props.midias"
-    :pagination="pagination"
-    :rows-per-page-options="[6, 12, 18, 24, 30, 0]"
+    :pagination.sync="pagination"
     card-container-class="q-col-gutter-md"
   >
 
@@ -24,6 +23,7 @@
 
       <q-tabs
         inline-label
+        outside-arrows
         align="left"
         active-color="primary"
         v-model="activeTab"
@@ -39,19 +39,18 @@
     </template>
 
     <template v-slot:item="props">
-      <card-wrapper
-        :class="[
-          'col-xs-12', 'col-sm-6', 'col-md-4',
-          {'fixed-height-card': activeTab === 'arquivo' || activeTab === 'audio'}
-        ]"
-        :card="props.row"
-      />
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <card-wrapper
+          class="column col"
+          style="border-radius: 20px; border: 1px solid #e6e6e6; overflow: hidden;"
+          :card="props.row"
+        />
+      </div>
     </template>
 
     <template v-slot:pagination="scope">
         <q-btn
           icon="first_page"
-          style="border: 1px solid brown"
           dense
           flat
           :disable="scope.isFirstPage"
@@ -65,6 +64,8 @@
           :disable="scope.isFirstPage"
           @click="scope.prevPage"
         />
+
+        <span>{{ firstIndexInPage }}-{{ lastIndexInPage }} de {{ midias.length }}</span>
 
         <q-btn
           icon="chevron_right"
@@ -100,7 +101,7 @@ export default {
   name: 'MainTable',
 
   components: {
-    CardWrapper: () => import('components/CardWrapper')
+    CardWrapper: () => import('components/acervo/CardWrapper')
   },
 
   props: {
@@ -142,12 +143,31 @@ export default {
       },
       activeTab: 'all'
     }
+  },
+
+  computed: {
+    lastIndexInPage: function () {
+      // Determine how many pages are available
+      const maxPages = Math.ceil(this.midias.length / this.pagination.rowsPerPage)
+      // If viewing the last page, simply return the array length
+      if (maxPages === this.pagination.page) {
+        return this.midias.length
+      }
+      return this.pagination.page * this.pagination.rowsPerPage
+    },
+
+    firstIndexInPage: function () {
+      const maxInPage = this.pagination.page * this.pagination.rowsPerPage
+      return maxInPage - this.pagination.rowsPerPage + 1
+    }
   }
+
 }
 </script>
 
 <style scoped>
-.fixed-height-card {
-  height: 250px;
+.content-card {
+  height: 300px !important;
+  width: 300px !important;
 }
 </style>

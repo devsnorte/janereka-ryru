@@ -1,6 +1,6 @@
 <template>
-  <div id="AUDIO-CARD-DIV-minus1">
-    <q-card class="cursor-pointer fit" @click="modal = !modal">
+  <div>
+    <q-card class="cursor-pointer fit" style="overflow: hidden;" @click="modal = !modal">
 
       <!-- File card -->
       <card-file v-if="card.data.tipo == 'arquivo'" :midia="card" />

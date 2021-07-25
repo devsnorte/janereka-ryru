@@ -4,6 +4,7 @@
     :loading="loading"
     :midias="midiaItems"
     @filterContent="filterContent($event)"
+    @changePage="requestPage($event)"
    />
 </q-page>
 </template>
@@ -41,8 +42,11 @@ export default {
     async getAllMidias () {
       this.loading = true
       try {
+        // const { data } = await this.$axios.get(
+        //   `/acervo/find?pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+        // )
         const { data } = await this.$axios.get(
-          `/acervo/find?pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+          '/acervo/midia'
         )
         this.midiaItems = data
         this.loading = false
@@ -59,8 +63,11 @@ export default {
     async getFileMidias () {
       this.loading = true
       try {
+        // const { data } = await this.$axios.get(
+        //   `/acervo/find?tipos=arquivo&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+        // )
         const { data } = await this.$axios.get(
-          `/acervo/find?tipos=arquivo&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+          '/acervo/find?tipos=arquivo'
         )
         this.midiaItems = data
         this.loading = false
@@ -80,6 +87,9 @@ export default {
         const { data } = await this.$axios.get(
           `/acervo/find?tipos=imagem&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
         )
+        // const { data } = await this.$axios.get(
+        //   '/acervo/find?tipos=imagem'
+        // )
         this.midiaItems = data
         this.loading = false
       } catch (error) {
@@ -95,8 +105,11 @@ export default {
     async getVideoMidias () {
       this.loading = true
       try {
+        // const { data } = await this.$axios.get(
+        //   `/acervo/find?tipos=video&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+        // )
         const { data } = await this.$axios.get(
-          `/acervo/find?tipos=video&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+          '/acervo/find?tipos=video'
         )
         this.midiaItems = data
         this.loading = false
@@ -113,8 +126,11 @@ export default {
     async getAudioMidias () {
       this.loading = true
       try {
+        // const { data } = await this.$axios.get(
+        //   `/acervo/find?tipos=arquivo&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+        // )
         const { data } = await this.$axios.get(
-          `/acervo/find?tipos=arquivo&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+          '/acervo/find?tipos=arquivo'
         )
         this.midiaItems = data
         this.loading = false
@@ -145,6 +161,11 @@ export default {
         default:
           this.getAllMidias()
       }
+    },
+
+    requestPage (pageData) {
+      const { pageNumber, midiaType } = pageData
+      console.log(pageNumber, midiaType)
     }
   }
 }

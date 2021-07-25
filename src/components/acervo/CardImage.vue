@@ -1,8 +1,10 @@
 <template>
+<div style="height: 300px;">
   <q-img
     :src="`${baseUrl}/acervo/download/${midia.path}`"
-    :ratio="16/9"
+    class="absolute-center"
   />
+</div>
 </template>
 
 <script>

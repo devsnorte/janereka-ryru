@@ -1,5 +1,5 @@
 <template>
-  <div class="full-height bg-black">
+  <div class="bg-secondary" style="height: 300px;">
 
     <div transparent class="fit absolute-center media-buttons-overlay" style="z-index: 1;">
       <div class="row absolute-center text-primary media-buttons">
@@ -8,22 +8,25 @@
       </div>
     </div>
 
-    <q-media-player
-      type="video"
-      :sources="[{
-        src: `${baseUrl}/acervo/download/${midia.path}`
-      }]"
-      :show-big-play-button="false"
-      radius='10px'
-      color="green-2"
-      class="no-pointer-events absolute-center"
-      style="z-index: 0;"
-    >
-      <!-- Omit media player controls through a hidden v-slot -->
-      <template v-slot:controls>
-        <p hidden></p>
-      </template>
-    </q-media-player>
+    <div class="q-pa-sm fit">
+      <q-media-player
+        type="video"
+        :sources="[{
+          src: `${baseUrl}/acervo/download/${midia.path}`
+        }]"
+        :show-big-play-button="false"
+        radius='20px'
+        background-color="black"
+        color="primary"
+        class="fit no-pointer-events absolute-center"
+        style="z-index: 0;"
+      >
+        <!-- Omit media player controls through a hidden v-slot -->
+        <template v-slot:controls>
+          <p hidden></p>
+        </template>
+      </q-media-player>
+    </div>
 
   </div>
 </template>
