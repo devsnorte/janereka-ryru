@@ -10,10 +10,12 @@
 
     <q-card-section>
       <q-pdfviewer
-      :src="`${baseUrl}/acervo/download/${midia.path}`"
-      type="pdfjs"
-      style="height: 500px"
-    />
+        :value="true"
+        :src="`${baseUrl}/acervo/download/${midia.path}`"
+        type="pdfjs"
+        content-inner-class="absolute"
+        content-style="height: 70vh;"
+      />
     </q-card-section>
 
     <q-card-section class="q-pt-none q-mb-xl">
