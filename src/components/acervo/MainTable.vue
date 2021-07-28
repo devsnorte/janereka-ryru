@@ -12,20 +12,12 @@
 
     <template v-slot:top>
 
-      <div class="row col-12">
-        <h1 class="col-8 no-margin text-h5">Acervo</h1>
-        <q-input class="col-4" borderless dense debounce="300" placeholder="Pesquisar">
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </div>
-
       <q-tabs
         inline-label
         outside-arrows
         align="left"
         active-color="primary"
+        class="col-grow q-mb-xs"
         v-model="activeTab"
         @input="$emit('filterContent', activeTab)"
       >
@@ -36,53 +28,59 @@
         <q-tab name="audio" icon="volume_up" label="Áudios" />
       </q-tabs>
 
+      <div>
+        <q-btn unelevated label="Enviar" icon="cloud_upload" color="primary" align="between" />
+        <q-btn unelevated icon="search" color="primary" padding="6px" class="q-ml-xs"
+          @click="$emit('toggleFilter')"
+        />
+      </div>
+
     </template>
 
     <template v-slot:item="props">
       <div class="col-xs-12 col-sm-6 col-md-4">
         <card-wrapper
-          class="column col"
-          style="border-radius: 20px; border: 1px solid #e6e6e6; overflow: hidden;"
+          class="column col content-card"
           :card="props.row"
         />
       </div>
     </template>
 
     <template v-slot:pagination="scope">
-        <q-btn
-          icon="first_page"
-          dense
-          flat
-          :disable="scope.isFirstPage"
-          @click="scope.firstPage"
-        />
+      <q-btn
+        icon="first_page"
+        dense
+        flat
+        :disable="scope.isFirstPage"
+        @click="scope.firstPage"
+      />
 
-        <q-btn
-          icon="chevron_left"
-          dense
-          flat
-          :disable="scope.isFirstPage"
-          @click="scope.prevPage"
-        />
+      <q-btn
+        icon="chevron_left"
+        dense
+        flat
+        :disable="scope.isFirstPage"
+        @click="scope.prevPage"
+      />
 
-        <span>{{ firstIndexInPage }}-{{ lastIndexInPage }} de {{ midias.length }}</span>
+      <span>{{ firstIndexInPage }}-{{ lastIndexInPage }} de {{ midias.length }}</span>
 
-        <q-btn
-          icon="chevron_right"
-          dense
-          flat
-          :disable="scope.isLastPage"
-          @click="scope.nextPage"
-        />
+      <q-btn
+        icon="chevron_right"
+        dense
+        flat
+        :disable="scope.isLastPage"
+        @click="scope.nextPage"
+      />
 
-        <q-btn
-          icon="last_page"
-          dense
-          flat
-          :disable="scope.isLastPage"
-          @click="scope.lastPage"
-        />
-      </template>
+      <q-btn
+        icon="last_page"
+        dense
+        flat
+        :disable="scope.isLastPage"
+        @click="scope.lastPage"
+      />
+    </template>
 
     <!-- <template v-slot:pagination>
       <q-pagination
@@ -167,7 +165,9 @@ export default {
 
 <style scoped>
 .content-card {
-  height: 300px !important;
-  width: 300px !important;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  overflow: hidden;
+  /* min-width: 300px; */
 }
 </style>
