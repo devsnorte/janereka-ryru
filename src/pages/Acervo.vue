@@ -190,10 +190,10 @@ export default {
       this.loading = true
       try {
         // const { data } = await this.$axios.get(
-        //   `/acervo/find?tipos=arquivo&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
+        //   `/acervo/find?tipos=audio&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
         // )
         const { data } = await this.$axios.get(
-          '/acervo/find?tipos=arquivo'
+          '/acervo/find?tipos=audio'
         )
         this.midiaItems = data
         this.loading = false
