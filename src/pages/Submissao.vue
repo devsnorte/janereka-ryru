@@ -1,6 +1,7 @@
 <template>
   <q-page>
-    <div class="constrain q-py-xl">
+    <create-midia />
+    <div class="constrain q-py-xl hidden">
         <div class="q-pb-xl">
             <q-btn @click="$router.go(-1)" round color="grey" icon="fa fa-arrow-left" />
         </div>
@@ -49,6 +50,11 @@
 <script>
 export default {
   name: 'Submissao',
+
+  components: {
+    CreateMidia: () => import('components/acervo/CreateMidia')
+  },
+
   data () {
     return {
       name: null,
