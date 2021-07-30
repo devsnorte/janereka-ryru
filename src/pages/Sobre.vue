@@ -1,17 +1,5 @@
 <template>
   <q-page>
-    <div class="bg-accent q-pb-lg q-px-xs-lg">
-        <div class="constrain row">
-            <div class="col-xs-12 col-md-5 q-pt-xs-xl q-py-md-xl q-my-md-xl">
-                <p class="text-h5 text-weight-bold text-white">
-                    Um ponto de conexão, para promover nossa resistência, além da troca de saberes e práticas de nossa educação patrimonial, tradicional e local que também dará oportunidade ao diálogo com demais povos das águas, terras e florestas e demais grupos e instituições.
-                </p>
-                <p class="text-white">
-                    A organização material e imaterial será feita como em nosso ritual tradicional Turywa, a partir da constelação de nossas redes de conexões internas e de parceiros, em momentos de compartilhamento entre a tradição e o novo.
-                </p>
-            </div>
-        </div>
-    </div>
     <Sobre />
     <div class="bg-grey-12 q-px-xs-lg">
         <div class="constrain row q-py-xs-lg q-py-md-xl">
@@ -27,7 +15,6 @@
                     </p>
                 </div>
                 <div class="col-xs-12 col-md-6 q-pl-md-xl">
-                    <div class="aspa"></div>
                     <p>
                         Um ponto comum da bibliografia acerca desta região é de que o termo “asuriní” ao qual Coudreau se refere provavelmente designava uma quantidade maior de povos indígenas que circulavam por essa região. Esse termo tem origem no termo juruna asóreni que designa vermelho. Embora ele seja atualmente aplicado aos Asuriní do Xingu é mais provável que esse termo designasse o grupo indígena Arawaté, pois estes últimos utilizam de forma abundante o urucum, de cor vermelha, enquanto que os Asuriní do Xingu utilizam jenipapo, de cor preta.”
                     </p>
@@ -47,20 +34,9 @@
 
 export default {
   components: {
-    Sobre: () => import('components/SobreImg'),
-    Map: () => import('components/SobreMap'),
-    Equipe: () => import('components/EquipeTecnica')
+    Sobre: () => import('components/sobre/SobreImg'),
+    Map: () => import('components/sobre/SobreMap'),
+    Equipe: () => import('components/sobre/EquipeTecnica')
   }
 }
 </script>
-
-<style scoped>
-
-.aspa {
-    position: absolute;
-    z-index: 9;
-    background-image: url("~assets/aspa.svg");
-    background-repeat: no-repeat;
-    background-position: top left;
-}
-</style>
