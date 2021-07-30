@@ -4,7 +4,9 @@
       <div class="row items-end q-py-xl">
         <div class="col-sm-12 col-md-4 q-gutter-md-lg q-gutter-xs-sm q-pb-md-xs" :class="$q.screen.lt.md ? 'order-last q-pt-lg' : 'text-right'">
             <q-btn class="btn-fixed-width" size="md" outline label="TERMOS DE SUBMISSÃO" />
-            <q-btn class="btn-fixed-width" size="md" outline label="ÁREA DO ADMINISTRADOR" />
+            <q-btn class="btn-fixed-width" size="md" outline label="ÁREA DO ADMINISTRADOR"
+              @click="showLogin = !showLogin"
+            />
         </div>
         <div class="col-xs-12 col-md-4 ">
           <img src="~/assets/logo-completa.svg" alt="Logo Instituto Janeraka" />
@@ -25,12 +27,27 @@
       </div>
       <q-img src="~/assets/marcas-apoio.svg" />
     </div>
+
+    <!-- Login dialog -->
+    <q-dialog v-model="showLogin">
+      <login @success="showLogin = false" />
+    </q-dialog>
   </q-footer>
 </template>
 
 <script>
 export default {
-  name: 'PageFooter'
+  name: 'PageFooter',
+
+  components: {
+    Login: () => import('components/Login')
+  },
+
+  data () {
+    return {
+      showLogin: false
+    }
+  }
 }
 </script>
 
