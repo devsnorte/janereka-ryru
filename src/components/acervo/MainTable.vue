@@ -29,7 +29,9 @@
       </q-tabs>
 
       <div>
-        <q-btn unelevated label="Enviar" icon="cloud_upload" color="primary" align="between" />
+        <q-btn unelevated label="Enviar" icon="cloud_upload" color="primary" align="between"
+          @click="sendMidia()"
+        />
         <q-btn unelevated icon="search" color="primary" padding="6px" class="q-ml-xs"
           @click="$emit('toggleFilter')"
         />
@@ -139,11 +141,29 @@ export default {
         page: 1,
         rowsPerPage: 12
       },
-      activeTab: 'all'
+      activeTab: 'all',
+      user: this.$axios.defaults.headers.common.token
+      // isLogged: false
     }
   },
 
   computed: {
+    /**
+     * Returns 'true' or 'false' whether the user is
+     * logged in, based on the presence of a token.
+     *
+     * @return {boolean}
+     */
+    isLogged: function () {
+      console.log(this.$axios.defaults.headers.common.token)
+      console.log(!!this.$axios.defaults.headers.common.token)
+      return !!this.$axios.defaults.headers.common.token
+    },
+
+    /**
+     * Represents the count of the last item in the current page.
+     * @return {number}
+     */
     lastIndexInPage: function () {
       // Determine how many pages are available
       const maxPages = Math.ceil(this.midias.length / this.pagination.rowsPerPage)
@@ -154,12 +174,30 @@ export default {
       return this.pagination.page * this.pagination.rowsPerPage
     },
 
+    /**
+     * Represents the count of the first item in the current page.
+     * @return {number}
+     */
     firstIndexInPage: function () {
       const maxInPage = this.pagination.page * this.pagination.rowsPerPage
       return maxInPage - this.pagination.rowsPerPage + 1
     }
-  }
+  },
 
+  methods: {
+    sendMidia () {
+      const isLogged = !!this.$axios.defaults.headers.common.token
+
+      if (isLogged) {
+        this.$router.push('/submissao')
+      } else {
+        this.$q.notify({
+          type: 'negative',
+          message: 'É necessário fazer login para enviar arquivos.'
+        })
+      }
+    }
+  }
 }
 </script>
 
