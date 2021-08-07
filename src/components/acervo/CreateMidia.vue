@@ -123,6 +123,8 @@
 </template>
 
 <script>
+import MediaSubmission from '../../services/MediaSubmissionService'
+
 export default {
   name: 'CreateMidia',
 
@@ -186,106 +188,124 @@ export default {
       this.$refs.tagsForm.blur()
     },
 
-    async submitMidiaDetails (nameParameter, midiaDetailsJSON, userToken) {
-      console.log('Submitting midia details...')
-      try {
-        const { data } = await this.$axios({
-          method: 'post',
-          url: '/acervo/midia',
-          data: midiaDetailsJSON,
-          params: { name: nameParameter },
-          headers: { token: userToken, 'Content-Type': 'application/json' }
-        })
-        console.log('New midia data responded from server:')
-        console.log(data)
-        const newMidiaFilePath = data.path
-        return newMidiaFilePath
-      } catch (error) {
-        console.error(error)
-        this.$q.notify({
-          type: 'negative',
-          message: 'Ocorreu um erro na submissão dos detalhes da publicação. Tente novamente.'
-        })
-      }
-    },
+    // async submitMidiaDetails (midiaDetailsJSON, userToken) {
+    //   console.log('Submitting midia details...')
+    //   try {
+    //     const { data } = await this.$axios({
+    //       method: 'post',
+    //       url: `/acervo/midia?name=${encodeURI(this.title)}`,
+    //       data: midiaDetailsJSON,
+    //       headers: { token: userToken, 'Content-Type': 'application/json' }
+    //     })
+    //     console.log('New midia data responded from server:')
+    //     console.log(data)
+    //     const newMidiaFilePath = data.path
+    //     return newMidiaFilePath
+    //   } catch (error) {
+    //     console.error(error)
+    //     this.$q.notify({
+    //       type: 'negative',
+    //       message: 'Ocorreu um erro na submissão dos detalhes da publicação. Tente novamente.'
+    //     })
+    //   }
+    // },
 
-    async submitMidiaDeletion (midiaFilePath, userToken) {
-      console.log('Submitting midia deletion...')
-      try {
-        await this.$axios({
-          method: 'delete',
-          url: `/acervo/midia/${midiaFilePath}`,
-          headers: { token: userToken }
-        })
-      } catch (error) {
-        console.error(error)
-        this.$q.notify({
-          type: 'negative',
-          message: 'Ocorreu um erro na deleção de mídia. Informe o administrador.'
-        })
-      }
-    },
+    // async submitMidiaDeletion (midiaFilePath, userToken) {
+    //   console.log('Submitting midia deletion...')
+    //   try {
+    //     await this.$axios({
+    //       method: 'delete',
+    //       url: `/acervo/midia/${midiaFilePath}`,
+    //       headers: { token: userToken }
+    //     })
+    //   } catch (error) {
+    //     console.error(error)
+    //     this.$q.notify({
+    //       type: 'negative',
+    //       message: 'Ocorreu um erro na deleção de mídia. Informe o administrador.'
+    //     })
+    //   }
+    // },
 
-    async submitMidiaFile (midiaFilePath, midiaFileFormData, userToken) {
-      console.log('Submitting midia file...')
-      try {
-        const { data } = this.$axios({
-          method: 'post',
-          url: `/acervo/upload/${midiaFilePath}`,
-          data: midiaFileFormData,
-          headers: { token: userToken }
-        })
-        console.log('New file request responded from server:')
-        console.log(data)
+    // async submitMidiaFile (midiaFilePath, midiaFileFormData, userToken) {
+    //   console.log('Submitting midia file...')
+    //   try {
+    //     const { data } = this.$axios({
+    //       method: 'post',
+    //       url: `/acervo/upload/${midiaFilePath}`,
+    //       data: midiaFileFormData,
+    //       headers: { token: userToken }
+    //     })
+    //     console.log('New file request responded from server:')
+    //     console.log(data)
 
-        this.$refs.newMidiaForm.reset()
-        this.$q.notify({
-          type: 'positive',
-          message: 'Publicação submetida com sucesso.'
-        })
-      } catch (error) {
-        console.error(error)
-        // Attempt to delete previously submitted midia details
-        this.submitMidiaDeletion(midiaFilePath, userToken)
+    //     this.$refs.newMidiaForm.reset()
+    //     this.$q.notify({
+    //       type: 'positive',
+    //       message: 'Publicação submetida com sucesso.'
+    //     })
+    //   } catch (error) {
+    //     console.error(error)
+    //     // Attempt to delete previously submitted midia details
+    //     this.submitMidiaDeletion(midiaFilePath, userToken)
+    //     this.$q.notify({
+    //       type: 'negative',
+    //       message: 'Ocorreu um erro na submissão do arquivo. Tente novamente.'
+    //     })
+    //   }
+    // },
+
+    // async submit () {
+    //   console.log('Submitting...')
+
+    //   const midiaData = JSON.stringify({
+    //     titulo: this.title,
+    //     descricao: this.description,
+    //     tipo: 'imagem',
+    //     tags: Array.from(this.tags)
+    //   })
+    //   console.log(midiaData)
+
+    //   const midiaFile = new FormData()
+    //   midiaFile.append('arquivo', this.newFile)
+
+    //   const token = this.$axios.defaults.headers.common.token
+    //   console.log(token)
+    //   if (!!token === false) {
+    //     console.error('No user token found')
+    //   }
+
+    //   // Send initial request to 'acervo/midia' with file details
+    //   const newMidiaFilePath = await this.submitMidiaDetails(midiaData, token)
+
+    //   // Send file to newly created midia resource
+    //   await this.submitMidiaFile(newMidiaFilePath, midiaFile, token)
+
+    //   console.log('Finished.')
+    // },
+
+    async submit () {
+      console.log('Submitting through service class...')
+      const token = this.$axios.defaults.headers.common.token
+      const submission = new MediaSubmission(
+        this.title,
+        this.description,
+        Array.from(this.tags),
+        this.newFile,
+        'imagem',
+        token
+      )
+      console.log(submission)
+
+      const result = await submission.submitNewMedia()
+      console.log(result)
+
+      if (result === false) {
         this.$q.notify({
           type: 'negative',
           message: 'Ocorreu um erro na submissão do arquivo. Tente novamente.'
         })
       }
-    },
-
-    async submit () {
-      console.log('Submitting...')
-
-      const midiaData = JSON.stringify({
-        titulo: this.title,
-        descricao: this.description,
-        tipo: 'imagem',
-        tags: Array.from(this.tags)
-      })
-      console.log(midiaData)
-
-      const midiaFile = new FormData()
-      midiaFile.append('arquivo', this.newFile)
-
-      const nameParam = new URLSearchParams({
-        name: this.title
-      })
-      console.log(nameParam)
-
-      const token = this.$axios.defaults.headers.common.token
-      console.log(token)
-      if (!!token === false) {
-        console.error('No user token found')
-      }
-
-      // Send initial request to 'acervo/midia' with file details
-      const newMidiaFilePath = await this.submitMidiaDetails(nameParam, midiaData, token)
-
-      // Send file to newly created midia resource
-      await this.submitMidiaFile(newMidiaFilePath, midiaFile, token)
-
-      console.log('Finished.')
     }
   }
 }
