@@ -8,16 +8,39 @@
 
                 <q-tabs class="gt-sm" shrink align="right" active-color="primary" indicator-color="transparent" :breakpoint="0">
                   <q-route-tab
-                      v-for="(tab, index) in essentialLinks"
-                      :key="index"
-                      :label="tab.title"
-                      :to="{ name: tab.route }"
+                      :label="$t('menus.navigationHome')"
+                      :to="{ name: 'home' }"
+                      exact
+                      no-caps
+                      content-class="test"
+                  />
+                  <q-route-tab
+                      :label="$t('menus.navigationAbout')"
+                      :to="{ name: 'sobre' }"
+                      exact
+                      no-caps
+                      content-class="test"
+                  />
+                  <q-route-tab
+                      :label="$t('menus.navigationGallery')"
+                      :to="{ name: 'acervo' }"
                       exact
                       no-caps
                       content-class="test"
                   />
                 </q-tabs>
                 <q-space />
+                <q-select
+                  v-model="locale"
+                  :options="localeOptions"
+                  :label="$t('menus.langSwitch')"
+                  dense
+                  borderless
+                  emit-value
+                  map-options
+                  options-dense
+                  style="min-width: 150px"
+                />
                 <q-btn
                   class="lt-md"
                   flat
@@ -43,7 +66,7 @@
             <q-btn flat round color="grey-9" icon="close" class="on-left absolute-top-right" @click="rightDrawerOpen = !rightDrawerOpen" />
             <q-list class="text-bold text-uppercase text-center q-pt-xl">
                 <EssentialLink
-                  v-for="link in essentialLinks"
+                  v-for="link in navigation"
                   :key="link.title"
                   v-bind="link"
                 />
@@ -55,31 +78,46 @@
 <script>
 import EssentialLink from './EssentialLink'
 
-const linksData = [
-  {
-    title: 'Início',
-    caption: '',
-    route: 'home'
-  },
-  {
-    title: 'Sobre',
-    caption: '',
-    route: 'sobre'
-  },
-  {
-    title: 'Acervo',
-    caption: '',
-    route: 'acervo'
-  }
-]
-
 export default {
   name: 'PageHeader',
+
   components: { EssentialLink },
+
   data () {
     return {
-      essentialLinks: linksData,
-      rightDrawerOpen: false
+      navigation: {
+        home: {
+          title: this.$t('menus.navigationHome'),
+          caption: '',
+          route: 'home'
+        },
+        about: {
+          title: this.$t('menus.navigationAbout'),
+          caption: '',
+          route: 'sobre'
+        },
+        gallery: {
+          title: this.$t('menus.navigationGallery'),
+          caption: '',
+          route: 'acervo'
+        }
+      },
+      rightDrawerOpen: false,
+      locale: this.$i18n.locale,
+      localeOptions: [
+        { value: 'en-us', label: 'English' },
+        { value: 'pt', label: 'Português' },
+        { value: 'awaete', label: 'Awaeté' }
+      ]
+    }
+  },
+
+  watch: {
+    locale: function (newLocale) {
+      console.log(newLocale)
+      console.log(this.$i18n.locale)
+      this.$i18n.locale = newLocale
+      console.log(this.$i18n.locale)
     }
   }
 }

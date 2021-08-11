@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import MediaSubmission from '../../services/MediaSubmissionService'
+import MediaSubmission from 'src/services/MediaSubmissionService'
 
 export default {
   name: 'CreateMidia',
