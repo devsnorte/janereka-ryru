@@ -33,7 +33,7 @@
     </q-card-section>
 
     <q-card-actions align="right" class="bg-white text-teal fixed-bottom">
-      <q-btn label="Fechar" v-close-popup color="dark"/>
+      <q-btn :label="$t('gallery.buttonLabelClose')" v-close-popup color="dark"/>
     </q-card-actions>
   </q-card>
 </template>

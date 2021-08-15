@@ -107,17 +107,14 @@ export default {
       localeOptions: [
         { value: 'en-us', label: 'English' },
         { value: 'pt', label: 'Português' },
-        { value: 'awaete', label: 'Awaeté' }
+        { value: 'awaete', label: 'Awaete' }
       ]
     }
   },
 
   watch: {
     locale: function (newLocale) {
-      console.log(newLocale)
-      console.log(this.$i18n.locale)
       this.$i18n.locale = newLocale
-      console.log(this.$i18n.locale)
     }
   }
 }

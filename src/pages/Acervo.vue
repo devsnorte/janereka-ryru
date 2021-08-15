@@ -22,7 +22,7 @@
       style="overflow-y: scroll;"
     >
 
-      <q-input filled dense debounce="300" placeholder="Pesquisar"
+      <q-input filled dense debounce="300" :placeholder="$t('gallery.searchBarPlaceholder')"
         standout="bg-grey-2" class="q-my-lg"
       >
         <template v-slot:append>
@@ -30,14 +30,14 @@
         </template>
       </q-input>
 
-      <strong>Classificação</strong>
+      <strong>{{ $t('gallery.menuSortBy') }}</strong>
       <div class="column q-my-md">
-        <q-radio v-model="radioPlaceholder" val="alph" label="Ordem alfabética" />
-        <q-radio v-model="radioPlaceholder" val="new" label="Mais recentes" />
-        <q-radio v-model="radioPlaceholder" val="old" label="Mais antigos" />
+        <q-radio v-model="radioPlaceholder" val="alph" :label="$t('gallery.menuSortAlphabetical')" />
+        <q-radio v-model="radioPlaceholder" val="new" :label="$t('gallery.menuSortNewer')" />
+        <q-radio v-model="radioPlaceholder" val="old" :label="$t('gallery.menuSortOlder')" />
       </div>
 
-      <strong>Hashtags</strong>
+      <strong>{{ $t('gallery.menuSortHashtags') }}</strong>
       <div class="q-gutter-sm q-mt-xs">
         <span
           v-for="hashtag in hashtagPlaceholder" :key="hashtag.name"
@@ -46,7 +46,7 @@
         </span>
       </div>
 
-      <q-btn label="Fechar" color="primary" class="self-start q-mt-xl"
+      <q-btn :label="$t('gallery.buttonLabelClose')" color="primary" class="self-start q-mt-xl"
         @click="showFilter = false"
       />
 

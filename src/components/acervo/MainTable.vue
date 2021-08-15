@@ -1,7 +1,7 @@
 <template>
   <q-table
     grid
-    title="Acervo"
+    :title="$t('gallery.mainTableTitle')"
     row-key="id"
     :loading="loading"
     :columns="columns"
@@ -21,16 +21,16 @@
         v-model="activeTab"
         @input="$emit('filterContent', activeTab)"
       >
-        <q-tab name="all" icon="perm_media" label="Todos" />
-        <q-tab name="arquivo" icon="folder" label="Arquivos" />
-        <q-tab name="imagem" icon="image" label="Imagens" />
-        <q-tab name="video" icon="theaters" label="Vídeos" />
-        <q-tab name="audio" icon="volume_up" label="Áudios" />
+        <q-tab name="all" icon="perm_media" :label="$t('gallery.categoryLabelAll')" />
+        <q-tab name="arquivo" icon="folder" :label="$t('gallery.categoryLabelFiles')" />
+        <q-tab name="imagem" icon="image" :label="$t('gallery.categoryLabelImages')" />
+        <q-tab name="video" icon="theaters" :label="$t('gallery.categoryLabelVideos')" />
+        <q-tab name="audio" icon="volume_up" :label="$t('gallery.categoryLabelAudio')" />
       </q-tabs>
 
       <div>
-        <q-btn unelevated label="Enviar" icon="cloud_upload" color="primary" align="between"
-          @click="sendMidia()"
+        <q-btn unelevated icon="cloud_upload" color="primary" align="between"
+          @click="sendMidia()" :label="$t('gallery.buttonLabelSend')"
         />
         <q-btn unelevated icon="search" color="primary" padding="6px" class="q-ml-xs"
           @click="$emit('toggleFilter')"
@@ -65,7 +65,9 @@
         @click="scope.prevPage"
       />
 
-      <span>{{ firstIndexInPage }}-{{ lastIndexInPage }} de {{ midias.length }}</span>
+      <span>
+        {{ firstIndexInPage }}-{{ lastIndexInPage }} {{ $t('gallery.paginationOfPage') }} {{ midias.length }}
+      </span>
 
       <q-btn
         icon="chevron_right"
@@ -193,7 +195,7 @@ export default {
       } else {
         this.$q.notify({
           type: 'negative',
-          message: 'É necessário fazer login para enviar arquivos.'
+          message: this.$t('login.alertLoginNecessary')
         })
       }
     }
