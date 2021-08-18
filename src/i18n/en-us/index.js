@@ -42,11 +42,14 @@ export default {
     pageTextAbout: 'This platform aims to organize, register and facilitate access to our knowledge, thus encouraging its practice, for the preservation and strengthening of our ancestral memories, especially those ritualistic, medicinal, artisanal and constructive, starting from the dialogue with our young and old.'
   },
   login: {
-    alertLoginFailed: 'Unable to login.',
+    alertLoginFailed: 'Unable to login. Please try again.',
     alertLoginNecessary: 'Login necessary.',
+    buttonLabelEnter: 'Enter',
     formFieldLabelUsername: 'Name',
     formFieldLabelPassword: 'Password',
-    formValidationFieldRequired: 'This field is required'
+    formValidationFieldRequired: 'This field is required',
+    pageTextTitle: 'Please login to access the gallery',
+    pageTextSubtitle: 'Exclusive access to tribe members'
   },
   menus: {
     navigationHome: 'Home',
