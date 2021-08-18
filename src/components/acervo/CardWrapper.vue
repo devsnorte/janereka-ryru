@@ -17,7 +17,7 @@
       <!-- Title/Author overlay -->
       <q-card-section class="absolute-bottom text-white bottom-overlay">
         <p class="text-h6">{{ card.data.titulo }}</p>
-        <strong>Autor:</strong> {{ card.creator.username }}
+        <strong>{{ $t('gallery.mediaDetailsAuthor') }}</strong> {{ card.creator.username }}
       </q-card-section>
 
     </q-card>

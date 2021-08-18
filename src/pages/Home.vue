@@ -5,31 +5,31 @@
           <div class="q-px-xs-lg q-px-md-xl" :class="$q.screen.lt.md ? 'justify-center text-center' : 'justify-end'">
             <q-img src="~/assets/janeraka.svg" width="15em" class="lt-md" />
             <h1 class="text-weight-bolder" :class="$q.screen.lt.md ? 'text-h3' : 'text-h2'">
-                Janereka Ryru
+                {{ $t('home.pageTitle') }}
             </h1>
             <div class="text-h6 text-weight-regular">
-              Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete
+              {{ $t('home.pageSubtitle') }}
             </div>
             <div class="q-py-xl q-mb-md-xl">
               <q-btn
                 color="primary"
                 no-caps
                 push
-                label="Acesse o Acervo"
+                :label="$t('home.buttonLabelGalleryAccess')"
                 size="xl"
                 to="/acervo"
                 class="text-weight-regular"
               />
             </div>
             <small class="gt-sm">
-              Projeto desenvolvido através da Lei Federal no 14.017/20, do Edital Museus e Memoriais de Base Comunitária – Lei Aldir Blanc Pará 2020
+              {{ $t('home.pageTextProjectFunding') }}
             </small>
           </div>
         </div>
         <div class="col-md-6 gt-sm">
           <q-img
             src="~assets/cover.jpg"
-            alt="Indigen Person jumping in the river"
+            :alt="$t('home.imageAltTextCoverPicture')"
             class="photo"
           />
         </div>
@@ -43,14 +43,14 @@
           </div>
           <div class="text-white col-xs-12 col-md-6 q-py-xl">
             <h1 class="text-h3 text-weight-bold">
-              Sobre a Plataforma
+              {{ $t('home.pageTextAboutTitle') }}
             </h1>
             <p class="q-pb-lg">
-              Essa plataforma tem o objetivo de organizar, facilitar o acesso e documentar, registrar nossos saberes, estimular suas práticas, para a preservação e o fortalecimento de nossas memórias ancestrais em especial ritualística, medicinal, artesanal e construtiva a partir do diálogo com nossos jovens e anciãos.
+              {{ $t('home.pageTextAbout') }}
             </p>
-            <small class="lt-md ">
-                Projeto desenvolvido através da Lei Federal no 14.017/20, do Edital Museus e Memoriais de Base Comunitária – Lei Aldir Blanc Pará 2020
-            </small>
+            <!-- <small class="lt-md">
+                {{ $t('home.pageTextProjectFunding') }}
+            </small> -->
           </div>
         </div>
       </div>

@@ -1,19 +1,25 @@
 <template>
   <div class="bg-white q-pa-xl" style="min-width: 400px;">
     <q-form @submit="login">
+
       <div class="q-mt-md col-xs-10 col-sm-7">
-        <label for="name" class="text-bold inline-block">Nome</label>
+        <label for="name" class="text-bold inline-block">
+          {{ $t('login.formFieldLabelUsername') }}
+        </label>
         <q-input
           id="name"
           v-model="name"
           dense
           filled
           type="text"
-          :rules="[val => !!val || 'Este campo é necessário']"
+          :rules="[val => !!val || $t('login.formValidationFieldRequired')]"
         />
       </div>
+
       <div class="q-mt-sm col-xs-10 col-sm-7">
-        <label for="password" class="text-bold inline-block">Senha</label>
+        <label for="password" class="text-bold inline-block">
+          {{ $t('login.formFieldLabelPassword') }}
+        </label>
         <q-input
           id="password"
           v-model="password"
@@ -27,9 +33,10 @@
           onpaste="return false"
           oncopy="return false"
           oncut="return false"
-          :rules="[val => !!val || 'Este campo é necessário']"
+          :rules="[val => !!val || $t('login.formValidationFieldRequired')]"
         />
       </div>
+
       <div class="column q-mt-sm col-xs-10 col-sm-7 q-mt-lg items-center">
         <q-btn
           color="primary"
@@ -45,6 +52,7 @@
           </span>
         </q-btn>
       </div>
+
     </q-form>
   </div>
 </template>
@@ -81,7 +89,7 @@ export default {
         this.loading = false
         this.$q.notify({
           type: 'negative',
-          message: 'Não foi possível fazer login.'
+          message: this.$t('login.alertLoginFailed')
         })
       }
     }

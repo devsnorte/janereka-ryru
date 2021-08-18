@@ -1,11 +1,11 @@
 <template>
   <div>
-    <q-form ref="newMidiaForm" class="constrain q-py-xl"  @submit.prevent.stop="submit">
+    <q-form ref="newMidiaForm" class="constrain q-py-xl" @submit.prevent.stop="submit">
 
       <!-- Input de arquivo / File input -->
       <div class="row no-wrap q-mr-md">
-        <q-btn unelevated color="primary" icon="file_upload" label="Novo"
-            @click="pickFile()"
+        <q-btn unelevated color="primary" class="no-wrap"
+            @click="pickFile()" :label="$t('submission.buttonLabelNewFile')"
           />
         <q-file dense filled
           v-show="newFile"
@@ -16,7 +16,7 @@
         >
 
           <template v-if="!newFile" v-slot:label>
-            <i>Selecione um arquivo</i>
+            <i>{{ $t('submission.formFieldLabelFilepicker') }}</i>
           </template>
 
           <template v-slot:file>
@@ -26,17 +26,17 @@
       </div>
 
       <!-- Input do nome / Filename input -->
-      <label for="filename" class="inline-block q-mt-lg">Nome do arquivo:</label>
+      <label for="filename" class="inline-block q-mt-lg">{{ $t('submission.formFieldLabelFilename') }}</label>
       <q-input id="filename" v-model="title" filled dense />
 
       <!-- Input da descrição / Description input -->
-      <label for="description" class="inline-block q-mt-lg">Descrição:</label>
+      <label for="description" class="inline-block q-mt-lg">{{ $t('submission.formFieldLabelDescription') }}</label>
       <q-input id="description" v-model="description" type="textarea" filled dense autogrow />
 
       <!-- Input das tags / Tags input -->
-      <label for="tags" class="inline-block q-mt-lg">Coleções (tags):</label>
+      <label for="tags" class="inline-block q-mt-lg">{{ $t('submission.formFieldLabelHashtags') }}</label>
       <q-input id="tags" ref="tagsForm" v-model="tagsText" filled dense
-        hint="Separe cada tag com uma vírgula (,). Ex: tag1, tag2, tag3"
+        :hint="$t('submission.formFieldHintHastags')"
         @input="parseTags()"
         @blur="addLastTag()"
         @keydown.enter.prevent="addLastTag()"
@@ -56,12 +56,12 @@
 
       <!-- Checkbox de aceite de termos / Accept terms checkbox -->
       <q-checkbox dense v-model="acceptTerms" class="q-mt-lg"
-        label="Li e aceito os termos da plataforma"
+        :label="$t('submission.formFieldLabelAcceptTerms')"
       />
 
       <!-- Seção do autor / Author section -->
       <div class="row no-wrap q-my-xl items-center">
-        <span class="text-h6">Dados do autor</span>
+        <span class="text-h6">{{ $t('submission.formSectionTitleAuthor') }}</span>
         <div class="col-grow q-mx-md bg-black" style="height: 2px;" />
       </div>
 
@@ -79,7 +79,7 @@
             class="q-my-md"
           >
             <template v-slot:label>
-              <span class="text-black text-weight-bold">Selecione sua aldeia</span>
+              <span class="text-black text-weight-bold">{{ $t('submission.formDropdownLabelAldeia') }}</span>
             </template>
 
             <template v-slot:selected>
@@ -97,7 +97,7 @@
             class="q-my-md"
           >
             <template v-slot:label>
-              <span class="text-black text-weight-bold">Selecione o autor</span>
+              <span class="text-black text-weight-bold">{{ $t('submission.formDropdownLabelAuthor') }}</span>
             </template>
 
             <template v-slot:selected>
@@ -108,14 +108,22 @@
         </div>
 
         <div class="column col-grow justify-center items-center">
-          <span class="text-h6">Ainda não é um autor?</span>
-          <q-btn unelevated no-caps color="secondary" label="Criar novo autor" class="q-mt-md" />
+          <span class="text-h6">{{ $t('submission.formTextNotAnAuthor') }}</span>
+          <q-btn unelevated no-caps color="secondary" class="q-mt-md"
+            :label="$t('submission.buttonLabelNewAuthor')"
+          />
         </div>
 
       </div>
 
       <div class="column items-center q-my-xl">
-        <q-btn unelevated color="primary" label="Enviar" type="submit" />
+        <q-btn unelevated color="primary" type="submit"
+          :loading="loading" :label="$t('submission.buttonLabelSend')"
+        >
+          <span slot="loading">
+            <q-spinner-hourglass />
+          </span>
+        </q-btn>
       </div>
 
     </q-form>
@@ -123,7 +131,7 @@
 </template>
 
 <script>
-import MediaSubmission from '../../services/MediaSubmissionService'
+import MediaSubmission from 'src/services/MediaSubmissionService'
 
 export default {
   name: 'CreateMidia',
@@ -138,6 +146,7 @@ export default {
       acceptTerms: false,
       aldeiaSelected: null,
       autorSelected: null,
+      loading: false,
       aldeiasPlaceholder: [
         'Gavião',
         'Itaaka',
@@ -188,104 +197,9 @@ export default {
       this.$refs.tagsForm.blur()
     },
 
-    // async submitMidiaDetails (midiaDetailsJSON, userToken) {
-    //   console.log('Submitting midia details...')
-    //   try {
-    //     const { data } = await this.$axios({
-    //       method: 'post',
-    //       url: `/acervo/midia?name=${encodeURI(this.title)}`,
-    //       data: midiaDetailsJSON,
-    //       headers: { token: userToken, 'Content-Type': 'application/json' }
-    //     })
-    //     console.log('New midia data responded from server:')
-    //     console.log(data)
-    //     const newMidiaFilePath = data.path
-    //     return newMidiaFilePath
-    //   } catch (error) {
-    //     console.error(error)
-    //     this.$q.notify({
-    //       type: 'negative',
-    //       message: 'Ocorreu um erro na submissão dos detalhes da publicação. Tente novamente.'
-    //     })
-    //   }
-    // },
-
-    // async submitMidiaDeletion (midiaFilePath, userToken) {
-    //   console.log('Submitting midia deletion...')
-    //   try {
-    //     await this.$axios({
-    //       method: 'delete',
-    //       url: `/acervo/midia/${midiaFilePath}`,
-    //       headers: { token: userToken }
-    //     })
-    //   } catch (error) {
-    //     console.error(error)
-    //     this.$q.notify({
-    //       type: 'negative',
-    //       message: 'Ocorreu um erro na deleção de mídia. Informe o administrador.'
-    //     })
-    //   }
-    // },
-
-    // async submitMidiaFile (midiaFilePath, midiaFileFormData, userToken) {
-    //   console.log('Submitting midia file...')
-    //   try {
-    //     const { data } = this.$axios({
-    //       method: 'post',
-    //       url: `/acervo/upload/${midiaFilePath}`,
-    //       data: midiaFileFormData,
-    //       headers: { token: userToken }
-    //     })
-    //     console.log('New file request responded from server:')
-    //     console.log(data)
-
-    //     this.$refs.newMidiaForm.reset()
-    //     this.$q.notify({
-    //       type: 'positive',
-    //       message: 'Publicação submetida com sucesso.'
-    //     })
-    //   } catch (error) {
-    //     console.error(error)
-    //     // Attempt to delete previously submitted midia details
-    //     this.submitMidiaDeletion(midiaFilePath, userToken)
-    //     this.$q.notify({
-    //       type: 'negative',
-    //       message: 'Ocorreu um erro na submissão do arquivo. Tente novamente.'
-    //     })
-    //   }
-    // },
-
-    // async submit () {
-    //   console.log('Submitting...')
-
-    //   const midiaData = JSON.stringify({
-    //     titulo: this.title,
-    //     descricao: this.description,
-    //     tipo: 'imagem',
-    //     tags: Array.from(this.tags)
-    //   })
-    //   console.log(midiaData)
-
-    //   const midiaFile = new FormData()
-    //   midiaFile.append('arquivo', this.newFile)
-
-    //   const token = this.$axios.defaults.headers.common.token
-    //   console.log(token)
-    //   if (!!token === false) {
-    //     console.error('No user token found')
-    //   }
-
-    //   // Send initial request to 'acervo/midia' with file details
-    //   const newMidiaFilePath = await this.submitMidiaDetails(midiaData, token)
-
-    //   // Send file to newly created midia resource
-    //   await this.submitMidiaFile(newMidiaFilePath, midiaFile, token)
-
-    //   console.log('Finished.')
-    // },
-
     async submit () {
       console.log('Submitting through service class...')
+      this.loading = true
       const token = this.$axios.defaults.headers.common.token
       const submission = new MediaSubmission(
         this.title,
@@ -303,9 +217,16 @@ export default {
       if (result === false) {
         this.$q.notify({
           type: 'negative',
-          message: 'Ocorreu um erro na submissão do arquivo. Tente novamente.'
+          message: this.$t('submission.alertSubmissionError')
+        })
+      } else {
+        this.$q.notify({
+          type: 'positive',
+          message: this.$t('submission.alertSubmissionSuccess')
         })
       }
+
+      this.loading = false
     }
   }
 }

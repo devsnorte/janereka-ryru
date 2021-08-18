@@ -109,8 +109,10 @@ export default class MediaSubmission {
     try {
       await this.performMediaDetailsSubmission()
       await this.perforMediaFileSubmission()
+      return this.success
     } catch (error) {
       console.error(error)
+      return this.success
     }
   }
 }
