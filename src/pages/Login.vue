@@ -83,8 +83,6 @@ export default {
       const result = await this.session.login(this.name, this.password)
 
       if (result.success) {
-        console.log('Logged user:')
-        console.log(this.session.getCurrentSession())
         this.loading = false
 
         if (goTo) this.$router.push({ path: goTo })

@@ -131,7 +131,7 @@
 </template>
 
 <script>
-import MediaSubmission from 'src/services/MediaSubmissionService'
+import MediaSubmission from 'src/api/MediaSubmissionService'
 
 export default {
   name: 'CreateMidia',
@@ -198,7 +198,6 @@ export default {
     },
 
     async submit () {
-      console.log('Submitting through service class...')
       this.loading = true
       const token = this.$axios.defaults.headers.common.token
       const submission = new MediaSubmission(
@@ -209,10 +208,8 @@ export default {
         'imagem',
         token
       )
-      console.log(submission)
 
       const result = await submission.submitNewMedia()
-      console.log(result)
 
       if (result === false) {
         this.$q.notify({
