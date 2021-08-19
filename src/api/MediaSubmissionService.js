@@ -25,7 +25,6 @@ export default class MediaSubmission {
   }
 
   async performMediaDeletion () {
-    console.info('Requesting deletion of midia file to the \'acervo\\midia\\{path}\' endpoint...')
     try {
       await axios({
         method: 'delete',
@@ -42,9 +41,7 @@ export default class MediaSubmission {
   }
 
   async performMediaDetailsSubmission () {
-    console.info('Requesting submission of media details to the \'acervo\\midia\' endpoint...')
-
-    // JSONify data as necessary for this endpoint
+    // JSONify data as needed by this endpoint
     const jsonMediaData = JSON.stringify({
       titulo: this.title,
       descricao: this.description,
@@ -63,8 +60,6 @@ export default class MediaSubmission {
 
       // Retrieve the 'path' value and update on the instance
       this.apiFilePath = data.path
-      console.info('Successfuly submitted new media details:')
-      console.log(data)
     } catch (error) {
       this.success = false
       console.error({
@@ -76,23 +71,19 @@ export default class MediaSubmission {
   }
 
   async perforMediaFileSubmission () {
-    console.info('Requesting submission of media file to the \'acervo\\midia\\{path}\' endpoint...')
-
     // Insert file into FormData as necessary for this endpoint
     const mediaFormData = new FormData()
     mediaFormData.append('arquivo', this.mediaFile)
 
     // Perform POST request
     try {
-      const { data } = await axios({
+      await axios({
         method: 'post',
         url: `/acervo/upload/${this.apiFilePath}`,
         data: mediaFormData,
         headers: { token: this.userToken }
       })
 
-      console.info('Successfuly submitted new media data:')
-      console.log(data)
       this.success = true
     } catch (error) {
       this.success = false

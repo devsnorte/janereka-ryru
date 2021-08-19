@@ -1,3 +1,4 @@
+import { sessionState as state } from 'src/store/session'
 
 const routes = [
   {
@@ -15,14 +16,35 @@ const routes = [
         component: () => import('pages/Sobre.vue')
       },
       {
+        path: '/login',
+        name: 'login',
+        component: () => import('pages/Login.vue')
+      },
+      {
         path: '/acervo',
         name: 'acervo',
-        component: () => import('pages/Acervo.vue')
+        component: () => import('pages/Acervo.vue'),
+        beforeEnter (to, from, next) {
+          if (to.name !== 'login' && !state.user) {
+            next({
+              name: 'login',
+              query: { goTo: to.fullPath }
+            })
+          } else next()
+        }
       },
       {
         path: '/submissao',
         name: 'submissao',
-        component: () => import('pages/Submissao.vue')
+        component: () => import('pages/Submissao.vue'),
+        beforeEnter (to, from, next) {
+          if (to.name !== 'login' && !state.user) {
+            next({
+              name: 'login',
+              query: { goTo: to.fullPath }
+            })
+          } else next()
+        }
       },
       {
         path: '*',

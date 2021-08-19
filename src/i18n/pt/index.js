@@ -28,7 +28,7 @@ export default {
     menuSortNewer: 'Mais recentes',
     menuSortOlder: 'Mais antigos',
     menuSortBy: 'Classificação',
-    menuSortHastahgs: 'Hashtags',
+    menuSortHashtags: 'Hashtags',
     paginationOfPage: 'de',
     searchBarPlaceholder: 'Pesquisar'
   },
@@ -42,11 +42,14 @@ export default {
     pageTextAbout: 'Essa plataforma tem o objetivo de organizar, facilitar o acesso e documentar, registrar nossos saberes, estimular suas práticas, para a preservação e o fortalecimento de nossas memórias ancestrais em especial ritualística, medicinal, artesanal e construtiva a partir do diálogo com nossos jovens e anciãos.'
   },
   login: {
-    alertLoginFailed: 'Não foi possível fazer login',
+    alertLoginFailed: 'Não foi possível fazer login. Tente novamente.',
     alertLoginNecessary: 'É necessário fazer login para obter acesso.',
+    buttonLabelEnter: 'Entrar',
     formFieldLabelUsername: 'Nome',
     formFieldLabelPassword: 'Senha',
-    formValidationFieldRequired: 'Este campo é necessário'
+    formValidationFieldRequired: 'Este campo é necessário',
+    pageTextTitle: 'Para acessar o acervo, entre com o login e senha',
+    pageTextSubtitle: 'Acesso exclusivo para membros da aldeia'
   },
   menus: {
     navigationHome: 'Início',
