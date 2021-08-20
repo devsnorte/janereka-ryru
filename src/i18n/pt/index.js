@@ -59,9 +59,11 @@ export default {
   },
   submission: {
     alertInvalidFile: 'O arquivo selecionado é inválido. Tente outro formato.',
+    alertMustAcceptTerms: 'É necessário aceitar os termos de submissão para enviar o arquivo.',
+    alertNoFileSelected: 'Nenhum arquivo selecionado para envio.',
     alertSubmissionError: 'Ocorreu um erro na submissão do arquivo. Tente novamente.',
     alertSubmissionSuccess: 'Arquivo submetido com sucesso.',
-    buttonLabelNewFile: 'Novo',
+    buttonLabelNewFile: 'Escolher arquivo',
     buttonLabelSend: 'Enviar',
     buttonLabelNewAuthor: 'Criar novo autor',
     formDropdownLabelAldeia: 'Selecione sua aldeia',
@@ -73,6 +75,7 @@ export default {
     formFieldLabelHashtags: 'Coleções (tags):',
     formFieldLabelAcceptTerms: 'Li e aceito os termos de submissão da plataforma',
     formSectionTitleAuthor: 'Dados do autor',
-    formTextNotAnAuthor: 'Ainda não é um autor?'
+    formTextNotAnAuthor: 'Ainda não é um autor?',
+    formValidationFieldRequired: 'Este campo é necessário.'
   }
 }

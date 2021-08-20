@@ -1,5 +1,5 @@
 <template>
-  <q-page class="column items-center q-pt-xl">
+  <q-page class="column items-center q-py-xl">
 
     <span class="text-h6"><strong>{{ $t('login.pageTextTitle') }}</strong></span>
     <span>{{ $t('login.pageTextSubtitle') }}</span>
