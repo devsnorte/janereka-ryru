@@ -11,8 +11,10 @@
           v-show="newFile"
           v-model="newFile"
           :label-slot="!newFile"
+          accept="ogg, ogv, avi, mp4, mpeg, webm, jpeg, jpg, png, gif, pdf, ods, odt, odp"
           class="no-pointer-events"
           ref="filePicker"
+          @rejected="alertInvalidFile()"
         >
 
           <template v-if="!newFile" v-slot:label>
@@ -164,36 +166,77 @@ export default {
     }
   },
 
+  computed: {
+    /**
+     * Represents the media type used by the API. Value is
+     * resolved by means of the 'type' property from the file
+     * in this.data.
+     *
+     * Resolves to 'audio', 'image', 'video' or 'arquivo'
+     * according to the selected file.
+     *
+     * @return {string}
+     */
+    mediaFileType: function () {
+      let apiMediaType = null
+
+      const fileType = this.newFile.type
+      console.log(fileType)
+      if (fileType) apiMediaType = fileType.split('/')
+
+      switch (apiMediaType[0]) {
+        case 'audio':
+          apiMediaType = 'audio'
+          break
+        case 'image':
+          apiMediaType = 'imagem'
+          break
+        case 'video':
+          apiMediaType = 'video'
+          break
+        case 'application':
+          apiMediaType = 'arquivo'
+          break
+        default:
+          apiMediaType = null
+      }
+
+      return apiMediaType
+    }
+  },
+
   methods: {
     pickFile () {
       this.$refs.filePicker.pickFiles()
       this.$refs.filePicker.blur()
     },
 
+    alertInvalidFile () {
+      this.$q.notify({
+        type: 'negative',
+        message: this.$t('submission.alertInvalidFile')
+      })
+    },
+
     parseTags () {
       const splittedTags = this.tagsText.split(',')
-      // console.log(splittedTags)
 
       if (splittedTags.length > 1) {
         this.tags.add(splittedTags[0].trim())
         splittedTags.splice(0, 1)
         this.tagsText = splittedTags.join('').trim()
-        // console.log(this.tags)
       }
     },
 
     addLastTag () {
-      // console.log('Called addLastTag()')
       if (this.tagsText.trim().length > 0) {
         this.tags.add(this.tagsText.trim())
-        // console.log(this.tags)
         this.tagsText = ''
       }
     },
 
     clearTag (tag) {
       this.tags.delete(tag)
-      // console.log(this.tags)
       this.$refs.tagsForm.blur()
     },
 
@@ -205,7 +248,7 @@ export default {
         this.description,
         Array.from(this.tags),
         this.newFile,
-        'imagem',
+        this.mediaFileType,
         token
       )
 

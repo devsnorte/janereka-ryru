@@ -58,6 +58,7 @@ export default {
     langSwitch: 'Idioma'
   },
   submission: {
+    alertInvalidFile: 'O arquivo selecionado é inválido. Tente outro formato.',
     alertSubmissionError: 'Ocorreu um erro na submissão do arquivo. Tente novamente.',
     alertSubmissionSuccess: 'Arquivo submetido com sucesso.',
     buttonLabelNewFile: 'Novo',

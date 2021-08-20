@@ -58,6 +58,7 @@ export default {
     langSwitch: 'Idioma' // Pending translation
   },
   submission: {
+    alertInvalidFile: 'O arquivo selecionado é inválido. Tente outro formato.', // Pending translation
     alertSubmissionError: 'Ocorreu um erro na submissão do arquivo. Tente novamente.', // Pending translation
     alertSubmissionSuccess: 'Arquivo submetido com sucesso.', // Pending translation
     buttonLabelNewFile: 'Novo', // Pending translation
