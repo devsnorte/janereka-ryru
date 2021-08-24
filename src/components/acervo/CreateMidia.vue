@@ -169,13 +169,14 @@
 
 <script>
 import MediaSubmission from 'src/api/MediaSubmissionService'
-import { sessionState as session } from 'src/store/session'
+import { Session } from 'src/api/SessionManager'
 
 export default {
   name: 'CreateMidia',
 
   data () {
     return {
+      session: Session.getSessionManager(),
       newFile: null,
       title: '',
       description: '',
@@ -292,14 +293,15 @@ export default {
         })
       // Proceed with submission
       } else {
-        const token = session.token
+        const session = this.session.getSession()
+
         const submission = new MediaSubmission(
           this.title,
           this.description,
           Array.from(this.tags),
           this.newFile,
           this.mediaFileType,
-          token
+          session.token
         )
 
         const result = await submission.submitNewMedia()

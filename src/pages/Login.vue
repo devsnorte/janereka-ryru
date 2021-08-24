@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { Session } from 'src/api/session'
+import { Session } from 'src/api/SessionManager'
 
 export default {
   name: 'Login',
