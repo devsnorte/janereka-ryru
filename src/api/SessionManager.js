@@ -1,21 +1,18 @@
 import { axiosInstance as axios } from 'src/boot/axios'
-import { sessionState as state } from 'src/store/session'
-
-// function Session (state) {
-//   this.state = state
-// }
+import { getters, mutations } from 'src/store/session-store'
 
 export const Session = (function () {
   function SessionManager () {
-    this.getCurrentSession = () => {
+    this.getSession = () => {
       return {
-        user: state.user
+        user: getters.user(),
+        token: getters.token()
       }
     }
 
     this.setSessionState = (user, token) => {
-      state.user = user || (state.user = null)
-      state.token = token || (state.token = null)
+      mutations.setUser(user)
+      mutations.setToken(token)
     }
 
     this.login = async (username, password) => {
@@ -30,7 +27,7 @@ export const Session = (function () {
         })
 
         axios.defaults.headers.common = { token: data }
-        this.setSessionState(username, { token: data })
+        this.setSessionState(username, data)
 
         return { success: true }
       } catch (error) {

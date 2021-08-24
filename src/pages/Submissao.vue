@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="flex flex-center">
       <create-midia />
   </q-page>
 </template>

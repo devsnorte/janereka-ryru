@@ -3,16 +3,23 @@
     <q-form ref="newMidiaForm" class="constrain q-py-xl" @submit.prevent.stop="submit">
 
       <!-- Input de arquivo / File input -->
-      <div class="row no-wrap q-mr-md">
-        <q-btn unelevated color="primary" class="no-wrap"
-            @click="pickFile()" :label="$t('submission.buttonLabelNewFile')"
-          />
-        <q-file dense filled
+      <div class="row no-wrap q-mr-md full-width items-center">
+        <q-btn
+          unelevated no-wrap
+          color="primary"
+          size="1.1em"
+          @click="pickFile()" :label="$t('submission.buttonLabelNewFile')"
+        />
+        <q-file
+          dense filled
+          id="filepicker"
           v-show="newFile"
           v-model="newFile"
           :label-slot="!newFile"
-          class="no-pointer-events"
+          accept="ogg, ogv, avi, mp4, mpeg, webm, jpeg, jpg, png, gif, pdf, ods, odt, odp"
+          class="no-pointer-events q-pl-xs q-py-md"
           ref="filePicker"
+          @rejected="alertInvalidFile()"
         >
 
           <template v-if="!newFile" v-slot:label>
@@ -26,16 +33,37 @@
       </div>
 
       <!-- Input do nome / Filename input -->
-      <label for="filename" class="inline-block q-mt-lg">{{ $t('submission.formFieldLabelFilename') }}</label>
-      <q-input id="filename" v-model="title" filled dense />
+      <label for="filename" class="inline-block q-mt-lg">
+        {{ $t('submission.formFieldLabelFilename') }}
+      </label>
+      <q-input
+        dense filled
+        id="filename"
+        v-model="title"
+        :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
+      />
 
       <!-- Input da descrição / Description input -->
-      <label for="description" class="inline-block q-mt-lg">{{ $t('submission.formFieldLabelDescription') }}</label>
-      <q-input id="description" v-model="description" type="textarea" filled dense autogrow />
+      <label for="description" class="inline-block q-mt-lg">
+        {{ $t('submission.formFieldLabelDescription') }}
+      </label>
+      <q-input
+        dense filled autogrow
+        id="description"
+        type="textarea"
+        v-model="description"
+        :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
+      />
 
       <!-- Input das tags / Tags input -->
-      <label for="tags" class="inline-block q-mt-lg">{{ $t('submission.formFieldLabelHashtags') }}</label>
-      <q-input id="tags" ref="tagsForm" v-model="tagsText" filled dense
+      <label for="tags" class="inline-block q-mt-lg">
+        {{ $t('submission.formFieldLabelHashtags') }}
+      </label>
+      <q-input
+        dense filled
+        id="tags"
+        ref="tagsForm"
+        v-model="tagsText"
         :hint="$t('submission.formFieldHintHastags')"
         @input="parseTags()"
         @blur="addLastTag()"
@@ -55,21 +83,27 @@
       </q-input>
 
       <!-- Checkbox de aceite de termos / Accept terms checkbox -->
-      <q-checkbox dense v-model="acceptTerms" class="q-mt-lg"
+      <q-checkbox
+        dense
+        v-model="acceptTerms"
         :label="$t('submission.formFieldLabelAcceptTerms')"
+        class="q-mt-lg"
       />
 
+      <!-- Keep hidden until full implementation is demanded -->
       <!-- Seção do autor / Author section -->
-      <div class="row no-wrap q-my-xl items-center">
+      <div class="row no-wrap q-my-xl items-center hidden">
         <span class="text-h6">{{ $t('submission.formSectionTitleAuthor') }}</span>
         <div class="col-grow q-mx-md bg-black" style="height: 2px;" />
       </div>
 
-      <div class="row justify-around">
+      <!-- Keep hidden until full implementation is demanded -->
+      <div class="row justify-around hidden">
 
         <div class="column col-grow q-px-xl">
 
-          <q-select outlined clearable
+          <q-select
+            outlined clearable
             v-model="aldeiaSelected"
             :options="aldeiasPlaceholder"
             :label-slot="!aldeiaSelected"
@@ -77,6 +111,7 @@
             popup-content-style="border: 2px solid black; border-radius: 5px;"
             color="black"
             class="q-my-md"
+            style="min-width: 250px;"
           >
             <template v-slot:label>
               <span class="text-black text-weight-bold">{{ $t('submission.formDropdownLabelAldeia') }}</span>
@@ -87,7 +122,8 @@
             </template>
           </q-select>
 
-          <q-select outlined clearable
+          <q-select
+            outlined clearable
             v-model="autorSelected"
             :options="autoresPlaceholder"
             :label-slot="!autorSelected"
@@ -95,6 +131,7 @@
             popup-content-style="border: 2px solid black; border-radius: 5px;"
             color="black"
             class="q-my-md"
+            style="min-width: 250px;"
           >
             <template v-slot:label>
               <span class="text-black text-weight-bold">{{ $t('submission.formDropdownLabelAuthor') }}</span>
@@ -132,12 +169,14 @@
 
 <script>
 import MediaSubmission from 'src/api/MediaSubmissionService'
+import { Session } from 'src/api/SessionManager'
 
 export default {
   name: 'CreateMidia',
 
   data () {
     return {
+      session: Session.getSessionManager(),
       newFile: null,
       title: '',
       description: '',
@@ -164,65 +203,121 @@ export default {
     }
   },
 
+  computed: {
+    /**
+     * Represents the media type used by the API. Value is
+     * resolved by means of the 'type' property from the file
+     * in this.data.
+     *
+     * Resolves to 'audio', 'image', 'video' or 'arquivo'
+     * according to the selected file.
+     *
+     * @return {string}
+     */
+    mediaFileType: function () {
+      let apiMediaType = null
+
+      const fileType = this.newFile.type
+      if (fileType) apiMediaType = fileType.split('/')
+
+      switch (apiMediaType[0]) {
+        case 'audio':
+          apiMediaType = 'audio'
+          break
+        case 'image':
+          apiMediaType = 'imagem'
+          break
+        case 'video':
+          apiMediaType = 'video'
+          break
+        case 'application':
+          apiMediaType = 'arquivo'
+          break
+        default:
+          apiMediaType = null
+      }
+
+      return apiMediaType
+    }
+  },
+
   methods: {
     pickFile () {
       this.$refs.filePicker.pickFiles()
       this.$refs.filePicker.blur()
     },
 
+    alertInvalidFile () {
+      this.$q.notify({
+        type: 'negative',
+        message: this.$t('submission.alertInvalidFile')
+      })
+    },
+
     parseTags () {
       const splittedTags = this.tagsText.split(',')
-      // console.log(splittedTags)
 
       if (splittedTags.length > 1) {
         this.tags.add(splittedTags[0].trim())
         splittedTags.splice(0, 1)
         this.tagsText = splittedTags.join('').trim()
-        // console.log(this.tags)
       }
     },
 
     addLastTag () {
-      // console.log('Called addLastTag()')
       if (this.tagsText.trim().length > 0) {
         this.tags.add(this.tagsText.trim())
-        // console.log(this.tags)
         this.tagsText = ''
       }
     },
 
     clearTag (tag) {
       this.tags.delete(tag)
-      // console.log(this.tags)
       this.$refs.tagsForm.blur()
     },
 
     async submit () {
       this.loading = true
-      const token = this.$axios.defaults.headers.common.token
-      const submission = new MediaSubmission(
-        this.title,
-        this.description,
-        Array.from(this.tags),
-        this.newFile,
-        'imagem',
-        token
-      )
 
-      const result = await submission.submitNewMedia()
-
-      if (result === false) {
+      // Ensure there is a file
+      if (!this.newFile) {
         this.$q.notify({
           type: 'negative',
-          message: this.$t('submission.alertSubmissionError')
+          message: this.$t('submission.alertNoFileSelected')
         })
-      } else {
+      // Ensure submission terms are agreed with
+      } else if (!this.acceptTerms) {
         this.$q.notify({
-          type: 'positive',
-          message: this.$t('submission.alertSubmissionSuccess')
+          type: 'negative',
+          message: this.$t('submission.alertMustAcceptTerms')
         })
-      }
+      // Proceed with submission
+      } else {
+        const session = this.session.getSession()
 
+        const submission = new MediaSubmission(
+          this.title,
+          this.description,
+          Array.from(this.tags),
+          this.newFile,
+          this.mediaFileType,
+          session.token
+        )
+
+        const result = await submission.submitNewMedia()
+
+        if (result === false) {
+          this.$q.notify({
+            type: 'negative',
+            message: this.$t('submission.alertSubmissionError')
+          })
+        } else {
+          this.$q.notify({
+            type: 'positive',
+            message: this.$t('submission.alertSubmissionSuccess')
+          })
+        }
+      }
       this.loading = false
     }
   }

@@ -58,9 +58,12 @@ export default {
     langSwitch: 'Idioma' // Pending translation
   },
   submission: {
+    alertInvalidFile: 'O arquivo selecionado é inválido. Tente outro formato.', // Pending translation
+    alertMustAcceptTerms: 'É necessário aceitar os termos de submissão para enviar o arquivo.', // Pending translation
+    alertNoFileSelected: 'Nenhum arquivo selecionado para envio.', // Pending translation
     alertSubmissionError: 'Ocorreu um erro na submissão do arquivo. Tente novamente.', // Pending translation
     alertSubmissionSuccess: 'Arquivo submetido com sucesso.', // Pending translation
-    buttonLabelNewFile: 'Novo', // Pending translation
+    buttonLabelNewFile: 'Escolher arquivo', // Pending translation
     buttonLabelSend: 'Enviar', // Pending translation
     buttonLabelNewAuthor: 'Criar novo autor', // Pending translation
     formDropdownLabelAldeia: 'Selecione sua aldeia', // Pending translation
@@ -72,6 +75,7 @@ export default {
     formFieldLabelHashtags: 'Coleções (tags):', // Pending translation
     formFieldLabelAcceptTerms: 'Li e aceito os termos de submissão da plataforma', // Pending translation
     formSectionTitleAuthor: 'Dados do autor', // Pending translation
-    formTextNotAnAuthor: 'Ainda não é um autor?' // Pending translation
+    formTextNotAnAuthor: 'Ainda não é um autor?', // Pending translation
+    formValidationFieldRequired: 'Este campo é necessário.' // Pending translation
   }
 }

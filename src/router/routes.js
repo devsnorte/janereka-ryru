@@ -1,4 +1,4 @@
-import { sessionState as state } from 'src/store/session'
+import { getters } from 'src/store/session-store'
 
 const routes = [
   {
@@ -25,7 +25,7 @@ const routes = [
         name: 'acervo',
         component: () => import('pages/Acervo.vue'),
         beforeEnter (to, from, next) {
-          if (to.name !== 'login' && !state.user) {
+          if (to.name !== 'login' && !getters.user()) {
             next({
               name: 'login',
               query: { goTo: to.fullPath }
@@ -38,7 +38,7 @@ const routes = [
         name: 'submissao',
         component: () => import('pages/Submissao.vue'),
         beforeEnter (to, from, next) {
-          if (to.name !== 'login' && !state.user) {
+          if (to.name !== 'login' && !getters.user()) {
             next({
               name: 'login',
               query: { goTo: to.fullPath }

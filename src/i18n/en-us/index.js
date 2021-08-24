@@ -58,9 +58,12 @@ export default {
     langSwitch: 'Language'
   },
   submission: {
+    alertInvalidFile: 'The selected file is invalid. Please try another format.',
+    alertMustAcceptTerms: 'It is necessary to agree with this platform\'s submission terms.',
+    alertNoFileSelected: 'No file selected for submission.',
     alertSubmissionError: 'And error has occured during file submission. Please try again.',
     alertSubmissionSuccess: 'File successfully submitted.',
-    buttonLabelNewFile: 'New',
+    buttonLabelNewFile: 'Choose file',
     buttonLabelSend: 'Send',
     buttonLabelNewAuthor: 'Create new author',
     formDropdownLabelAldeia: 'Select your tribe',
@@ -72,6 +75,7 @@ export default {
     formFieldLabelHashtags: 'Collections (tags):',
     formFieldLabelAcceptTerms: 'I have read and agree with this platform\'s submission terms',
     formSectionTitleAuthor: 'Author data',
-    formTextNotAnAuthor: 'Not yet an author?'
+    formTextNotAnAuthor: 'Not yet an author?',
+    formValidationFieldRequired: 'This field is required.'
   }
 }
