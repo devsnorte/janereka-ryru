@@ -28,6 +28,13 @@
                       no-caps
                       content-class="test"
                   />
+                  <q-route-tab
+                      :label="$t('menus.navigationContact')"
+                      :to="{ name: 'contato' }"
+                      exact
+                      no-caps
+                      content-class="test"
+                  />
                 </q-tabs>
                 <q-space />
                 <q-select
@@ -100,14 +107,19 @@ export default {
           title: this.$t('menus.navigationGallery'),
           caption: '',
           route: 'acervo'
+        },
+        contact: {
+          title: this.$t('menus.navigationContact'),
+          caption: '',
+          route: 'acervo'
         }
       },
       rightDrawerOpen: false,
       locale: this.$i18n.locale,
       localeOptions: [
-        { value: 'en-us', label: 'English' },
         { value: 'pt', label: 'Português' },
-        { value: 'awaete', label: 'Awaete' }
+        { value: 'awaete', label: 'Awaete' },
+        { value: 'en-us', label: 'English' }
       ]
     }
   },

@@ -5,6 +5,16 @@ export default {
     pageTextAboutAwaeteCitationB: 'Um ponto comum da bibliografia acerca desta região é de que o termo “asuriní” ao qual Coudreau se refere provavelmente designava uma quantidade maior de povos indígenas que circulavam por essa região. Esse termo tem origem no termo juruna asóreni que designa vermelho. Embora ele seja atualmente aplicado aos Asuriní do Xingu é mais provável que esse termo designasse o grupo indígena Arawaté, pois estes últimos utilizam de forma abundante o urucum, de cor vermelha, enquanto que os Asuriní do Xingu utilizam jenipapo, de cor preta.”', // Pending translation
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61' // Pending translation
   },
+  contact: {
+    buttonLabelSubmit: 'Entrar', // Pending translation
+    formFieldLabelName: 'Nome', // Pending translation
+    formFieldLabelPhone: 'Telefone', // Pending translation
+    formFieldLabelEmail: 'E-mail', // Pending translation
+    formFieldLabelMessage: 'Escreva uma mensagem', // Pending translation
+    formValidationFieldRequired: 'Por favor, preencha este campo', // Pending translation
+    pageTextTitle: 'Tem algum arquivo sobre a etnia Awaeté?', // Pending translation
+    pageTextSubtitle: 'Entre em contato conosco' // Pending translation
+  },
   footer: {
     buttonLabelSubmissionTerms: 'TERMOS DE SUBMISSÃO', // Pending translation
     buttonLabelAdminArea: 'ÁREA DO ADMINISTRADOR', // Pending translation
@@ -52,10 +62,11 @@ export default {
     pageTextSubtitle: 'Acesso exclusivo para membros da aldeia' // Pending translation
   },
   menus: {
-    navigationHome: 'Início', // Pending translation
+    langSwitch: 'Idioma', // Pending translation
     navigationAbout: 'Sobre', // Pending translation
+    navigationContact: 'Contato', // Pending translation
     navigationGallery: 'Acervo', // Pending translation
-    langSwitch: 'Idioma' // Pending translation
+    navigationHome: 'Início' // Pending translation
   },
   submission: {
     alertInvalidFile: 'O arquivo selecionado é inválido. Tente outro formato.', // Pending translation

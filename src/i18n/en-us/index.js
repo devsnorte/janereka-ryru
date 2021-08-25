@@ -5,6 +5,16 @@ export default {
     pageTextAboutAwaeteCitationB: 'Um ponto comum da bibliografia acerca desta região é de que o termo “asuriní” ao qual Coudreau se refere provavelmente designava uma quantidade maior de povos indígenas que circulavam por essa região. Esse termo tem origem no termo juruna asóreni que designa vermelho. Embora ele seja atualmente aplicado aos Asuriní do Xingu é mais provável que esse termo designasse o grupo indígena Arawaté, pois estes últimos utilizam de forma abundante o urucum, de cor vermelha, enquanto que os Asuriní do Xingu utilizam jenipapo, de cor preta.”',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  contact: {
+    buttonLabelSubmit: 'Enter',
+    formFieldLabelName: 'Name',
+    formFieldLabelPhone: 'Phone',
+    formFieldLabelEmail: 'E-mail',
+    formFieldLabelMessage: 'Write a message',
+    formValidationFieldRequired: 'Please fill in this field',
+    pageTextTitle: 'Do you have a file about the Awaeté people?',
+    pageTextSubtitle: 'Please contact us'
+  },
   footer: {
     buttonLabelSubmissionTerms: 'SUBMISSION TERMS',
     buttonLabelAdminArea: 'ADMINISTRATOR AREA',
@@ -52,10 +62,11 @@ export default {
     pageTextSubtitle: 'Exclusive access to tribe members'
   },
   menus: {
-    navigationHome: 'Home',
+    langSwitch: 'Language',
     navigationAbout: 'About',
+    navigationContact: 'Contact',
     navigationGallery: 'Gallery',
-    langSwitch: 'Language'
+    navigationHome: 'Home'
   },
   submission: {
     alertInvalidFile: 'The selected file is invalid. Please try another format.',
