@@ -14,7 +14,7 @@
         <div class="col-xs-12 col-md-4 q-pt-xs-lg" :class="$q.screen.lt.md ? 'text-center' : 'text-left'">
           <div>
             <p>{{ $t('footer.contact') }}: </p>
-            <p>nononono@nono.com <br />
+            <p>janerakaawaete@gmail.com<br />
             +55 91 91234-5678</p>
           </div>
           <div class="q-gutter-md" style="font-size: 1.7em">
