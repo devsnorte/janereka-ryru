@@ -80,9 +80,9 @@ export default {
       this.loading = true
 
       console.log('Submitting...')
-      const fullMessage = encodeURI(`Doador: ${this.name}\nContato: ${this.email}, ${this.phone}\n\n${this.message}`)
+      const fullMessage = encodeURI(`Doador:\n${this.name}\n\nContato:\n${this.email}\n${this.phone}\n\n${this.message}`)
       const subject = encodeURI('Doação de arquivo para acervo Janeraka')
-      window.open(`mailto:nononono@nono.com?subject=${subject}&body=${fullMessage}`)
+      window.open(`mailto:janerakaawaete@gmail.com?subject=${subject}&body=${fullMessage}`)
 
       this.loading = false
     }
