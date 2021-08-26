@@ -1,5 +1,5 @@
 <template>
-  <q-list>
+  <q-list class="text-bold text-uppercase text-center q-pt-xl">
     <q-item exact clickable :to="{name: home.route}">
       <q-item-section>
         <q-item-label>{{ home.label }}</q-item-label>

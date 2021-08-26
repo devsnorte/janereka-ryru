@@ -64,8 +64,7 @@
           />
 
           <q-menu
-            fit
-            no-parent-event
+            fit no-parent-event
             v-model="showLanguages"
           >
             <q-list style="min-width: 120px;">
@@ -93,13 +92,11 @@
     </q-header>
 
     <q-drawer
-      v-model="rightDrawerOpen"
-      show-if-above
-      bordered
-      overlay
+      bordered overlay show-if-above
       side="right"
       behavior="mobile"
       content-class="bg-grey-1"
+      v-model="rightDrawerOpen"
     >
       <q-btn
         flat round
@@ -108,9 +105,9 @@
         class="on-left absolute-top-right"
         @click="rightDrawerOpen = !rightDrawerOpen"
       />
-      <q-list class="text-bold text-uppercase text-center q-pt-xl">
-          <MobileNavigationMenu />
-      </q-list>
+
+      <MobileNavigationMenu />
+
     </q-drawer>
   </div>
 </template>
