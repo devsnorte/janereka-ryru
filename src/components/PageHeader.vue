@@ -1,126 +1,135 @@
 <template>
-    <div>
-        <q-header elevated class="bg-grey-1">
-            <q-toolbar class="text-dark">
-                <q-toolbar-title class="q-ml-md gt-sm" shrink>
-                  <q-img src="~/assets/janeraka.svg" width="3.2em" />
-                </q-toolbar-title>
+  <div>
+    <q-header elevated class="bg-grey-1">
+      <q-toolbar class="row justify-center text-dark">
 
-                <q-tabs class="gt-sm" shrink align="right" active-color="primary" indicator-color="transparent" :breakpoint="0">
-                  <q-route-tab
-                      :label="$t('menus.navigationHome')"
-                      :to="{ name: 'home' }"
-                      exact
-                      no-caps
-                      content-class="test"
-                  />
-                  <q-route-tab
-                      :label="$t('menus.navigationAbout')"
-                      :to="{ name: 'sobre' }"
-                      exact
-                      no-caps
-                      content-class="test"
-                  />
-                  <q-route-tab
-                      :label="$t('menus.navigationGallery')"
-                      :to="{ name: 'acervo' }"
-                      exact
-                      no-caps
-                      content-class="test"
-                  />
-                  <q-route-tab
-                      :label="$t('menus.navigationContact')"
-                      :to="{ name: 'contato' }"
-                      exact
-                      no-caps
-                      content-class="test"
-                  />
-                </q-tabs>
-                <q-space />
-                <q-select
-                  v-model="locale"
-                  :options="localeOptions"
-                  :label="$t('menus.langSwitch')"
-                  dense
-                  borderless
-                  emit-value
-                  map-options
-                  options-dense
-                  style="min-width: 150px"
-                />
-                <q-btn
-                  class="lt-md"
-                  flat
-                  dense
-                  size="lg"
-                  round
-                  icon="menu"
-                  aria-label="Menu"
-                  @click="rightDrawerOpen = !rightDrawerOpen"
-                />
-            </q-toolbar>
-        </q-header>
+        <q-toolbar-title shrink class="q-ml-md">
+          <q-img src="~/assets/janeraka.svg" width="3.2em" />
+        </q-toolbar-title>
 
-        <q-drawer
-            v-model="rightDrawerOpen"
-            show-if-above
-            bordered
-            overlay
-            side="right"
-            behavior="mobile"
-            content-class="bg-grey-1"
+        <q-tabs
+          shrink
+          active-color="primary"
+          indicator-color="transparent"
+          class="gt-sm"
+          :breakpoint="0"
         >
-            <q-btn flat round color="grey-9" icon="close" class="on-left absolute-top-right" @click="rightDrawerOpen = !rightDrawerOpen" />
-            <q-list class="text-bold text-uppercase text-center q-pt-xl">
-                <EssentialLink
-                  v-for="link in navigation"
-                  :key="link.title"
-                  v-bind="link"
-                />
+          <q-route-tab
+            exact
+            :to="{ name: 'home' }"
+            :label="$t('menus.navigationHome')"
+          />
+          <q-route-tab
+            exact
+            :to="{ name: 'sobre' }"
+            :label="$t('menus.navigationAbout')"
+          />
+          <q-route-tab
+            exact
+            :to="{ name: 'acervo' }"
+            :label="$t('menus.navigationGallery')"
+          />
+          <q-route-tab
+            exact
+            :to="{ name: 'contato' }"
+            :label="$t('menus.navigationContact')"
+          />
+        </q-tabs>
+
+        <div class="q-mr-sm" style="position: absolute; right: 0;">
+          <q-btn
+            outline
+            icon="language"
+            color="grey-8"
+            class="gt-sm"
+            :label="`${$t('menus.langSwitch')} | ${locales[locale]}`"
+            @click="showLanguages = !showLanguages"
+          />
+          <q-btn
+            flat dense round
+            icon="language"
+            size="1.1em"
+            color="grey-9"
+            class="lt-md"
+            @click="showLanguages = !showLanguages"
+          />
+          <q-btn
+            flat dense round
+            icon="menu"
+            aria-label="Menu"
+            size="lg"
+            color="grey-9"
+            class="lt-md"
+            @click="rightDrawerOpen = !rightDrawerOpen"
+          />
+
+          <q-menu
+            fit no-parent-event
+            v-model="showLanguages"
+          >
+            <q-list style="min-width: 120px;">
+              <q-item clickable v-close-popup @click="setLanguage('pt')">
+                <q-item-section>
+                  <q-item-label>Português</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup @click="setLanguage('awaete')">
+                <q-item-section>
+                  <q-item-label>Awaete</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup @click="setLanguage('en-us')">
+                <q-item-section>
+                  <q-item-label>English</q-item-label>
+                </q-item-section>
+              </q-item>
+
             </q-list>
-        </q-drawer>
-    </div>
+          </q-menu>
+
+        </div>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer
+      bordered overlay show-if-above
+      side="right"
+      behavior="mobile"
+      content-class="bg-grey-1"
+      v-model="rightDrawerOpen"
+    >
+      <q-btn
+        flat round
+        icon="close"
+        color="grey-9"
+        class="on-left absolute-top-right"
+        @click="rightDrawerOpen = !rightDrawerOpen"
+      />
+
+      <MobileNavigationMenu />
+
+    </q-drawer>
+  </div>
 </template>
 
 <script>
-import EssentialLink from './EssentialLink'
+import MobileNavigationMenu from './MobileNavigationMenu'
 
 export default {
   name: 'PageHeader',
 
-  components: { EssentialLink },
+  components: { MobileNavigationMenu },
 
   data () {
     return {
-      navigation: {
-        home: {
-          title: this.$t('menus.navigationHome'),
-          caption: '',
-          route: 'home'
-        },
-        about: {
-          title: this.$t('menus.navigationAbout'),
-          caption: '',
-          route: 'sobre'
-        },
-        gallery: {
-          title: this.$t('menus.navigationGallery'),
-          caption: '',
-          route: 'acervo'
-        },
-        contact: {
-          title: this.$t('menus.navigationContact'),
-          caption: '',
-          route: 'acervo'
-        }
-      },
       rightDrawerOpen: false,
+      showLanguages: false,
       locale: this.$i18n.locale,
-      localeOptions: [
-        { value: 'pt', label: 'Português' },
-        { value: 'awaete', label: 'Awaete' },
-        { value: 'en-us', label: 'English' }
-      ]
+      locales: {
+        pt: 'Português',
+        awaete: 'Awaete',
+        'en-us': 'English'
+      }
     }
   },
 
@@ -128,6 +137,18 @@ export default {
     locale: function (newLocale) {
       this.$i18n.locale = newLocale
     }
+  },
+
+  methods: {
+    setLanguage (locale) {
+      this.locale = locale
+    }
   }
 }
 </script>
+
+<style>
+.q-tab__label {
+  font-weight: 700;
+}
+</style>

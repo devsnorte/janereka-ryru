@@ -79,7 +79,6 @@ export default {
     submit () {
       this.loading = true
 
-      console.log('Submitting...')
       const fullMessage = encodeURI(`Doador:\n${this.name}\n\nContato:\n${this.email}\n${this.phone}\n\n${this.message}`)
       const subject = encodeURI('Doação de arquivo para acervo Janeraka')
       window.open(`mailto:janerakaawaete@gmail.com?subject=${subject}&body=${fullMessage}`)
