@@ -23,8 +23,12 @@ export default {
   },
   gallery: {
     alertSubmissionSuccess: 'Seu arquivo foi submetido com sucesso.', // Pending translation
+    buttonLabelDelete: 'Deletar', // Pending translation
+    buttonLabelCancelEdit: 'Cancelar edição', // Pending translation
     buttonLabelClose: 'Fechar', // Pending translation
+    buttonLabelEdit: 'Editar detalhes', // Pending translation
     buttonLabelSend: 'Enviar', // Pending translation
+    buttonLabelSubmitEdit: 'Submeter mudanças', // Pending translation
     categoryLabelAll: 'Todos', // Pending translation
     categoryLabelFiles: 'Arquivos', // Pending translation
     categoryLabelImages: 'Imagens', // Pending translation

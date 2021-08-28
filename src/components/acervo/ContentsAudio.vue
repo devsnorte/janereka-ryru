@@ -20,8 +20,21 @@
       dark
     />
 
+    <q-card-section class="q-pt-none">
+      <edit-midia
+        v-if="editMode"
+        :title="midia.data.titulo"
+        :description="midia.data.descricao"
+        :rawTags="midia.data.tags"
+        :path="midia.path"
+        :triggerSubmit="triggerSubmit"
+        @finished-submission="finishSubmit"
+      />
+    </q-card-section>
+
     <q-card-section class="q-pt-none q-mb-xl">
       <midia-details
+        v-show="!editMode"
         :description="midia.data.descricao"
         :created="midia.created"
         :username="midia.creator.username"
@@ -31,7 +44,12 @@
     </q-card-section>
 
     <q-card-actions align="right" class="bg-white text-teal fixed-bottom">
-      <q-btn :label="$t('gallery.buttonLabelClose')" v-close-popup color="dark"/>
+      <midia-content-buttons
+        :editMode="editMode"
+        @toggleEditMode="editMode = !editMode"
+        @triggerDelete="deleteMidia()"
+        @triggerSubmit="triggerSubmit = true"
+      />
     </q-card-actions>
   </q-card>
 </template>
@@ -41,7 +59,9 @@ export default {
   name: 'ContentsAudio',
 
   components: {
-    MidiaDetails: () => import('components/acervo/MidiaDetails')
+    MidiaContentButtons: () => import('components/acervo/MidiaContentButtons.vue'),
+    MidiaDetails: () => import('components/acervo/MidiaDetails'),
+    EditMidia: () => import('components/acervo/EditMidia.vue')
   },
 
   props: {
@@ -53,7 +73,21 @@ export default {
 
   data () {
     return {
-      baseUrl: this.$axios.defaults.baseURL
+      baseUrl: this.$axios.defaults.baseURL,
+      editMode: false,
+      triggerSubmit: false
+    }
+  },
+
+  methods: {
+    deleteMidia () {
+      console.log('Delete?')
+    },
+
+    finishSubmit () {
+      console.info('Submission finished.')
+      this.triggerSubmit = false
+      this.editMode = false
     }
   }
 }

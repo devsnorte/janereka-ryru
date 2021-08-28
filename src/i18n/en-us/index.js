@@ -23,8 +23,12 @@ export default {
   },
   gallery: {
     alertSubmissionSuccess: 'Your file was successfully submitted.',
+    buttonLabelDelete: 'Delete',
+    buttonLabelCancelEdit: 'Cancel edit',
     buttonLabelClose: 'Close',
+    buttonLabelEdit: 'Edit details',
     buttonLabelSend: 'Send',
+    buttonLabelSubmitEdit: 'Submit changes',
     categoryLabelAll: 'All',
     categoryLabelFiles: 'Documents',
     categoryLabelImages: 'Images',
