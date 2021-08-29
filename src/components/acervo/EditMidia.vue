@@ -29,31 +29,10 @@
       />
 
       <!-- Input das tags / Tags input -->
-      <label for="tags" class="inline-block q-mt-lg">
-        {{ $t('submission.formFieldLabelHashtags') }}
-      </label>
-      <q-input
-        dense filled
-        id="tags"
-        ref="tagsForm"
-        v-model="tagsText"
-        :hint="$t('submission.formFieldHintHastags')"
-        @input="parseTags()"
-        @blur="addLastTag()"
-        @keydown.enter.prevent="addLastTag()"
-      >
-        <template v-slot:prepend>
-          <div class="row">
-            <div v-for="tag in tags" :key="tag"
-              class="cursor-pointer text-caption bg-grey-5 q-mr-xs q-pr-sm overflow-hidden"
-              @click="clearTag(tag)"
-            >
-              <q-btn flat dense round size="xs" label="x" class="no-padding" />
-              <i>{{ tag }}</i>
-            </div>
-          </div>
-        </template>
-      </q-input>
+      <tags-form-input
+        :tagsFromProps="tags"
+        @parsedTags="updateTags($event)"
+      />
 
     </q-form>
   </div>
@@ -65,6 +44,10 @@ import { Session } from 'src/api/SessionManager'
 
 export default {
   name: 'EditMidia',
+
+  components: {
+    TagsFormInput: () => import('src/components/acervo/TagsFormInput')
+  },
 
   props: {
     title: {
@@ -98,17 +81,12 @@ export default {
       session: Session.getSessionManager(),
       submission: SubmissionManager.getManager(),
       loading: false,
-      tags: new Set(),
-      tagsText: ''
+      tags: new Set()
     }
   },
 
   watch: {
     triggerSubmit (val, oldVal) {
-      console.info('watcher watchin\' ya')
-      if (val === true) {
-        console.info('is tru')
-      }
       this.$emit('finished-submission')
     }
   },
@@ -117,32 +95,11 @@ export default {
     if (this.rawTags) {
       this.rawTags.forEach(tag => this.tags.add(tag))
     }
-
-    // Trigger form re-render with trimmable whitespace to display tags
-    this.tagsText = ' '
   },
 
   methods: {
-    parseTags () {
-      const splittedTags = this.tagsText.split(',')
-
-      if (splittedTags.length > 1) {
-        this.tags.add(splittedTags[0].trim())
-        splittedTags.splice(0, 1)
-        this.tagsText = splittedTags.join('').trim()
-      }
-    },
-
-    addLastTag () {
-      if (this.tagsText.trim().length > 0) {
-        this.tags.add(this.tagsText.trim())
-        this.tagsText = ''
-      }
-    },
-
-    clearTag (tag) {
-      this.tags.delete(tag)
-      this.$refs.tagsForm.blur()
+    updateTags (tags) {
+      this.tags = tags
     },
 
     async submit () {

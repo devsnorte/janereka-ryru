@@ -20,7 +20,6 @@ export const SubmissionManager = (function () {
     }
 
     this.refreshToken = () => {
-      this.session.loadFromLocalStorage()
       const sessionData = this.session.getSession()
       this.token = sessionData.token
     }
@@ -31,8 +30,7 @@ export const SubmissionManager = (function () {
     }
 
     this.validateAuthentication = () => {
-      this.refreshToken()
-      if (!this.token) {
+      if (!this.session.isAuthenticated()) {
         throw new this.SubmissionException('AuthenticationError', 'No user is authenticated.')
       }
     }

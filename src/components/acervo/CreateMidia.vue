@@ -48,7 +48,7 @@
         {{ $t('submission.formFieldLabelDescription') }}
       </label>
       <q-input
-        dense filled autogrow
+        dense filled
         id="description"
         type="textarea"
         v-model="description"
@@ -56,31 +56,10 @@
       />
 
       <!-- Input das tags / Tags input -->
-      <label for="tags" class="inline-block q-mt-lg">
-        {{ $t('submission.formFieldLabelHashtags') }}
-      </label>
-      <q-input
-        dense filled
-        id="tags"
-        ref="tagsForm"
-        v-model="tagsText"
-        :hint="$t('submission.formFieldHintHastags')"
-        @input="parseTags()"
-        @blur="addLastTag()"
-        @keydown.enter.prevent="addLastTag()"
-      >
-        <template v-slot:prepend>
-          <div class="row">
-            <div v-for="tag in tags" :key="tag"
-              class="cursor-pointer text-caption bg-grey-5 q-mr-xs q-pr-sm overflow-hidden"
-              @click="clearTag(tag)"
-            >
-              <q-btn flat dense round size="xs" label="x" class="no-padding" />
-              <i>{{ tag }}</i>
-            </div>
-          </div>
-        </template>
-      </q-input>
+      <tags-form-input
+        :tagsFromProps="tags"
+        @parsedTags="updateTags($event)"
+      />
 
       <!-- Checkbox de aceite de termos / Accept terms checkbox -->
       <q-checkbox
@@ -90,14 +69,14 @@
         class="q-mt-lg"
       />
 
-      <!-- Keep hidden until full implementation is demanded -->
+      <!-- Keep hidden until backend is ready -->
       <!-- Seção do autor / Author section -->
       <div class="row no-wrap q-my-xl items-center hidden">
         <span class="text-h6">{{ $t('submission.formSectionTitleAuthor') }}</span>
         <div class="col-grow q-mx-md bg-black" style="height: 2px;" />
       </div>
 
-      <!-- Keep hidden until full implementation is demanded -->
+      <!-- Keep hidden until backend is ready -->
       <div class="row justify-around hidden">
 
         <div class="column col-grow q-px-xl">
@@ -174,6 +153,10 @@ import { Session } from 'src/api/SessionManager'
 export default {
   name: 'CreateMidia',
 
+  components: {
+    TagsFormInput: () => import('src/components/acervo/TagsFormInput')
+  },
+
   data () {
     return {
       session: Session.getSessionManager(),
@@ -181,7 +164,6 @@ export default {
       newFile: null,
       title: '',
       description: '',
-      tagsText: '',
       tags: new Set(),
       acceptTerms: false,
       aldeiaSelected: null,
@@ -255,26 +237,8 @@ export default {
       })
     },
 
-    parseTags () {
-      const splittedTags = this.tagsText.split(',')
-
-      if (splittedTags.length > 1) {
-        this.tags.add(splittedTags[0].trim())
-        splittedTags.splice(0, 1)
-        this.tagsText = splittedTags.join('').trim()
-      }
-    },
-
-    addLastTag () {
-      if (this.tagsText.trim().length > 0) {
-        this.tags.add(this.tagsText.trim())
-        this.tagsText = ''
-      }
-    },
-
-    clearTag (tag) {
-      this.tags.delete(tag)
-      this.$refs.tagsForm.blur()
+    updateTags (tags) {
+      this.tags = tags
     },
 
     async submit () {
