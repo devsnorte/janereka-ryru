@@ -13,6 +13,25 @@ export const Session = (function () {
     this.setSessionState = (user, token) => {
       mutations.setUser(user)
       mutations.setToken(token)
+      axios.defaults.headers.common = { token: token }
+
+      const localStorage = window.localStorage
+      localStorage.setItem('user', user)
+      // Encrypt token before saving to Local Storage
+      localStorage.setItem('token', token)
+    }
+
+    this.loadFromLocalStorage = () => {
+      const user = localStorage.getItem('user')
+      const token = localStorage.getItem('token')
+
+      // Decrypt token after loading
+      // if (token) {
+      //   // Decrypt token
+      //   token = decrytpedToken
+      // }
+
+      if (user && token) this.setSessionState(user, token)
     }
 
     this.login = async (username, password) => {
@@ -26,7 +45,6 @@ export const Session = (function () {
           data: formData
         })
 
-        axios.defaults.headers.common = { token: data }
         this.setSessionState(username, data)
 
         return { success: true }

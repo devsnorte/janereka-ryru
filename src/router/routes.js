@@ -1,4 +1,7 @@
+import { Session } from 'src/api/SessionManager'
 import { getters } from 'src/store/session-store'
+
+const session = Session.getSessionManager()
 
 const routes = [
   {
@@ -30,6 +33,7 @@ const routes = [
         name: 'acervo',
         component: () => import('pages/Acervo.vue'),
         beforeEnter (to, from, next) {
+          session.loadFromLocalStorage()
           if (to.name !== 'login' && !getters.user()) {
             next({
               name: 'login',
@@ -43,6 +47,7 @@ const routes = [
         name: 'submissao',
         component: () => import('pages/Submissao.vue'),
         beforeEnter (to, from, next) {
+          session.loadFromLocalStorage()
           if (to.name !== 'login' && !getters.user()) {
             next({
               name: 'login',
