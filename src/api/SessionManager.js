@@ -4,20 +4,28 @@ import { getters, mutations } from 'src/store/session-store'
 export const Session = (function () {
   function SessionManager () {
     this.getSession = () => {
+      this.loadFromLocalStorage()
       return {
         user: getters.user(),
         token: getters.token()
       }
     }
 
+    this.isAuthenticated = () => {
+      const session = this.getSession()
+
+      if (session.user && session.token) return true
+      else return false
+    }
+
     this.setSessionState = (user, token) => {
+      axios.defaults.headers.common = { token: token }
       mutations.setUser(user)
       mutations.setToken(token)
-      axios.defaults.headers.common = { token: token }
 
+      // Todo: encrypt token before saving to Local Storage
       const localStorage = window.localStorage
       localStorage.setItem('user', user)
-      // Encrypt token before saving to Local Storage
       localStorage.setItem('token', token)
     }
 
@@ -25,13 +33,8 @@ export const Session = (function () {
       const user = localStorage.getItem('user')
       const token = localStorage.getItem('token')
 
-      // Decrypt token after loading
-      // if (token) {
-      //   // Decrypt token
-      //   token = decrytpedToken
-      // }
-
-      if (user && token) this.setSessionState(user, token)
+      // Todo: decrypt token before saving
+      this.setSessionState(user || '', token || '')
     }
 
     this.login = async (username, password) => {
@@ -49,13 +52,13 @@ export const Session = (function () {
 
         return { success: true }
       } catch (error) {
+        this.setSessionState('', '')
         return { error, success: false }
       }
     }
 
     this.logout = async () => {
-      axios.defaults.headers.common = { token: null }
-      this.setSessionState(null, null)
+      this.setSessionState('', '')
     }
   }
 

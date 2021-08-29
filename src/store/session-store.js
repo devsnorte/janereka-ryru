@@ -1,8 +1,8 @@
 import Vue from 'vue'
 
 const sessionState = Vue.observable({
-  user: null,
-  token: null
+  user: '',
+  token: ''
 })
 
 const getters = {

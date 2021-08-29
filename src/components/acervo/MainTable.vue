@@ -188,16 +188,7 @@ export default {
 
   methods: {
     sendMidia () {
-      const isLogged = !!this.$axios.defaults.headers.common.token
-
-      if (isLogged) {
-        this.$router.push('/submissao')
-      } else {
-        this.$q.notify({
-          type: 'negative',
-          message: this.$t('login.alertLoginNecessary')
-        })
-      }
+      this.$router.push('/submissao')
     }
   }
 }

@@ -3,8 +3,8 @@ import { Session } from './SessionManager'
 
 export const SubmissionManager = (function () {
   function MediaHandler () {
-    this.mediaObject = {}
     this.session = Session.getSessionManager()
+    this.mediaObject = {}
     this.token = null
 
     this.unmakeMediaObject = () => {
@@ -20,6 +20,7 @@ export const SubmissionManager = (function () {
     }
 
     this.refreshToken = () => {
+      this.session.loadFromLocalStorage()
       const sessionData = this.session.getSession()
       this.token = sessionData.token
     }
@@ -30,13 +31,13 @@ export const SubmissionManager = (function () {
     }
 
     this.validateAuthentication = () => {
+      this.refreshToken()
       if (!this.token) {
         throw new this.SubmissionException('AuthenticationError', 'No user is authenticated.')
       }
     }
 
     this.validateForSubmission = () => {
-      console.info('validateForSubmission called.')
       if (this.isMediaObjectEmpty()) {
         throw new this.SubmissionException('MediaDataError', 'Media data is empty. Can not submit.')
       }
