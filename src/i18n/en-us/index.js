@@ -57,7 +57,8 @@ export default {
   },
   login: {
     alertLoginFailed: 'Unable to login. Please try again.',
-    alertLoginNecessary: 'Login necessary.',
+    alertLoginNecessary: 'Login necessary to access the platform.',
+    alertSessionAboutToExpire: 'Your session is about to expire. Please log in again to continue using the platform.',
     buttonLabelEnter: 'Enter',
     formFieldLabelUsername: 'Name',
     formFieldLabelPassword: 'Password',

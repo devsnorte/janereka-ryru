@@ -57,7 +57,8 @@ export default {
   },
   login: {
     alertLoginFailed: 'Não foi possível fazer login. Tente novamente.', // Pending translation
-    alertLoginNecessary: 'É necessário fazer login para obter acesso.', // Pending translation
+    alertLoginNecessary: 'Login necessário para acessar a plataforma.', // Pending translation
+    alertSessionAboutToExpire: 'Sua sessão irá expirar em breve. Por favor, refaça o login para continuar usando a plataforma.', // Pending translation
     buttonLabelEnter: 'Entrar', // Pending translation
     formFieldLabelUsername: 'Nome', // Pending translation
     formFieldLabelPassword: 'Senha', // Pending translation
