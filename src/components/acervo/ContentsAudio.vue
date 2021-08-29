@@ -1,7 +1,7 @@
 <template>
   <q-card class="full-width z-max">
     <q-card-section class="row items-center text-primary">
-      <div class="text-h6">{{ midia.data.titulo }}</div>
+      <div class="text-h6">{{ media.data.titulo }}</div>
       <q-space />
       <q-btn icon="close" flat round dense v-close-popup />
     </q-card-section>
@@ -11,8 +11,8 @@
     <q-media-player
       type="audio"
       :sources="[{
-        src: `${baseUrl}/acervo/download/${midia.path}`,
-        type: `${midia.type}/${midia.format}`
+        src: `${baseUrl}/acervo/download/${media.path}`,
+        type: `${media.type}/${media.format}`
       }]"
       radius='10px'
       color="green-2"
@@ -21,51 +21,55 @@
     />
 
     <q-card-section class="q-pt-none">
-      <edit-midia
+      <edit-media
         v-if="editMode"
-        :title="midia.data.titulo"
-        :description="midia.data.descricao"
-        :rawTags="midia.data.tags"
-        :path="midia.path"
+        :title="media.data.titulo"
+        :description="media.data.descricao"
+        :rawTags="media.data.tags"
+        :mediaFileName="media.data.arquivo"
+        :mediaType="media.data.tipo"
+        :mediaPath="media.path"
         :triggerSubmit="triggerSubmit"
         @finished-submission="finishSubmit"
       />
     </q-card-section>
 
     <q-card-section class="q-pt-none q-mb-xl">
-      <midia-details
+      <media-details
         v-show="!editMode"
-        :description="midia.data.descricao"
-        :created="midia.created"
-        :username="midia.creator.username"
-        :authorName="midia.creator.name"
-        :authorEmail="midia.creator.email"
+        :description="media.data.descricao"
+        :created="media.created"
+        :username="media.creator.username"
+        :authorName="media.creator.name"
+        :authorEmail="media.creator.email"
       />
     </q-card-section>
 
     <q-card-actions align="right" class="bg-white text-teal fixed-bottom">
-      <midia-content-buttons
+      <media-content-buttons
         :editMode="editMode"
         @toggleEditMode="editMode = !editMode"
-        @triggerDelete="deleteMidia()"
         @triggerSubmit="triggerSubmit = true"
+        @triggerDelete="deleteMedia()"
       />
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
+import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+
 export default {
   name: 'ContentsAudio',
 
   components: {
-    MidiaContentButtons: () => import('components/acervo/MidiaContentButtons.vue'),
-    MidiaDetails: () => import('components/acervo/MidiaDetails'),
-    EditMidia: () => import('components/acervo/EditMidia.vue')
+    MediaContentButtons: () => import('components/acervo/MediaContentButtons'),
+    MediaDetails: () => import('components/acervo/MediaDetails'),
+    EditMedia: () => import('components/acervo/EditMedia')
   },
 
   props: {
-    midia: {
+    media: {
       type: Object,
       required: true
     }
@@ -73,6 +77,7 @@ export default {
 
   data () {
     return {
+      submission: SubmissionManager.getManager(),
       baseUrl: this.$axios.defaults.baseURL,
       editMode: false,
       triggerSubmit: false
@@ -80,8 +85,25 @@ export default {
   },
 
   methods: {
-    deleteMidia () {
-      console.log('Delete?')
+    async deleteMedia () {
+      this.submission.makeMediaObject(
+        this.media.data.titule, this.media.data.descricao, this.media.data.tags, '', this.media.data.tipo, this.media.path
+      )
+      const success = await this.submission.performMediaDeletion()
+
+      if (success) {
+        this.$q.notify({
+          type: 'positive',
+          multiLine: true,
+          message: this.$t('gallery.alertDeleteSuccess')
+        })
+      } else {
+        this.$q.notify({
+          type: 'negative',
+          multiLine: true,
+          message: this.$t('gallery.alertDeletFailed')
+        })
+      }
     },
 
     finishSubmit () {

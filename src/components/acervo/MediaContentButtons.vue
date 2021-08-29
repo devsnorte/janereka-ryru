@@ -19,7 +19,7 @@
       color="secondary"
       v-show="editMode"
       :label="$t('gallery.buttonLabelDelete')"
-      @click="$emit('triggerDelete')"
+      @click="confirmDelete = true"
     />
     <q-btn
       unelevated
@@ -35,6 +35,9 @@
       color="dark"
       :label="$t('gallery.buttonLabelClose')"
     />
+    <q-dialog v-model="confirmDelete">
+      <confirm-delete @confirm="$emit('triggerDelete')" />
+    </q-dialog>
   </div>
 </template>
 
@@ -42,11 +45,21 @@
 export default {
   name: 'MidiaContentButtons',
 
+  components: {
+    ConfirmDelete: () => import('components/acervo/ConfirmDelete')
+  },
+
   props: {
     editMode: {
       type: Boolean,
       required: true,
       default: false
+    }
+  },
+
+  data () {
+    return {
+      confirmDelete: false
     }
   }
 }

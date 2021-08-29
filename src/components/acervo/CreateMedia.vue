@@ -148,10 +148,9 @@
 
 <script>
 import { SubmissionManager } from 'src/api/MediaSubmissionManager'
-import { Session } from 'src/api/SessionManager'
 
 export default {
-  name: 'CreateMidia',
+  name: 'CreateMedia',
 
   components: {
     TagsFormInput: () => import('src/components/acervo/TagsFormInput')
@@ -159,7 +158,6 @@ export default {
 
   data () {
     return {
-      session: Session.getSessionManager(),
       submission: SubmissionManager.getManager(),
       newFile: null,
       title: '',

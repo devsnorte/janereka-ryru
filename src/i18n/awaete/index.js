@@ -23,6 +23,10 @@ export default {
   },
   gallery: {
     alertSubmissionSuccess: 'Seu arquivo foi submetido com sucesso.', // Pending translation
+    alertDeleteSuccess: 'Arquivo deletado com sucesso. Atualize a página para visualizar as mudanças.', // Pending translation
+    alertDeleteFailed: 'Ocorreu um erro na deleção do arquivo.', // Pending translation
+    alerteUpdateFailed: 'Ocorreu um erro na atualização do arquivo.', // Pending translation
+    alertUpdateSuccess: 'Seu aquivo foi atualizado com sucesso. Atualize a página para visualizar as mudanças.', // Pending translation
     buttonLabelDelete: 'Deletar', // Pending translation
     buttonLabelCancelEdit: 'Cancelar edição', // Pending translation
     buttonLabelClose: 'Fechar', // Pending translation
@@ -43,6 +47,7 @@ export default {
     menuSortOlder: 'Mais antigos', // Pending translation
     menuSortBy: 'Classificação', // Pending translation
     menuSortHashtags: 'Hashtags', // Pending translation
+    pageTextSureToDelete: 'Proceder com deleção do arquivo?', // Pending translation
     paginationOfPage: 'de', // Pending translation
     searchBarPlaceholder: 'Pesquisar' // Pending translation
   },
@@ -67,6 +72,8 @@ export default {
     pageTextSubtitle: 'Acesso exclusivo para membros da aldeia' // Pending translation
   },
   menus: {
+    buttonLabelCancel: 'Cancelar', // Pending translation
+    buttonLabelYes: 'Sim', // Pending translation
     langSwitch: 'Idioma', // Pending translation
     navigationAbout: 'Sobre', // Pending translation
     navigationContact: 'Contato', // Pending translation

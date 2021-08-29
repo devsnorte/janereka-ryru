@@ -19,45 +19,45 @@ export const SubmissionManager = (function () {
       }
     }
 
-    this.refreshToken = () => {
-      const sessionData = this.session.getSession()
-      this.token = sessionData.token
-    }
-
     this.isMediaObjectEmpty = () => {
       if (Object.keys(this.mediaObject).length === 0) return true
       else return false
     }
 
+    this.refreshToken = () => {
+      const sessionData = this.session.getSession()
+      this.token = sessionData.token
+    }
+
     this.validateAuthentication = () => {
       if (!this.session.isAuthenticated()) {
-        throw new this.SubmissionException('AuthenticationError', 'No user is authenticated.')
+        throw new this.SubmissionException('AuthenticationValidationError', 'No user is authenticated.')
       }
     }
 
     this.validateForSubmission = () => {
       if (this.isMediaObjectEmpty()) {
-        throw new this.SubmissionException('MediaDataError', 'Media data is empty. Can not submit.')
+        throw new this.SubmissionException('MediaDataValidationError', 'Media data is empty. Can not submit.')
       }
 
       if (!this.mediaObject.title) {
-        throw new this.SubmissionException('MediaDataError', 'Media title is empty. Can not submit.')
+        throw new this.SubmissionException('MediaDataValidationError', 'Media title is empty. Can not submit.')
       }
 
       if (!this.mediaObject.description) {
-        throw new this.SubmissionException('MediaDataError', 'Media description is empty. Can not submit.')
+        throw new this.SubmissionException('MediaDataValidationError', 'Media description is empty. Can not submit.')
       }
 
       if (!this.mediaObject.mediaType) {
-        throw new this.SubmissionException('MediaDataError', 'Media file type was not set. Can not submit.')
+        throw new this.SubmissionException('MediaDataValidationError', 'Media file type was not set. Can not submit.')
       }
 
       if (!Array.isArray(this.mediaObject.tags)) {
-        throw new this.SubmissionException('MediaDataError', 'Media tags are not set as array. Can not submit.')
+        throw new this.SubmissionException('MediaDataValidationError', 'Media tags are not set as array. Can not submit.')
       } else {
         this.mediaObject.tags.forEach(tag => {
           if (typeof (tag) !== 'string') {
-            throw new this.SubmissionException('MediaDataError', 'One of the media tags is not a string. Can not submit.')
+            throw new this.SubmissionException('MediaDataValidationError', 'One of the media tags is not a string. Can not submit.')
           }
         })
       }
@@ -67,35 +67,20 @@ export const SubmissionManager = (function () {
       this.validateForSubmission()
 
       if (!this.mediaObject.mediaFile) {
-        throw new this.SubmissionException('MediaDataError', 'No media file found. Can not upload.')
+        throw new this.SubmissionException('MediaDataValidationError', 'No media file found. Can not upload.')
       }
       if (!this.mediaObject.mediaPath) {
-        throw new this.SubmissionException('MediaDataError', 'No media path found. Can not upload.')
+        throw new this.SubmissionException('MediaDataValidationError', 'No media path found. Can not upload.')
       }
     }
 
     this.validateForDeletion = () => {
       if (this.isMediaObjectEmpty()) {
-        throw new this.SubmissionException('DeletionError', 'Media data is empty. Unable to delete.')
+        throw new this.SubmissionException('DeletionValidationError', 'Media data is empty. Unable to delete.')
       }
 
       if (!this.mediaObject.mediaPath) {
-        throw new this.SubmissionException('DeletionError', 'No media path found. Unable to delete.')
-      }
-    }
-
-    this.handleMediaDeletion = async () => {
-      try {
-        this.validateAuthentication()
-        this.validateForDeletion()
-
-        await axios({
-          method: 'delete',
-          url: `/acervo/midia/${this.mediaObject.mediaPath}`,
-          headers: { token: this.token }
-        })
-      } catch (error) {
-        console.error(error)
+        throw new this.SubmissionException('DeletionValidationError', 'No media path found. Unable to delete.')
       }
     }
 
@@ -121,6 +106,7 @@ export const SubmissionManager = (function () {
         this.mediaObject.mediaPath = data.path
       } catch (error) {
         console.error(error)
+        throw new this.SubmissionException('MediaInformationSubmissionError', 'Error during the Media information submission process. If error persists, please contact an administrator.')
       }
     }
 
@@ -140,7 +126,54 @@ export const SubmissionManager = (function () {
         })
       } catch (error) {
         this.handleMediaDeletion()
-        throw (error)
+        throw new this.SubmissionException('MediaFileUploadError', 'Error during the file upload. Deletion request dispatched for the corresponding path. If error persists, please contact an administrator.')
+      }
+    }
+
+    this.handleMediaUpdate = async (fileName) => {
+      try {
+        this.validateAuthentication()
+
+        if (!fileName) {
+          throw new this.SubmissionException('MediaDataError', 'No media file name found. Can not upload.')
+        }
+
+        const jsonMediaInfo = JSON.stringify({
+          titulo: this.mediaObject.title,
+          descricao: this.mediaObject.description,
+          tags: this.mediaObject.tags,
+          tipo: this.mediaObject.mediaType,
+          arquivo: fileName
+        })
+
+        await axios({
+          method: 'put',
+          url: `/acervo/midia/${this.mediaObject.mediaPath}`,
+          data: jsonMediaInfo,
+          headers: { token: this.token, 'Content-Type': 'application/json' }
+        })
+      } catch (error) {
+        console.error(error)
+        throw new this.SubmissionException('MediaUpdateError', 'Error during the update process. If error persists, please contact an administrator.')
+      }
+    }
+
+    this.handleMediaDeletion = async () => {
+      try {
+        this.validateAuthentication()
+        this.validateForDeletion()
+        console.log(this.mediaObject)
+
+        await axios({
+          method: 'delete',
+          url: `/acervo/midia/${encodeURI(this.mediaObject.mediaPath)}`,
+          headers: { token: this.token }
+        })
+        console.log('got here')
+      } catch (error) {
+        console.log('didnt got there')
+        console.error(error)
+        throw new this.SubmissionException('MediaDeletionError', 'Error during the deletion process. If error persists, please contact an administrator.')
       }
     }
 
@@ -156,20 +189,34 @@ export const SubmissionManager = (function () {
       }
     }
 
-    this.handleMediaUpdate = async () => {}
+    this.performMediaUpdate = async (fileName) => {
+      try {
+        this.refreshToken()
+        await this.handleMediaUpdate(fileName)
+        return true
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    this.performMediaDeletion = async () => {
+      try {
+        this.refreshToken()
+        await this.handleMediaDeletion()
+        console.log('now im here')
+        return true
+      } catch (error) {
+        console.log('nope')
+        console.error(error)
+        return false
+      }
+    }
 
     this.SubmissionException = function (name, message) {
       this.name = name
       this.message = message
     }
-
-    // this.logMediaObject = () => {
-    //   console.log(this.mediaObject)
-    // }
-
-    // this.logToken = () => {
-    //   console.log(this.token)
-    // }
   }
 
   let manager

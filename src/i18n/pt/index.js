@@ -23,6 +23,10 @@ export default {
   },
   gallery: {
     alertSubmissionSuccess: 'Seu arquivo foi submetido com sucesso.',
+    alertDeleteSuccess: 'Arquivo deletado com sucesso. Atualize a página para visualizar as mudanças.',
+    alertDeleteFailed: 'Ocorreu um erro na deleção do arquivo.',
+    alerteUpdateFailed: 'Ocorreu um erro na atualização do arquivo.',
+    alertUpdateSuccess: 'Seu aquivo foi atualizado com sucesso. Atualize a página para visualizar as mudanças.',
     buttonLabelDelete: 'Deletar',
     buttonLabelCancelEdit: 'Cancelar edição',
     buttonLabelClose: 'Fechar',
@@ -43,6 +47,7 @@ export default {
     menuSortOlder: 'Mais antigos',
     menuSortBy: 'Classificação',
     menuSortHashtags: 'Hashtags',
+    pageTextSureToDelete: 'Proceder com deleção do arquivo?',
     paginationOfPage: 'de',
     searchBarPlaceholder: 'Pesquisar'
   },
@@ -67,6 +72,8 @@ export default {
     pageTextSubtitle: 'Acesso exclusivo para membros da aldeia'
   },
   menus: {
+    buttonLabelCancel: 'Cancelar',
+    buttonLabelYes: 'Sim',
     langSwitch: 'Idioma',
     navigationAbout: 'Sobre',
     navigationContact: 'Contato',

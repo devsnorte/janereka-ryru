@@ -22,7 +22,11 @@ export default {
     contact: 'Contact'
   },
   gallery: {
-    alertSubmissionSuccess: 'Your file was successfully submitted.',
+    alertDeleteSuccess: 'File successfully deleted. Refresh the page to see the changes.',
+    alertDeleteFailed: 'An error has ocurred during file deletion.',
+    alertSubmissionSuccess: 'Your file has been successfully submitted.',
+    alerteUpdateFailed: 'An error has occured during the update process.',
+    alertUpdateSuccess: 'Your file has been successfully updated. Refresh the page to see the changes.',
     buttonLabelDelete: 'Delete',
     buttonLabelCancelEdit: 'Cancel edit',
     buttonLabelClose: 'Close',
@@ -43,6 +47,7 @@ export default {
     menuSortOlder: 'Older',
     menuSortBy: 'Sort by',
     menuSortHashtags: 'Hashtags',
+    pageTextSureToDelete: 'Proceed with media deletion?',
     paginationOfPage: 'of',
     searchBarPlaceholder: 'Search'
   },
@@ -67,6 +72,8 @@ export default {
     pageTextSubtitle: 'Exclusive access to tribe members'
   },
   menus: {
+    buttonLabelCancel: 'Cancel',
+    buttonLabelYes: 'Yes',
     langSwitch: 'Language',
     navigationAbout: 'About',
     navigationContact: 'Contact',

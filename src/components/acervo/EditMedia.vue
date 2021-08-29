@@ -12,7 +12,7 @@
       <q-input
         dense filled
         id="filename"
-        v-model="title"
+        v-model="newTitle"
         :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
       />
 
@@ -24,7 +24,7 @@
         dense filled autogrow
         id="description"
         type="textarea"
-        v-model="description"
+        v-model="newDescription"
         :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
       />
 
@@ -40,10 +40,9 @@
 
 <script>
 import { SubmissionManager } from 'src/api/MediaSubmissionManager'
-import { Session } from 'src/api/SessionManager'
 
 export default {
-  name: 'EditMidia',
+  name: 'EditMedia',
 
   components: {
     TagsFormInput: () => import('src/components/acervo/TagsFormInput')
@@ -65,7 +64,15 @@ export default {
       required: false,
       default: () => []
     },
-    path: {
+    mediaFileName: {
+      type: String,
+      required: true
+    },
+    mediaType: {
+      type: String,
+      required: true
+    },
+    mediaPath: {
       type: String,
       required: true
     },
@@ -78,20 +85,26 @@ export default {
 
   data () {
     return {
-      session: Session.getSessionManager(),
       submission: SubmissionManager.getManager(),
       loading: false,
+      newTitle: '',
+      newDescription: '',
       tags: new Set()
     }
   },
 
   watch: {
-    triggerSubmit (val, oldVal) {
+    async triggerSubmit (val, oldVal) {
+      await this.submit()
       this.$emit('finished-submission')
     }
   },
 
   mounted () {
+    if (this.title) this.newTitle = this.title
+
+    if (this.description) this.newDescription = this.description
+
     if (this.rawTags) {
       this.rawTags.forEach(tag => this.tags.add(tag))
     }
@@ -105,7 +118,26 @@ export default {
     async submit () {
       this.loading = true
 
-      // Todo
+      this.submission.makeMediaObject(
+        this.newTitle, this.newDescription, Array.from(this.tags), '', this.mediaType, this.mediaPath
+      )
+      console.log(this.submission.mediaObject)
+      const success = await this.submission.performMediaUpdate(this.mediaFileName)
+      console.log(success)
+
+      if (success) {
+        this.$q.notify({
+          type: 'positive',
+          multiLine: true,
+          message: this.$t('gallery.alertUpdateSuccess')
+        })
+      } else {
+        this.$q.notify({
+          type: 'negative',
+          multiLine: true,
+          message: this.$t('gallery.alertUpdateFailed')
+        })
+      }
 
       this.loading = false
     }
