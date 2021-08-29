@@ -168,7 +168,7 @@
 </template>
 
 <script>
-import MediaSubmission from 'src/api/MediaSubmissionService'
+import { SubmissionManager } from 'src/api/MediaSubmissionManager'
 import { Session } from 'src/api/SessionManager'
 
 export default {
@@ -177,6 +177,7 @@ export default {
   data () {
     return {
       session: Session.getSessionManager(),
+      submission: SubmissionManager.getManager(),
       newFile: null,
       title: '',
       description: '',
@@ -293,32 +294,26 @@ export default {
         })
       // Proceed with submission
       } else {
-        const session = this.session.getSession()
-
-        const submission = new MediaSubmission(
-          this.title,
-          this.description,
-          Array.from(this.tags),
-          this.newFile,
-          this.mediaFileType,
-          session.token
+        this.submission.makeMediaObject(
+          this.title, this.description, Array.from(this.tags), this.newFile, this.mediaFileType
         )
 
-        const result = await submission.submitNewMedia()
+        const success = await this.submission.performMediaCreation()
 
-        if (result === false) {
-          this.$q.notify({
-            type: 'negative',
-            message: this.$t('submission.alertSubmissionError')
-          })
-        } else {
+        if (success) {
           this.$q.notify({
             type: 'positive',
             message: this.$t('submission.alertSubmissionSuccess')
           })
+        } else {
+          this.$q.notify({
+            type: 'negative',
+            message: this.$t('submission.alertSubmissionError')
+          })
         }
+
+        this.loading = false
       }
-      this.loading = false
     }
   }
 }

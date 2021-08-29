@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import MediaSubmission from 'src/api/MediaSubmissionService'
+import { SubmissionManager } from 'src/api/MediaSubmissionManager'
 import { Session } from 'src/api/SessionManager'
 
 export default {
@@ -96,6 +96,7 @@ export default {
   data () {
     return {
       session: Session.getSessionManager(),
+      submission: SubmissionManager.getManager(),
       loading: false,
       tags: new Set(),
       tagsText: ''
@@ -147,29 +148,8 @@ export default {
     async submit () {
       this.loading = true
 
-      const session = this.session.getSession()
-      const submission = new MediaSubmission(
-        this.title,
-        this.description,
-        Array.from(this.tags),
-        this.newFile,
-        this.mediaFileType,
-        session.token
-      )
+      // Todo
 
-      const result = await submission.submitNewMedia()
-
-      if (result === false) {
-        this.$q.notify({
-          type: 'negative',
-          message: this.$t('submission.alertSubmissionError')
-        })
-      } else {
-        this.$q.notify({
-          type: 'positive',
-          message: this.$t('submission.alertSubmissionSuccess')
-        })
-      }
       this.loading = false
     }
   }

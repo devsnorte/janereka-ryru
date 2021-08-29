@@ -147,12 +147,12 @@ export default {
     async getImageMidias () {
       this.loading = true
       try {
-        const { data } = await this.$axios.get(
-          `/acervo/find?tipos=imagem&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
-        )
         // const { data } = await this.$axios.get(
-        //   '/acervo/find?tipos=imagem'
+        //   `/acervo/find?tipos=imagem&pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
         // )
+        const { data } = await this.$axios.get(
+          '/acervo/find?tipos=imagem'
+        )
         this.midiaItems = data
         this.loading = false
       } catch (error) {
@@ -207,6 +207,8 @@ export default {
       }
     },
 
+    // Todo: API forces a default pagination if their query parameters
+    // are not sent (12 items at page one)
     filterContent (contentType) {
       switch (contentType) {
         case 'arquivo':
