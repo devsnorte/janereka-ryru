@@ -7,13 +7,13 @@
       </div>
     </div>
     <q-pdfviewer
-      :src="`${baseUrl}/acervo/download/${midia.path}`"
+      :src="`${baseUrl}/acervo/download/${media.path}`"
       type="pdfjs"
       style="height: 500px"
     />
 
     <q-pdfviewer
-      :src="`${baseUrl}/acervo/download/${midia.path}`"
+      :src="`${baseUrl}/acervo/download/${media.path}`"
       type="pdfjs"
       style="height: 500px"
     />
@@ -26,7 +26,7 @@ export default {
   name: 'CardFile',
 
   props: {
-    midia: {
+    media: {
       type: Object,
       required: true
     }

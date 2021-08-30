@@ -3,16 +3,16 @@
     <q-card class="cursor-pointer fit" style="overflow: hidden;" @click="modal = !modal">
 
       <!-- File card -->
-      <card-file v-if="card.data.tipo == 'arquivo'" :midia="card" />
+      <card-file v-if="card.data.tipo == 'arquivo'" :media="card" />
 
       <!-- Image card -->
-      <card-image v-if="card.data.tipo == 'imagem'" :midia="card" />
+      <card-image v-if="card.data.tipo == 'imagem'" :media="card" />
 
       <!-- Video card -->
-      <card-video v-if="card.data.tipo == 'video'" :midia="card" />
+      <card-video v-if="card.data.tipo == 'video'" :media="card" />
 
       <!-- Audio card -->
-      <card-audio v-if="card.data.tipo == 'audio'" :midia="card" />
+      <card-audio v-if="card.data.tipo == 'audio'" :media="card" />
 
       <!-- Title/Author overlay -->
       <q-card-section class="absolute-bottom text-white bottom-overlay">
@@ -28,10 +28,10 @@
       persistent
       maximized
     >
-      <contents-file v-if="card.data.tipo == 'arquivo'" :midia="card" />
-      <contents-image v-if="card.data.tipo == 'imagem'" :midia="card" />
-      <contents-video v-if="card.data.tipo == 'video'" :midia="card" />
-      <contents-audio v-if="card.data.tipo == 'audio'" :midia="card" />
+      <contents-file v-if="card.data.tipo == 'arquivo'" :media="card" />
+      <contents-image v-if="card.data.tipo == 'imagem'" :media="card" />
+      <contents-video v-if="card.data.tipo == 'video'" :media="card" />
+      <contents-audio v-if="card.data.tipo == 'audio'" :media="card" />
     </q-dialog>
   </div>
 </template>

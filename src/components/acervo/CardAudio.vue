@@ -14,7 +14,7 @@ export default {
   name: 'CardVideo',
 
   props: {
-    midia: {
+    media: {
       type: Object,
       required: true
     }

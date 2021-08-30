@@ -1,7 +1,7 @@
 <template>
   <q-card class="full-width z-max">
     <q-card-section class="row items-center text-primary">
-      <div class="text-h6">{{ midia.data.titulo }}</div>
+      <div class="text-h6">{{ media.data.titulo }}</div>
       <q-space />
       <q-btn icon="close" flat round dense v-close-popup />
     </q-card-section>
@@ -11,7 +11,7 @@
     <q-media-player
       type="video"
       :sources="[{
-        src: `${baseUrl}/acervo/download/${midia.path}`
+        src: `${baseUrl}/acervo/download/${media.path}`
       }]"
       :bottom-controls="true"
       color="green-2"
@@ -19,32 +19,56 @@
       dark
     />
 
+    <q-card-section class="q-pt-none">
+      <edit-media
+        v-if="editMode"
+        :title="media.data.titulo"
+        :description="media.data.descricao"
+        :rawTags="media.data.tags"
+        :mediaFileName="media.data.arquivo"
+        :mediaType="media.data.tipo"
+        :mediaPath="media.path"
+        :triggerSubmit="triggerSubmit"
+        @finished-submission="finishSubmit"
+      />
+    </q-card-section>
+
     <q-card-section class="q-pt-none q-mb-xl">
-      <midia-details
-        :description="midia.data.descricao"
-        :created="midia.created"
-        :username="midia.creator.username"
-        :authorName="midia.creator.name"
-        :authorEmail="midia.creator.email"
+      <media-details
+        v-show="!editMode"
+        :description="media.data.descricao"
+        :created="media.created"
+        :username="media.creator.username"
+        :authorName="media.creator.name"
+        :authorEmail="media.creator.email"
       />
     </q-card-section>
 
     <q-card-actions align="right" class="bg-white text-teal fixed-bottom">
-      <q-btn :label="$t('gallery.buttonLabelClose')" v-close-popup color="dark"/>
+      <media-content-buttons
+        :editMode="editMode"
+        @toggleEditMode="editMode = !editMode"
+        @triggerSubmit="triggerSubmit = true"
+        @triggerDelete="deleteMedia()"
+      />
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
+import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+
 export default {
   name: 'ContentsVideo',
 
   components: {
-    MidiaDetails: () => import('components/acervo/MidiaDetails')
+    MediaContentButtons: () => import('components/acervo/MediaContentButtons'),
+    MediaDetails: () => import('components/acervo/MediaDetails'),
+    EditMedia: () => import('components/acervo/EditMedia')
   },
 
   props: {
-    midia: {
+    media: {
       type: Object,
       required: true
     }
@@ -52,7 +76,39 @@ export default {
 
   data () {
     return {
-      baseUrl: this.$axios.defaults.baseURL
+      submission: SubmissionManager.getManager(),
+      baseUrl: this.$axios.defaults.baseURL,
+      editMode: false,
+      triggerSubmit: false
+    }
+  },
+
+  methods: {
+    async deleteMedia () {
+      this.submission.makeMediaObject(
+        this.media.data.titule, this.media.data.descricao, this.media.data.tags, '', this.media.data.tipo, this.media.path
+      )
+      const success = await this.submission.performMediaDeletion()
+
+      if (success) {
+        this.$q.notify({
+          type: 'positive',
+          multiLine: true,
+          message: this.$t('gallery.alertDeleteSuccess')
+        })
+      } else {
+        this.$q.notify({
+          type: 'negative',
+          multiLine: true,
+          message: this.$t('gallery.alertDeleteFailed')
+        })
+      }
+    },
+
+    finishSubmit () {
+      console.info('Submission finished.')
+      this.triggerSubmit = false
+      this.editMode = false
     }
   }
 }

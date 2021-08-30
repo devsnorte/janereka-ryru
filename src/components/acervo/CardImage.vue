@@ -1,7 +1,7 @@
 <template>
 <div style="height: 300px;">
   <q-img
-    :src="`${baseUrl}/acervo/download/${midia.path}`"
+    :src="`${baseUrl}/acervo/download/${media.path}`"
     class="absolute-center"
   />
 </div>
@@ -12,7 +12,7 @@ export default {
   name: 'CardImage',
 
   props: {
-    midia: {
+    media: {
       type: Object,
       required: true
     }

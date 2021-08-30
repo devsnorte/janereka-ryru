@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-      <create-midia />
+      <create-media />
   </q-page>
 </template>
 
@@ -9,7 +9,7 @@ export default {
   name: 'Submissao',
 
   components: {
-    CreateMidia: () => import('components/acervo/CreateMidia')
+    CreateMedia: () => import('components/acervo/CreateMedia')
   }
 }
 </script>

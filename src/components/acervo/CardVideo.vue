@@ -12,7 +12,7 @@
       <q-media-player
         type="video"
         :sources="[{
-          src: `${baseUrl}/acervo/download/${midia.path}`
+          src: `${baseUrl}/acervo/download/${media.path}`
         }]"
         :show-big-play-button="false"
         radius='20px'
@@ -36,7 +36,7 @@ export default {
   name: 'CardVideo',
 
   props: {
-    midia: {
+    media: {
       type: Object,
       required: true
     }
