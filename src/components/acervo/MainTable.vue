@@ -1,12 +1,13 @@
 <template>
   <q-table
     grid
-    :title="$t('gallery.mainTableTitle')"
     row-key="id"
+    :title="$t('gallery.mainTableTitle')"
     :loading="loading"
     :columns="columns"
     :data="$props.midias"
     :pagination.sync="pagination"
+    :rows-per-page-label="$t('gallery.paginationRowsPerPageLabel')"
     card-container-class="q-col-gutter-md"
   >
 

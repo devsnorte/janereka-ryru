@@ -17,7 +17,7 @@
       id="tags"
       ref="tagsForm"
       bg-color="transparent"
-      class="bg-grey-3"
+      class="tags-input bg-grey-3"
       v-model="tagsText"
       @input="parseTags()"
       @blur="addLastTag()"
@@ -25,7 +25,7 @@
     >
     </q-input>
     <span class="text-caption">
-      {{ $t('submission.formFieldHintHastags') }}
+      <i><pre style="font-family: inherit; margin-top: 0;">{{ $t('submission.formFieldHintHastags') }}</pre></i>
     </span>
   </div>
 </template>
@@ -91,3 +91,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.tags-input:hover {
+  background-color: #e0e0e0 !important;
+}
+</style>

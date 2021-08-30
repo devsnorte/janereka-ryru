@@ -1,7 +1,7 @@
 <template>
   <q-page class="column items-center q-py-xl">
 
-    <span class="text-h6"><strong>{{ $t('login.pageTextTitle') }}</strong></span>
+    <span class="text-h6 text-center"><strong>{{ $t('login.pageTextTitle') }}</strong></span>
     <span>{{ $t('login.pageTextSubtitle') }}</span>
 
     <q-form class="q-pt-lg" style="min-width: 400px;" @submit="login">
