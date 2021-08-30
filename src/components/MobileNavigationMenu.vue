@@ -1,26 +1,26 @@
 <template>
   <q-list class="text-bold text-uppercase text-center q-pt-xl">
-    <q-item exact clickable :to="{name: home.route}">
+    <q-item exact clickable :to="{name: 'home'}">
       <q-item-section>
-        <q-item-label>{{ home.label }}</q-item-label>
+        <q-item-label>{{ $t('menus.navigationHome') }}</q-item-label>
       </q-item-section>
     </q-item>
 
-    <q-item exact clickable :to="{name: about.route}">
+    <q-item exact clickable :to="{name: 'sobre'}">
       <q-item-section>
-        <q-item-label>{{ about.label }}</q-item-label>
+        <q-item-label>{{ $t('menus.navigationAbout') }}</q-item-label>
       </q-item-section>
     </q-item>
 
-    <q-item exact clickable :to="{name: gallery.route}">
+    <q-item exact clickable :to="{name: 'acervo'}">
       <q-item-section>
-        <q-item-label>{{ gallery.label }}</q-item-label>
+        <q-item-label>{{ $t('menus.navigationGallery') }}</q-item-label>
       </q-item-section>
     </q-item>
 
-    <q-item exact clickable :to="{name: contact.route}">
+    <q-item exact clickable :to="{name: 'contato' }">
       <q-item-section>
-        <q-item-label>{{ contact.label }}</q-item-label>
+        <q-item-label>{{ $t('menus.navigationContact') }}</q-item-label>
       </q-item-section>
     </q-item>
   </q-list>
@@ -28,27 +28,6 @@
 
 <script>
 export default {
-  name: 'MobileNavigationMenu',
-
-  data () {
-    return {
-      home: {
-        label: this.$t('menus.navigationHome'),
-        route: 'home'
-      },
-      about: {
-        label: this.$t('menus.navigationAbout'),
-        route: 'sobre'
-      },
-      gallery: {
-        label: this.$t('menus.navigationGallery'),
-        route: 'acervo'
-      },
-      contact: {
-        label: this.$t('menus.navigationContact'),
-        route: 'acervo'
-      }
-    }
-  }
+  name: 'MobileNavigationMenu'
 }
 </script>

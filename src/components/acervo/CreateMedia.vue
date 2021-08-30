@@ -40,6 +40,7 @@
         dense filled
         id="filename"
         v-model="title"
+        :placeholder="$t('submission.formFieldPlaceholderFilename')"
         :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
       />
 
@@ -52,6 +53,7 @@
         id="description"
         type="textarea"
         v-model="description"
+        :placeholder="$t('submission.formFieldPlaceholderDescription')"
         :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
       />
 

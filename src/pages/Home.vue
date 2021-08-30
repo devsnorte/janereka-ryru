@@ -46,7 +46,8 @@
               {{ $t('home.pageTextAboutTitle') }}
             </h1>
             <p class="q-pb-lg">
-              {{ $t('home.pageTextAbout') }}
+              {{ $t('home.pageTextAboutLine1') }}<br />
+              {{ $t('home.pageTextAboutLine2') }}
             </p>
             <!-- <small class="lt-md">
                 {{ $t('home.pageTextProjectFunding') }}

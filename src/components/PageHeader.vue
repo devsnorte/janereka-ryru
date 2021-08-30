@@ -127,7 +127,7 @@ export default {
       locale: this.$i18n.locale,
       locales: {
         pt: 'Português',
-        awaete: 'Awaete',
+        awaete: 'Awaete Jeyga',
         'en-us': 'English'
       }
     }
