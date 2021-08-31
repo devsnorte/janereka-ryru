@@ -18,7 +18,7 @@
    >
 
     <div v-if="showFilter"
-      class="side-frame column no-wrap absolute-right col-xs-10 col-sm-8 col-md-3 q-px-md q-pa-md bg-white"
+      class="side-frame column no-wrap absolute-right col-xs-10 col-sm-8 col-md-3 q-px-md q-pa-md bg-white z-top"
       style="overflow-y: scroll;"
     >
 
@@ -69,7 +69,7 @@ export default {
     return {
       midiaItems: [],
       loading: false,
-      showFilter: true,
+      showFilter: false,
       radioPlaceholder: '',
       hashtagPlaceholder: [
         { name: 'janereka', amount: 150 },

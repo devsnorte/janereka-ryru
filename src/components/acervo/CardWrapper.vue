@@ -73,10 +73,12 @@ export default {
   border-radius: 0 0 10px 10px;
   background-color: rgba(0,0,0,0.4) !important;
 }
+.media-buttons-wrapper {
+  border-radius: 15px;
+}
 .media-buttons-overlay {
   overflow: hidden;
-  border-radius: 10px;
-  background-color: transparent;
+  border-radius: 15px;
   opacity: 0.6;
 }
 .media-buttons-overlay:hover {

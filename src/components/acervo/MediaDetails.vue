@@ -3,7 +3,7 @@
   <p class="text-primary text-weight-medium">{{ $t('gallery.mediaDetailsDescription') }}</p>
   <p>{{ description }}</p>
   <p class="text-primary text-weight-medium">{{ $t('gallery.mediaDetailsCreated') }}</p>
-  <p>{{ created }}</p>
+  <p>{{ $d(new Date(created), 'long') }}</p>
   <p class="text-primary text-weight-medium">{{ $t('gallery.mediaDetailsAuthor') }}</p>
   <p v-if="username">{{ username }}</p>
   <p v-if="authorName">{{ authorName }}</p>

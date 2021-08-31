@@ -15,7 +15,7 @@
       }]"
       :bottom-controls="true"
       color="green-2"
-      class="q-mt-md q-mb-sm"
+      class="video-wrapper q-mt-md q-mb-sm"
       dark
     />
 
@@ -113,3 +113,23 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.video-wrapper {
+  height: 75vh !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* @media only screen and (min-width: 599px) {
+  .video-wrapper {
+    width: 70vw;
+  }
+}
+
+@media only screen and (min-width: 1023px) {
+  .video-wrapper {
+    width: 60vw;
+  }
+} */
+</style>
