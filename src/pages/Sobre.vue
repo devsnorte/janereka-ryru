@@ -51,7 +51,7 @@ export default {
 
   computed: {
     /**
-     * Retrive the current locale for conditional usage
+     * Retrieve the current locale for conditional usage
      * of the <pre> tag.
      *
      * @return {string}

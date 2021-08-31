@@ -29,7 +29,7 @@
         <q-tab name="audio" icon="volume_up" :label="$t('gallery.categoryLabelAudio')" />
       </q-tabs>
 
-      <div>
+      <div class="top-side-buttons-wrapper">
         <q-btn unelevated icon="cloud_upload" color="primary" align="between"
           @click="sendMidia()" :label="$t('gallery.buttonLabelSend')"
         />
@@ -201,5 +201,12 @@ export default {
   border-radius: 20px;
   overflow: hidden;
   /* min-width: 300px; */
+}
+/* top-side-buttons-wrapper */
+@media only screen and (max-width: 1153px) {
+  .top-side-buttons-wrapper {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 </style>

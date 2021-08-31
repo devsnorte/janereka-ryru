@@ -1,6 +1,6 @@
 <template>
   <q-card class="full-width z-max">
-    <q-card-section class="row items-center text-primary">
+    <q-card-section class="row items-center no-wrap text-primary">
       <div class="text-h6">{{ media.data.titulo }}</div>
       <q-space />
       <q-btn icon="close" flat round dense v-close-popup />
@@ -8,11 +8,11 @@
 
     <q-separator />
 
-    <q-card-section>
+    <q-card-section class="image-wrapper">
       <q-img
-        :src="`${baseUrl}/acervo/download/${media.path}`"
-        spinner-color="primary"
         basic
+        spinner-color="primary"
+        :src="`${baseUrl}/acervo/download/${media.path}`"
       >
         <!-- <template v-slot:error>
           <div class="absolute-full flex flex-center bg-negative text-white">
@@ -117,3 +117,23 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.image-wrapper {
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (min-width: 599px) {
+  .image-wrapper {
+    width: 70vw;
+  }
+}
+
+@media only screen and (min-width: 1023px) {
+  .image-wrapper {
+    width: 60vw;
+  }
+}
+</style>

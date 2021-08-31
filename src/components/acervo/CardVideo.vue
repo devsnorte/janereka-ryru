@@ -8,14 +8,14 @@
       </div>
     </div>
 
-    <div class="q-pa-sm fit">
+    <div class="q-pa-xs fit">
       <q-media-player
         type="video"
         :sources="[{
           src: `${baseUrl}/acervo/download/${media.path}`
         }]"
         :show-big-play-button="false"
-        radius='20px'
+        radius='15px'
         background-color="black"
         color="primary"
         class="fit no-pointer-events absolute-center"
