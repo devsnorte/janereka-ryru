@@ -36,6 +36,7 @@ export const Session = (function () {
         } else {
           this.logout()
           Notify.create({
+            position: 'center',
             type: 'warning',
             multiLine: true,
             message: i18n.t('login.alertLoginNecessary')

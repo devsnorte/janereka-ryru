@@ -90,7 +90,6 @@ export default {
       } else {
         this.loading = false
         this.$q.notify({
-          position: 'center',
           type: 'negative',
           message: this.$t('login.alertLoginFailed')
         })
