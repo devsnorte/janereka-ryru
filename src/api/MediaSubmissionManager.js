@@ -169,9 +169,7 @@ export const SubmissionManager = (function () {
           url: `/acervo/midia/${encodeURI(this.mediaObject.mediaPath)}`,
           headers: { token: this.token }
         })
-        console.log('got here')
       } catch (error) {
-        console.log('didnt got there')
         console.error(error)
         throw new this.SubmissionException('MediaDeletionError', 'Error during the deletion process. If error persists, please contact an administrator.')
       }
@@ -204,10 +202,8 @@ export const SubmissionManager = (function () {
       try {
         this.refreshToken()
         await this.handleMediaDeletion()
-        console.log('now im here')
         return true
       } catch (error) {
-        console.log('nope')
         console.error(error)
         return false
       }

@@ -238,7 +238,9 @@ export default {
     },
 
     updateTags (tags) {
+      console.log(tags)
       this.tags = tags
+      console.log(this.tags)
     },
 
     async submit () {
@@ -250,17 +252,20 @@ export default {
           type: 'negative',
           message: this.$t('submission.alertNoFileSelected')
         })
+        this.loading = false
       // Ensure submission terms are agreed with
       } else if (!this.acceptTerms) {
         this.$q.notify({
           type: 'negative',
           message: this.$t('submission.alertMustAcceptTerms')
         })
+        this.loading = false
       // Proceed with submission
       } else {
         this.submission.makeMediaObject(
           this.title, this.description, Array.from(this.tags), this.newFile, this.mediaFileType
         )
+        console.log(this.submission.mediaObject)
 
         const success = await this.submission.performMediaCreation()
 

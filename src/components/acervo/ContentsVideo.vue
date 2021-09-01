@@ -9,14 +9,14 @@
     <q-separator />
 
     <q-media-player
+      dark
       type="video"
+      color="green-2"
+      class="video-wrapper q-mt-md q-mb-sm"
+      :bottom-controls="true"
       :sources="[{
         src: `${baseUrl}/acervo/download/${media.path}`
       }]"
-      :bottom-controls="true"
-      color="green-2"
-      class="video-wrapper q-mt-md q-mb-sm"
-      dark
     />
 
     <q-card-section class="q-pt-none">
@@ -120,16 +120,4 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-
-/* @media only screen and (min-width: 599px) {
-  .video-wrapper {
-    width: 70vw;
-  }
-}
-
-@media only screen and (min-width: 1023px) {
-  .video-wrapper {
-    width: 60vw;
-  }
-} */
 </style>
