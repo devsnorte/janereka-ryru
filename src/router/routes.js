@@ -55,6 +55,11 @@ const routes = [
         }
       },
       {
+        path: '/construction',
+        name: 'construction',
+        component: () => import('pages/UnderConstruction.vue')
+      },
+      {
         path: '*',
         component: () => import('pages/Error404.vue')
       }
