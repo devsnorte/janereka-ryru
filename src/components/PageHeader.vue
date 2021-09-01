@@ -3,7 +3,7 @@
     <q-header elevated class="bg-grey-1">
       <q-toolbar class="row justify-center text-dark">
 
-        <q-toolbar-title shrink class="q-ml-md">
+        <q-toolbar-title shrink class="q-ml-md gt-sm" >
           <q-img src="~/assets/janeraka.svg" width="3.2em" />
         </q-toolbar-title>
 
