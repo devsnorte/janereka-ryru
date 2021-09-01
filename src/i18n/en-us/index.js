@@ -105,5 +105,12 @@ export default {
     formTextNotAnAuthor: 'Not yet an author?',
     formValidationFieldRequired: 'This field is required.',
     formValidationTagsNumber: 'Please add at least one tag.'
+  },
+  construction: {
+    pageTextTitle: 'This page is under construction...'
+  },
+  error404: {
+    pageTextTitle: 'This page does not exist...',
+    buttonLabelReturnHome: 'Go to homepage'
   }
 }
