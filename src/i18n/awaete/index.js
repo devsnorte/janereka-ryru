@@ -105,5 +105,12 @@ export default {
     formTextNotAnAuthor: 'Ainda não é um autor?', // Pending translation
     formValidationFieldRequired: 'Este campo é necessário.', // Pending translation
     formValidationTagsNumber: 'Por favor, adicione ao menos uma tag.' // Pending translation
+  },
+  construction: {
+    pageTextTitle: 'Essa página está em construção...' // Pending translation
+  },
+  error404: {
+    pageTextTitle: 'Essa página não existe...', // Pending translation
+    buttonLabelReturnHome: 'Ir para página inicial' // Pending translation
   }
 }
