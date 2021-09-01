@@ -12,7 +12,7 @@ export default {
     formFieldLabelEmail: 'E-mail', // Pending translation
     formFieldLabelMessage: 'Escreva uma mensagem', // Pending translation
     formValidationFieldRequired: 'Por favor, preencha este campo', // Pending translation
-    pageTextTitle: 'Tem algum arquivo sobre a etnia Awaeté?', // Pending translation
+    pageTextTitle: 'Tem algum arquivo sobre a etnia Awaete?', // Pending translation
     pageTextSubtitle: 'Entre em contato conosco' // Pending translation
   },
   footer: {
@@ -103,6 +103,7 @@ export default {
     formFieldPlaceholderFilename: 'Insira o nome do seu arquivo aqui', // Pending translation
     formSectionTitleAuthor: 'ejera enum', // Pending translation
     formTextNotAnAuthor: 'Ainda não é um autor?', // Pending translation
-    formValidationFieldRequired: 'Este campo é necessário.' // Pending translation
+    formValidationFieldRequired: 'Este campo é necessário.', // Pending translation
+    formValidationTagsNumber: 'Por favor, adicione ao menos uma tag.' // Pending translation
   }
 }

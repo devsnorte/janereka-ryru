@@ -12,7 +12,7 @@ export default {
     formFieldLabelEmail: 'E-mail',
     formFieldLabelMessage: 'Write a message',
     formValidationFieldRequired: 'Please fill in this field',
-    pageTextTitle: 'Do you have a file about the Awaeté people?',
+    pageTextTitle: 'Do you have a file about the Awaete people?',
     pageTextSubtitle: 'Please contact us'
   },
   footer: {
@@ -103,6 +103,7 @@ export default {
     formFieldPlaceholderFilename: 'Input a name for your file here',
     formSectionTitleAuthor: 'Author data',
     formTextNotAnAuthor: 'Not yet an author?',
-    formValidationFieldRequired: 'This field is required.'
+    formValidationFieldRequired: 'This field is required.',
+    formValidationTagsNumber: 'Please add at least one tag.'
   }
 }

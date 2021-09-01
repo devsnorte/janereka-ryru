@@ -16,9 +16,11 @@
       dense borderless
       id="tags"
       ref="tagsForm"
-      bg-color="transparent"
-      class="tags-input bg-grey-3"
+      bg-color="grey-3"
+      input-class="tags-input q-pl-md"
       v-model="tagsText"
+      :lazy-rules="true"
+      :rules="[ hasOneTagAtLeast ]"
       @input="parseTags()"
       @blur="addLastTag()"
       @keydown.enter.prevent="addLastTag()"
@@ -44,8 +46,7 @@ export default {
   data () {
     return {
       tags: new Set(),
-      tagsText: '',
-      tagsFieldHeight: '40px'
+      tagsText: ''
     }
   },
 
@@ -66,7 +67,6 @@ export default {
         this.tags.add(splittedTags[0].trim())
         splittedTags.splice(0, 1)
         this.tagsText = splittedTags.join('').trim()
-        // this.getResponsiveFieldHeight()
 
         this.$emit('parsedTags', this.tags)
       }
@@ -76,17 +76,23 @@ export default {
       if (this.tagsText.trim().length > 0) {
         this.tags.add(this.tagsText.trim())
         this.tagsText = ''
-        this.getResponsiveFieldHeight()
 
         this.$emit('parsedTags', this.tags)
       }
     },
 
     clearTag (tag) {
+      // Trigger form re-render with trimmable whitespace to display tags
+      this.tagsText = ' '
       this.tags.delete(tag)
-      this.$refs.tagsForm.blur()
+      this.tagsText = ''
 
+      this.$refs.tagsForm.validate()
       this.$emit('parsedTags', this.tags)
+    },
+
+    hasOneTagAtLeast () {
+      return (this.tags.size >= 1 || this.$t('submission.formValidationTagsNumber'))
     }
   }
 }

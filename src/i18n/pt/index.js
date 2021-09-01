@@ -12,7 +12,7 @@ export default {
     formFieldLabelEmail: 'E-mail',
     formFieldLabelMessage: 'Escreva uma mensagem',
     formValidationFieldRequired: 'Por favor, preencha este campo',
-    pageTextTitle: 'Tem algum arquivo sobre a etnia Awaeté?',
+    pageTextTitle: 'Tem algum arquivo sobre a etnia Awaete?',
     pageTextSubtitle: 'Entre em contato conosco'
   },
   footer: {
@@ -103,6 +103,7 @@ export default {
     formFieldPlaceholderFilename: 'Insira o nome do seu arquivo aqui',
     formSectionTitleAuthor: 'Dados do autor',
     formTextNotAnAuthor: 'Ainda não é um autor?',
-    formValidationFieldRequired: 'Este campo é necessário.'
+    formValidationFieldRequired: 'Este campo é necessário.',
+    formValidationTagsNumber: 'Por favor, adicione ao menos uma tag.'
   }
 }
