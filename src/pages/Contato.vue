@@ -10,10 +10,10 @@
           <span class="text-h6 text-bold">{{ $t('contact.pageTextSubtitle') }}</span>
         </div>
 
-        <div :class="$q.screen.lt.md ? '' : 'row no-wrap'">
+        <div class="row no-wrap">
           <q-input
             filled dense
-            :class="$q.screen.lt.md ? '' : 'q-mr-sm'"
+            class="q-mr-sm"
             id="name"
             :label="$t('contact.formFieldLabelName')"
             v-model="name"

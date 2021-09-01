@@ -5,8 +5,8 @@
         404
       </div>
 
-      <div :class="$q.screen.lt.md ? 'text-h3' : 'text-h2'" style="opacity: 0.7">
-        {{ $t('error404.pageTextTitle') }}
+      <div :class="$q.screen.lt.md ? 'text-h3' : 'text-h2'" style="opacity:.6">
+        Página não existe...
       </div>
 
       <q-btn
@@ -15,7 +15,7 @@
         text-color="accent"
         unelevated
         to="/"
-        :label="$t('error404.buttonLabelReturnHome')"
+        label="Ir para página inicial"
         no-caps
       />
     </div>
