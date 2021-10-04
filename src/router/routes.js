@@ -1,57 +1,69 @@
+import { Session } from 'src/api/SessionManager'
+
+const session = Session.getSessionManager()
 
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/LoginLayout.vue'),
-    children: [
-      {
-        path: '',
-        name: 'login',
-        component: () => import('pages/Login.vue')
-      }
-    ]
-  },
-  {
-    path: '/dashboard',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/HomeLayout.vue'),
     children: [
       {
         path: '',
         name: 'home',
-        component: () => import('pages/Index.vue')
+        component: () => import('pages/Home.vue')
       },
       {
-        path: '/imagens',
-        name: 'imagens',
-        component: () => import('pages/Imagens.vue')
+        path: '/sobre',
+        name: 'sobre',
+        component: () => import('pages/Sobre.vue')
       },
       {
-        path: '/videos',
-        name: 'videos',
-        component: () => import('pages/Video.vue')
+        path: '/contato',
+        name: 'contato',
+        component: () => import('pages/Contato.vue')
       },
       {
-        path: '/audios',
-        name: 'audios',
-        component: () => import('pages/Audios.vue')
+        path: '/login',
+        name: 'login',
+        component: () => import('pages/Login.vue')
       },
       {
-        path: '/arquivos',
-        name: 'arquivos',
-        component: () => import('pages/Arquivos.vue')
+        path: '/acervo',
+        name: 'acervo',
+        component: () => import('pages/Acervo.vue'),
+        beforeEnter (to, from, next) {
+          if (to.name !== 'login' && !session.isAuthenticated()) {
+            next({
+              name: 'login',
+              query: { goTo: to.fullPath }
+            })
+          } else next()
+        }
       },
       {
-        path: '/mapa',
-        name: 'mapa',
-        component: () => import('pages/Mapa.vue')
+        path: '/submissao',
+        name: 'submissao',
+        component: () => import('pages/Submissao.vue'),
+        beforeEnter (to, from, next) {
+          session.loadFromLocalStorage()
+          if (to.name !== 'login' && !session.isAuthenticated()) {
+            next({
+              name: 'login',
+              query: { goTo: to.fullPath }
+            })
+          } else next()
+        }
+      },
+      {
+        path: '/construction',
+        name: 'construction',
+        component: () => import('pages/UnderConstruction.vue')
+      },
+      {
+        path: '*',
+        component: () => import('pages/Error404.vue')
       }
     ]
-  },
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '*',
-    component: () => import('pages/Error404.vue')
   }
 ]
 

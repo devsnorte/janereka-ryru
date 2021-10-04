@@ -1,26 +1,29 @@
-# Quasar Acervo Digital (quasar-acervo)
+# Plataforma Janereka Ryru
 
-Uma plataforma de acervos digitais.
+Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete
 
-## Install the dependencies
+## Sobre a Plataforma
+
+Essa plataforma tem o objetivo de organizar, facilitar o acesso e documentar, registrar nossos saberes, estimular suas práticas, para a preservação e o fortalecimento de nossas memórias ancestrais em especial ritualística, medicinal, artesanal e construtiva a partir do diálogo com nossos jovens e anciãos.
+
+
+> Projeto desenvolvido através da Lei Federal no 14.017/20, do Edital Museus e Memoriais de Base Comunitária – Lei Aldir Blanc Pará 2020
+
+***
+
+## Rodando localmente
+
+### Instalar as dependências
 ```bash
 yarn
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Iniciar a aplcação em modo de desenvolvimento
 ```bash
-quasar dev
+yarn dev
 ```
 
-### Lint the files
+### Buildar a aplicação para produção
 ```bash
-yarn run lint
+yarn build
 ```
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).

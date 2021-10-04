@@ -1,11 +1,19 @@
 {
-  "name": "quasar-acervo",
+  "name": "janereka-ryru",
   "version": "0.0.1",
-  "description": "Uma plataforma de acervos digitais.",
-  "productName": "Quasar Acervo Digital",
-  "author": "Patrick Monteiro <eng.patrickmonteiro@gmail.com>",
+  "description": "Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete",
+  "productName": "Plataforma Janereka Ryru",
+  "authors": [
+    "Patrick Monteiro <eng.patrickmonteiro@gmail.com>",
+    "Thayana Corrêa Mamoré <thayanacmamore@gmail.com>",
+    "Diego Souza <diego00alfa@gmail.com>"
+  ],
+  "contributors": [],
   "private": true,
   "scripts": {
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "build:pwa": "quasar build -m pwa",
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },
@@ -23,14 +31,15 @@
     "@quasar/quasar-app-extension-qmediaplayer": "^1.1.4",
     "@quasar/quasar-app-extension-qpdfviewer": "^1.0.0-beta.8",
     "babel-eslint": "^10.0.1",
-    "eslint": "^6.8.0",
+    "eslint": "^7.24.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.1.2"
+    "eslint-plugin-vue": "^6.1.2",
+    "workbox-webpack-plugin": "^5.0.0"
   },
   "browserslist": [
     "last 10 Chrome versions",

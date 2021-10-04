@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-const axiosConfig = axios.create({
-  baseURL: 'https://cors-anywhere.herokuapp.com/https://baobaxia.mocambos.net/api/mocambos/rede/bbx/search'
+export const axiosInstance = axios.create({
+  baseURL: 'http://mucuas.mercadosul.org:8067',
+  headers: {
+    common: {
+      token: null
+    }
+  }
 })
 
-Vue.prototype.$axios = axiosConfig
+Vue.prototype.$axios = axiosInstance
