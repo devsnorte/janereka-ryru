@@ -6,22 +6,24 @@
         <q-icon name="description" style="font-size: 4rem;" />
       </div>
     </div>
-    <q-pdfviewer
-      :src="`${baseUrl}/acervo/download/${media.path}`"
+    <!-- <q-pdfviewer
+      :src="fileSrc"
       type="pdfjs"
       style="height: 500px"
     />
 
     <q-pdfviewer
-      :src="`${baseUrl}/acervo/download/${media.path}`"
+      :src="fileSrc"
       type="pdfjs"
       style="height: 500px"
-    />
+    /> -->
 
   </div>
 </template>
 
 <script>
+// import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+
 export default {
   name: 'CardFile',
 
@@ -30,12 +32,17 @@ export default {
       type: Object,
       required: true
     }
-  },
-
-  data () {
-    return {
-      baseUrl: this.$axios.defaults.baseURL
-    }
   }
+
+  // data () {
+  //   return {
+  //     submission: SubmissionManager.getManager(),
+  //     fileSrc: ''
+  //   }
+  // }
+
+  // async mounted () {
+  //   this.fileSrc = await this.submission.performMediaDownload(this.$props.media.path)
+  // }
 }
 </script>

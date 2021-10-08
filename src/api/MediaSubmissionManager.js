@@ -89,18 +89,17 @@ export const SubmissionManager = (function () {
         this.validateAuthentication()
         this.validateForSubmission()
 
-        const jsonMediaInfo = JSON.stringify({
-          titulo: this.mediaObject.title,
-          descricao: this.mediaObject.description,
-          tags: this.mediaObject.tags,
-          tipo: this.mediaObject.mediaType
-        })
+        const infoFormData = new FormData()
+        infoFormData.append('titulo', this.mediaObject.title)
+        infoFormData.append('descricao', this.mediaObject.description)
+        infoFormData.append('tipo', this.mediaObject.mediaType)
+        infoFormData.append('tags', this.mediaObject.tags)
 
         const { data } = await axios({
           method: 'post',
-          url: `/acervo/midia?name=${encodeURI(this.mediaObject.title)}`,
-          data: jsonMediaInfo,
-          headers: { token: this.token, 'Content-Type': 'application/json' }
+          url: '/acervo/midia',
+          data: infoFormData,
+          headers: { token: this.token, 'Content-Type': 'application/x-www-form-urlencoded' }
         })
 
         this.mediaObject.mediaPath = data.path
@@ -138,19 +137,16 @@ export const SubmissionManager = (function () {
           throw new this.SubmissionException('MediaDataError', 'No media file name found. Can not upload.')
         }
 
-        const jsonMediaInfo = JSON.stringify({
-          titulo: this.mediaObject.title,
-          descricao: this.mediaObject.description,
-          tags: this.mediaObject.tags,
-          tipo: this.mediaObject.mediaType,
-          arquivo: fileName
-        })
+        const updateInfoFormData = new FormData()
+        updateInfoFormData.append('titulo', this.mediaObject.title)
+        updateInfoFormData.append('descricao', this.mediaObject.description)
+        updateInfoFormData.append('tags', this.mediaObject.tags)
 
         await axios({
           method: 'put',
           url: `/acervo/midia/${this.mediaObject.mediaPath}`,
-          data: jsonMediaInfo,
-          headers: { token: this.token, 'Content-Type': 'application/json' }
+          data: updateInfoFormData,
+          headers: { token: this.token, 'Content-Type': 'application/x-www-form-urlencoded' }
         })
       } catch (error) {
         console.error(error)
@@ -203,6 +199,23 @@ export const SubmissionManager = (function () {
         this.refreshToken()
         await this.handleMediaDeletion()
         return true
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    this.performMediaDownload = async (mediaPath) => {
+      try {
+        this.refreshToken()
+        const response = await axios({
+          method: 'get',
+          url: `/acervo/download/${encodeURIComponent(mediaPath)}`,
+          token: this.token,
+          responseType: 'blob'
+        })
+        const url = URL.createObjectURL(response.data)
+        return url
       } catch (error) {
         console.error(error)
         return false

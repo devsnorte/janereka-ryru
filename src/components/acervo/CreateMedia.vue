@@ -238,9 +238,7 @@ export default {
     },
 
     updateTags (tags) {
-      console.log(tags)
       this.tags = tags
-      console.log(this.tags)
     },
 
     async submit () {
@@ -265,7 +263,6 @@ export default {
         this.submission.makeMediaObject(
           this.title, this.description, Array.from(this.tags), this.newFile, this.mediaFileType
         )
-        console.log(this.submission.mediaObject)
 
         const success = await this.submission.performMediaCreation()
 
