@@ -45,6 +45,7 @@
         <card-wrapper
           class="column col content-card"
           :card="props.row"
+          @closeMenus="$emit('closeMenus')"
         />
       </div>
     </template>

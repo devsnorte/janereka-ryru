@@ -7,6 +7,7 @@
     @filterContent="filterContent($event)"
     @changePage="requestPage($event)"
     @toggleFilter="showFilter = !showFilter"
+    @closeMenus="showFilter = false"
     v-bind:class="[ {'col-xs-12 col-md-9' : showFilter}, {'fit': !showFilter} ]"
     style="transition: 0.3s ease;"
    />
