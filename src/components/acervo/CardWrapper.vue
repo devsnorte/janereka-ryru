@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-card class="cursor-pointer fit" style="overflow: hidden;" @click="modal = !modal">
+    <q-card class="cursor-pointer fit" style="overflow: hidden;" @click="toggleModal()">
 
       <!-- File card -->
       <card-file v-if="card.tipo == 'arquivo'" :media="card" />
@@ -62,6 +62,13 @@ export default {
     return {
       baseUrlImg: this.$axios.defaults.baseURL,
       modal: false
+    }
+  },
+
+  methods: {
+    toggleModal () {
+      this.modal = !this.modal
+      this.$emit('closeMenus')
     }
   }
 }

@@ -4,10 +4,16 @@
   <p>{{ description }}</p>
   <p class="text-primary text-weight-medium">{{ $t('gallery.mediaDetailsCreated') }}</p>
   <p>{{ $d(new Date(created), 'long') }}</p>
-  <p class="text-primary text-weight-medium">{{ $t('gallery.mediaDetailsAuthor') }}</p>
-  <!-- <p v-if="username">{{ username }}</p> -->
+  <p v-if="authorName" class="text-primary text-weight-medium">{{ $t('gallery.mediaDetailsAuthor') }}</p>
   <p v-if="authorName">{{ authorName }}</p>
-  <!-- <p v-if="authorEmail">{{ authorEmail }}</p> -->
+  <div v-if="hashtags" class="q-gutter-sm q-mt-xs">
+    <p class="text-primary text-weight-medium">{{ $t('gallery.menuSortHashtags') }}:</p>
+    <span
+      v-for="hashtag, index in hashtags" :key="index"
+      class="inline-block bg-grey-3 text-caption">
+      {{ `#${hashtag}` }}
+    </span>
+  </div>
 </div>
 </template>
 
@@ -26,21 +32,15 @@ export default {
       required: false,
       default: ''
     },
-    // username: {
-    //   type: [String, null],
-    //   required: false,
-    //   default: ''
-    // },
     authorName: {
       type: [String, null],
       required: false,
       default: ''
+    },
+    hashtags: {
+      type: [Array, null],
+      required: false
     }
-    // authorEmail: {
-    //   type: [String, null],
-    //   required: false,
-    //   default: ''
-    // }
   }
 }
 </script>

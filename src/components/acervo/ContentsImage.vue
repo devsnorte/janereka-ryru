@@ -42,6 +42,7 @@
         :description="media.descricao"
         :created="media.created"
         :authorName="media.creator"
+        :hashtags="media.tags"
       />
     </q-card-section>
 

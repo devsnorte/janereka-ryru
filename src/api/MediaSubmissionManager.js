@@ -93,7 +93,7 @@ export const SubmissionManager = (function () {
         infoFormData.append('titulo', this.mediaObject.title)
         infoFormData.append('descricao', this.mediaObject.description)
         infoFormData.append('tipo', this.mediaObject.mediaType)
-        infoFormData.append('tags', this.mediaObject.tags)
+        infoFormData.append('tags', this.mediaObject.tags.join(', '))
 
         const { data } = await axios({
           method: 'post',
@@ -133,14 +133,10 @@ export const SubmissionManager = (function () {
       try {
         this.validateAuthentication()
 
-        if (!fileName) {
-          throw new this.SubmissionException('MediaDataError', 'No media file name found. Can not upload.')
-        }
-
         const updateInfoFormData = new FormData()
         updateInfoFormData.append('titulo', this.mediaObject.title)
         updateInfoFormData.append('descricao', this.mediaObject.description)
-        updateInfoFormData.append('tags', this.mediaObject.tags)
+        updateInfoFormData.append('tags', this.mediaObject.tags.join(', '))
 
         await axios({
           method: 'put',

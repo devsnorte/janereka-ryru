@@ -7,6 +7,7 @@
     @filterContent="filterContent($event)"
     @changePage="requestPage($event)"
     @toggleFilter="showFilter = !showFilter"
+    @closeMenus="showFilter = false"
     v-bind:class="[ {'col-xs-12 col-md-9' : showFilter}, {'fit': !showFilter} ]"
     style="transition: 0.3s ease;"
    />
@@ -37,14 +38,10 @@
         <q-radio v-model="radioPlaceholder" val="old" :label="$t('gallery.menuSortOlder')" />
       </div>
 
-      <strong>{{ $t('gallery.menuSortHashtags') }}</strong>
-      <div class="q-gutter-sm q-mt-xs">
-        <span
-          v-for="hashtag in hashtagPlaceholder" :key="hashtag.name"
-          class="inline-block bg-grey-3 text-caption">
-          {{ `# ${hashtag.name} (${hashtag.amount})` }}
-        </span>
-      </div>
+      <tag-cloud
+        :hashtags="hashtags"
+        @findHashtag="getMediasByTag"
+      />
 
       <q-btn :label="$t('gallery.buttonLabelClose')" color="primary" class="self-start q-mt-xl"
         @click="showFilter = false"
@@ -62,29 +59,17 @@ export default {
   name: 'Acervo',
 
   components: {
-    MainTable: () => import('components/acervo/MainTable')
+    MainTable: () => import('components/acervo/MainTable'),
+    TagCloud: () => import('components/acervo/TagCloud')
   },
 
   data () {
     return {
       midiaItems: [],
+      hashtags: [],
       loading: false,
       showFilter: false,
       radioPlaceholder: '',
-      hashtagPlaceholder: [
-        { name: 'janereka', amount: 150 },
-        { name: 'artesanato', amount: 86 },
-        { name: 'cerâmica', amount: 74 },
-        { name: 'canto', amount: 20 },
-        { name: 'gavião', amount: 20 },
-        { name: 'itaaka', amount: 20 },
-        { name: 'história', amount: 20 },
-        { name: 'família', amount: 20 },
-        { name: 'kwatinema', amount: 20 },
-        { name: 'medicina', amount: 20 },
-        { name: 'construção', amount: 20 },
-        { name: 'culinária', amount: 2 }
-      ],
       queryParameters: {
         keywords: '',
         hashtags: [],
@@ -99,6 +84,7 @@ export default {
 
   mounted () {
     this.getAllMidias()
+    this.getTopHashtags()
   },
 
   methods: {
@@ -205,6 +191,31 @@ export default {
           message: 'Ocorreu um erro'
         })
       }
+    },
+
+    async getMediasByTag (hashtag) {
+      this.loading = true
+      try {
+        const { data } = await this.$axios.get(
+          `/acervo/find?hashtags=${hashtag}`
+        )
+        this.midiaItems = data
+        this.loading = false
+      } catch (error) {
+        console.log(error)
+        this.loading = false
+        this.$q.notify({
+          type: 'negative',
+          message: 'Ocorreu um erro'
+        })
+      }
+    },
+
+    async getTopHashtags () {
+      const { data } = await this.$axios.get(
+        '/acervo/top_tags?size=20'
+      )
+      this.hashtags = data
     },
 
     // Todo: API forces a default pagination if their query parameters

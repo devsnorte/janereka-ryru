@@ -51,6 +51,13 @@ export default {
 
   async mounted () {
     this.videoSrc = await this.submission.performMediaDownload(this.$props.media.path)
+  },
+
+  watch: {
+    async media (newMedia) {
+      console.log(newMedia)
+      this.imgSrc = await this.submission.performMediaDownload(newMedia.path)
+    }
   }
 }
 </script>
