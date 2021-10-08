@@ -6,24 +6,10 @@
         <q-icon name="description" style="font-size: 4rem;" />
       </div>
     </div>
-    <!-- <q-pdfviewer
-      :src="fileSrc"
-      type="pdfjs"
-      style="height: 500px"
-    />
-
-    <q-pdfviewer
-      :src="fileSrc"
-      type="pdfjs"
-      style="height: 500px"
-    /> -->
-
   </div>
 </template>
 
 <script>
-// import { SubmissionManager } from 'src/api/MediaSubmissionManager'
-
 export default {
   name: 'CardFile',
 
@@ -33,16 +19,5 @@ export default {
       required: true
     }
   }
-
-  // data () {
-  //   return {
-  //     submission: SubmissionManager.getManager(),
-  //     fileSrc: ''
-  //   }
-  // }
-
-  // async mounted () {
-  //   this.fileSrc = await this.submission.performMediaDownload(this.$props.media.path)
-  // }
 }
 </script>

@@ -66,7 +66,7 @@ export default {
       if (splittedTags.length > 1) {
         this.tags.add(splittedTags[0].trim())
         splittedTags.splice(0, 1)
-        this.tagsText = splittedTags.join('').trim()
+        this.tagsText = splittedTags.join('').trim().toLowerCase()
 
         this.$emit('parsedTags', this.tags)
       }
@@ -74,7 +74,7 @@ export default {
 
     addLastTag () {
       if (this.tagsText.trim().length > 0) {
-        this.tags.add(this.tagsText.trim())
+        this.tags.add(this.tagsText.trim().toLowerCase())
         this.tagsText = ''
 
         this.$emit('parsedTags', this.tags)
