@@ -61,10 +61,11 @@ export default {
 
   methods: {
     parseTags () {
+      // Add tag only after separating with a comma character
       const splittedTags = this.tagsText.split(',')
 
       if (splittedTags.length > 1) {
-        this.tags.add(splittedTags[0].trim())
+        this.tags.add(splittedTags[0].trim().toLowerCase())
         splittedTags.splice(0, 1)
         this.tagsText = splittedTags.join('').trim().toLowerCase()
 
