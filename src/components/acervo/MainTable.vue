@@ -158,8 +158,6 @@ export default {
      * @return {boolean}
      */
     isLogged: function () {
-      console.log(this.$axios.defaults.headers.common.token)
-      console.log(!!this.$axios.defaults.headers.common.token)
       return !!this.$axios.defaults.headers.common.token
     },
 

@@ -121,9 +121,7 @@ export default {
       this.submission.makeMediaObject(
         this.newTitle, this.newDescription, Array.from(this.tags), '', this.mediaType, this.mediaPath
       )
-      console.log(this.submission.mediaObject)
       const success = await this.submission.performMediaUpdate(this.mediaFileName)
-      console.log(success)
 
       if (success) {
         this.$q.notify({

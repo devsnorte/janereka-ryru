@@ -1,7 +1,7 @@
 <template>
   <q-card class="full-width z-max">
     <q-card-section class="row items-center text-primary">
-      <div class="text-h6">{{ media.data.titulo }}</div>
+      <div class="text-h6">{{ media.titulo }}</div>
       <q-space />
       <q-btn icon="close" flat round dense v-close-popup />
     </q-card-section>
@@ -10,10 +10,7 @@
 
     <q-media-player
       type="audio"
-      :sources="[{
-        src: `${baseUrl}/acervo/download/${media.path}`,
-        type: `${media.type}/${media.format}`
-      }]"
+      :source="audioSrc"
       radius='10px'
       color="green-2"
       class="q-ma-md"
@@ -23,11 +20,11 @@
     <q-card-section class="q-pt-none">
       <edit-media
         v-if="editMode"
-        :title="media.data.titulo"
-        :description="media.data.descricao"
-        :rawTags="media.data.tags"
-        :mediaFileName="media.data.arquivo"
-        :mediaType="media.data.tipo"
+        :title="media.titulo"
+        :description="media.descricao"
+        :rawTags="media.tags"
+        :mediaFileName="media.arquivo"
+        :mediaType="media.tipo"
         :mediaPath="media.path"
         :triggerSubmit="triggerSubmit"
         @finished-submission="finishSubmit"
@@ -37,11 +34,9 @@
     <q-card-section class="q-pt-none q-mb-xl">
       <media-details
         v-show="!editMode"
-        :description="media.data.descricao"
+        :description="media.descricao"
         :created="media.created"
-        :username="media.creator.username"
-        :authorName="media.creator.name"
-        :authorEmail="media.creator.email"
+        :authorName="media.creator"
       />
     </q-card-section>
 
@@ -78,16 +73,21 @@ export default {
   data () {
     return {
       submission: SubmissionManager.getManager(),
+      audioSrc: '',
       baseUrl: this.$axios.defaults.baseURL,
       editMode: false,
       triggerSubmit: false
     }
   },
 
+  async mounted () {
+    this.audioSrc = await this.submission.performMediaDownload(this.$props.media.path)
+  },
+
   methods: {
     async deleteMedia () {
       this.submission.makeMediaObject(
-        this.media.data.titule, this.media.data.descricao, this.media.data.tags, '', this.media.data.tipo, this.media.path
+        this.media.titule, this.media.descricao, this.media.tags, '', this.media.tipo, this.media.path
       )
       const success = await this.submission.performMediaDeletion()
 

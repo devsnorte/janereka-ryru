@@ -126,14 +126,12 @@ export default {
       this.$q.loading.hide()
     },
     setCenter (latitude, longitude) {
-      console.log('CHAMOU CENTRALIZAR:', { latitude, longitude })
       this.center = [latitude, longitude]
       // this.$refs.map.mapObject.panTo([latitude, longitude])
       this.show = true
     },
     showDialog () {
       this.dialogInfo = true
-      console.log('show')
     }
   }
 }

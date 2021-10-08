@@ -5,9 +5,9 @@
   <p class="text-primary text-weight-medium">{{ $t('gallery.mediaDetailsCreated') }}</p>
   <p>{{ $d(new Date(created), 'long') }}</p>
   <p class="text-primary text-weight-medium">{{ $t('gallery.mediaDetailsAuthor') }}</p>
-  <p v-if="username">{{ username }}</p>
+  <!-- <p v-if="username">{{ username }}</p> -->
   <p v-if="authorName">{{ authorName }}</p>
-  <p v-if="authorEmail">{{ authorEmail }}</p>
+  <!-- <p v-if="authorEmail">{{ authorEmail }}</p> -->
 </div>
 </template>
 
@@ -26,21 +26,21 @@ export default {
       required: false,
       default: ''
     },
-    username: {
-      type: [String, null],
-      required: false,
-      default: ''
-    },
+    // username: {
+    //   type: [String, null],
+    //   required: false,
+    //   default: ''
+    // },
     authorName: {
       type: [String, null],
       required: false,
       default: ''
-    },
-    authorEmail: {
-      type: [String, null],
-      required: false,
-      default: ''
     }
+    // authorEmail: {
+    //   type: [String, null],
+    //   required: false,
+    //   default: ''
+    // }
   }
 }
 </script>

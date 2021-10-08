@@ -11,9 +11,7 @@
     <div class="q-pa-xs fit">
       <q-media-player
         type="video"
-        :sources="[{
-          src: `${baseUrl}/acervo/download/${media.path}`
-        }]"
+        :source="videoSrc"
         :show-big-play-button="false"
         radius='15px'
         background-color="black"
@@ -32,6 +30,8 @@
 </template>
 
 <script>
+import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+
 export default {
   name: 'CardVideo',
 
@@ -44,8 +44,13 @@ export default {
 
   data () {
     return {
-      baseUrl: this.$axios.defaults.baseURL
+      submission: SubmissionManager.getManager(),
+      videoSrc: ''
     }
+  },
+
+  async mounted () {
+    this.videoSrc = await this.submission.performMediaDownload(this.$props.media.path)
   }
 }
 </script>
