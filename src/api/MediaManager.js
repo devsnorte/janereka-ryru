@@ -1,7 +1,7 @@
 import { axiosInstance as axios } from 'src/boot/axios'
 import { Session } from './SessionManager'
 
-export const SubmissionManager = (function () {
+export const MediaManager = (function () {
   function MediaHandler () {
     this.session = Session.getSessionManager()
     this.mediaObject = {}

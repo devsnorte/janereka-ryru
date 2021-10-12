@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+import { MediaManager } from 'src/api/MediaManager'
 
 export default {
   name: 'CardImage',
@@ -22,18 +22,18 @@ export default {
 
   data () {
     return {
-      submission: SubmissionManager.getManager(),
+      mediaManager: MediaManager.getManager(),
       imgSrc: ''
     }
   },
 
   async mounted () {
-    this.imgSrc = await this.submission.performMediaDownload(this.$props.media.path)
+    this.imgSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
   },
 
   watch: {
     async media (newMedia) {
-      this.imgSrc = await this.submission.performMediaDownload(newMedia.path)
+      this.imgSrc = await this.mediaManager.performMediaDownload(newMedia.path)
     }
   }
 }

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+import { MediaManager } from 'src/api/MediaManager'
 
 export default {
   name: 'ContentsImage',
@@ -79,7 +79,7 @@ export default {
 
   data () {
     return {
-      submission: SubmissionManager.getManager(),
+      mediaManager: MediaManager.getManager(),
       imgSrc: '',
       editMode: false,
       triggerSubmit: false
@@ -87,15 +87,15 @@ export default {
   },
 
   async mounted () {
-    this.imgSrc = await this.submission.performMediaDownload(this.$props.media.path)
+    this.imgSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
   },
 
   methods: {
     async deleteMedia () {
-      this.submission.makeMediaObject(
+      this.mediaManager.makeMediaObject(
         this.media.titule, this.media.descricao, this.media.tags, '', this.media.tipo, this.media.path
       )
-      const success = await this.submission.performMediaDeletion()
+      const success = await this.mediaManager.performMediaDeletion()
 
       if (success) {
         this.$q.notify({

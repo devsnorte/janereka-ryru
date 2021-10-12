@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+import { MediaManager } from 'src/api/MediaManager'
 
 export default {
   name: 'Acervo',
@@ -66,7 +66,7 @@ export default {
 
   data () {
     return {
-      submission: SubmissionManager.getManager(),
+      mediaManager: MediaManager.getManager(),
       mediaItems: [],
       hashtags: [],
       loading: false,
@@ -101,7 +101,7 @@ export default {
       this.loading = true
       this.showFilter = false
 
-      const mediaItems = await this.submission.getMediasByHashtag(hashtag)
+      const mediaItems = await this.mediaManager.getMediasByHashtag(hashtag)
 
       if (mediaItems) {
         this.mediaItems = mediaItems
@@ -121,7 +121,7 @@ export default {
     async filterContent (contentType) {
       this.loading = true
 
-      const mediaItems = await this.submission.getMediasByContentType(contentType)
+      const mediaItems = await this.mediaManager.getMediasByContentType(contentType)
 
       if (mediaItems) {
         this.mediaItems = mediaItems
