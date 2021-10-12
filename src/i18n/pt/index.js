@@ -24,6 +24,7 @@ export default {
   gallery: {
     alertDeleteFailed: 'Ocorreu um erro na deleção do arquivo.',
     alertDeleteSuccess: 'Arquivo deletado com sucesso. Atualize a página para visualizar as mudanças.',
+    alertGenericError: 'Ocorreu um erro.',
     alertSubmissionSuccess: 'Seu arquivo foi submetido com sucesso.',
     alertUpdateFailed: 'Ocorreu um erro na atualização do arquivo.',
     alertUpdateSuccess: 'Seu aquivo foi atualizado com sucesso. Atualize a página para visualizar as mudanças.',

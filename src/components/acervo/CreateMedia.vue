@@ -271,6 +271,7 @@ export default {
             type: 'positive',
             message: this.$t('submission.alertSubmissionSuccess')
           })
+          this.$router.push('/acervo')
         } else {
           this.$q.notify({
             type: 'negative',

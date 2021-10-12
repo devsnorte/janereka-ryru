@@ -3,7 +3,7 @@
 
   <main-table
     :loading="loading"
-    :midias="midiaItems"
+    :midias="mediaItems"
     @filterContent="filterContent($event)"
     @changePage="requestPage($event)"
     @toggleFilter="showFilter = !showFilter"
@@ -40,7 +40,7 @@
 
       <tag-cloud
         :hashtags="hashtags"
-        @findHashtag="getMediasByTag"
+        @findHashtag="getMediasByHashtag"
       />
 
       <q-btn :label="$t('gallery.buttonLabelClose')" color="primary" class="self-start q-mt-xl"
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import { SubmissionManager } from 'src/api/MediaSubmissionManager'
 
 export default {
   name: 'Acervo',
@@ -65,7 +66,8 @@ export default {
 
   data () {
     return {
-      midiaItems: [],
+      submission: SubmissionManager.getManager(),
+      mediaItems: [],
       hashtags: [],
       loading: false,
       showFilter: false,
@@ -83,134 +85,11 @@ export default {
   },
 
   mounted () {
-    this.getAllMidias()
     this.getTopHashtags()
+    this.filterContent('todos')
   },
 
   methods: {
-    async getAllMidias () {
-      this.loading = true
-      try {
-        // const { data } = await this.$axios.get(
-        //   `/acervo/find?pag_tamanho=${this.queryParameters.pag_tamanho}&pag_atual=${this.queryParameters.pag_atual}`
-        // )
-        const { data } = await this.$axios.get(
-          '/acervo/midia'
-        )
-        this.midiaItems = data
-        this.loading = false
-      } catch (error) {
-        console.error(error)
-        this.loading = false
-        this.$q.notify({
-          type: 'negative',
-          message: 'Ocorreu um erro'
-        })
-      }
-    },
-
-    async getFileMidias () {
-      this.loading = true
-      try {
-        const { data } = await this.$axios.get(
-          '/acervo/find?tipos=arquivo&pag_tamanho=1000&pag_atual=1'
-        )
-        // const { data } = await this.$axios.get(
-        //   '/acervo/find?tipos=arquivo'
-        // )
-        this.midiaItems = data
-        this.loading = false
-      } catch (error) {
-        console.error(error)
-        this.loading = false
-        this.$q.notify({
-          type: 'negative',
-          message: 'Ocorreu um erro'
-        })
-      }
-    },
-
-    async getImageMidias () {
-      this.loading = true
-      try {
-        const { data } = await this.$axios.get(
-          '/acervo/find?tipos=imagem&pag_tamanho=1000&pag_atual=1'
-        )
-        // const { data } = await this.$axios.get(
-        //   '/acervo/find?tipos=imagem'
-        // )
-        this.midiaItems = data
-        this.loading = false
-      } catch (error) {
-        console.error(error)
-        this.loading = false
-        this.$q.notify({
-          type: 'negative',
-          message: 'Ocorreu um erro'
-        })
-      }
-    },
-
-    async getVideoMidias () {
-      this.loading = true
-      try {
-        const { data } = await this.$axios.get(
-          '/acervo/find?tipos=video&pag_tamanho=1000&pag_atual=1'
-        )
-        // const { data } = await this.$axios.get(
-        //   '/acervo/find?tipos=video'
-        // )
-        this.midiaItems = data
-        this.loading = false
-      } catch (error) {
-        console.error(error)
-        this.loading = false
-        this.$q.notify({
-          type: 'negative',
-          message: 'Ocorreu um erro'
-        })
-      }
-    },
-
-    async getAudioMidias () {
-      this.loading = true
-      try {
-        const { data } = await this.$axios.get(
-          '/acervo/find?tipos=audio&pag_tamanho=1000&pag_atual=1'
-        )
-        // const { data } = await this.$axios.get(
-        //   '/acervo/find?tipos=audio'
-        // )
-        this.midiaItems = data
-        this.loading = false
-      } catch (error) {
-        console.error(error)
-        this.loading = false
-        this.$q.notify({
-          type: 'negative',
-          message: 'Ocorreu um erro'
-        })
-      }
-    },
-
-    async getMediasByTag (hashtag) {
-      this.loading = true
-      try {
-        const { data } = await this.$axios.get(
-          `/acervo/find?hashtags=${hashtag}`
-        )
-        this.midiaItems = data
-        this.loading = false
-      } catch (error) {
-        console.log(error)
-        this.loading = false
-        this.$q.notify({
-          type: 'negative',
-          message: 'Ocorreu um erro'
-        })
-      }
-    },
-
     async getTopHashtags () {
       const { data } = await this.$axios.get(
         '/acervo/top_tags?size=20'
@@ -218,24 +97,41 @@ export default {
       this.hashtags = data
     },
 
-    // Todo: API forces a default pagination if their query parameters
-    // are not sent (12 items at page one)
-    filterContent (contentType) {
-      switch (contentType) {
-        case 'arquivo':
-          this.getFileMidias()
-          break
-        case 'imagem':
-          this.getImageMidias()
-          break
-        case 'video':
-          this.getVideoMidias()
-          break
-        case 'audio':
-          this.getAudioMidias()
-          break
-        default:
-          this.getAllMidias()
+    async getMediasByHashtag (hashtag) {
+      this.loading = true
+      this.showFilter = false
+
+      const mediaItems = await this.submission.getMediasByHashtag(hashtag)
+
+      if (mediaItems) {
+        this.mediaItems = mediaItems
+        this.loading = false
+      } else {
+        this.loading = false
+        this.$q.notify({
+          type: 'negative',
+          message: this.$t('gallery.alertGenericError')
+        })
+      }
+    },
+
+    // Todo: Implement functional server-side pagination when backend is ready.
+    // Pagination is currently calculated on the frontend by requesting many
+    // media items at a time.
+    async filterContent (contentType) {
+      this.loading = true
+
+      const mediaItems = await this.submission.getMediasByContentType(contentType)
+
+      if (mediaItems) {
+        this.mediaItems = mediaItems
+        this.loading = false
+      } else {
+        this.loading = false
+        this.$q.notify({
+          type: 'negative',
+          message: this.$t('gallery.alertGenericError')
+        })
       }
     },
 

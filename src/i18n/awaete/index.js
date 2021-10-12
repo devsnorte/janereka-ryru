@@ -24,6 +24,7 @@ export default {
   gallery: {
     alertDeleteFailed: 'Ocorreu um erro na deleção do arquivo.', // Pending translation
     alertDeleteSuccess: 'Arquivo deletado com sucesso. Atualize a página para visualizar as mudanças.', // Pending translation
+    alertGenericError: 'Ocorreu um erro.', // Pending translation
     alertSubmissionSuccess: 'Seu arquivo foi submetido com sucesso.', // Pending translation
     alertUpdateFailed: 'Ocorreu um erro na atualização do arquivo.', // Pending translation
     alertUpdateSuccess: 'Seu aquivo foi atualizado com sucesso. Atualize a página para visualizar as mudanças.', // Pending translation
