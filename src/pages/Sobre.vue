@@ -46,7 +46,7 @@ export default {
   components: {
     Sobre: () => import('components/sobre/SobreImg'),
     Map: () => import('components/sobre/SobreMap'),
-    Equipe: () => import('components/sobre/EquipeTecnica')
+    Equipe: () => import('components/sobre/EquipeTecnicaLista')
   },
 
   computed: {
