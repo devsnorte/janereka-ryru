@@ -23,11 +23,23 @@
       style="overflow-y: scroll;"
     >
 
-      <q-input filled dense debounce="300" :placeholder="$t('gallery.searchBarPlaceholder')"
-        standout="bg-grey-2" class="q-my-lg"
+      <q-input
+        filled dense
+        v-model="keywords"
+        :placeholder="$t('gallery.searchBarPlaceholder')"
+        @keydown.enter.prevent="getMediasByKeywords(keywords)"
+        debounce="300"
+        standout="bg-grey-2"
+        class="q-my-lg"
       >
         <template v-slot:append>
-          <q-icon name="search" />
+          <q-btn
+            flat dense
+            type="submit"
+            @click="getMediasByKeywords(keywords)"
+          >
+            <q-icon name="search" />
+          </q-btn>
         </template>
       </q-input>
 
@@ -72,15 +84,7 @@ export default {
       loading: false,
       showFilter: false,
       radioPlaceholder: '',
-      queryParameters: {
-        keywords: '',
-        hashtags: [],
-        tipos: [],
-        ordem_campo: '',
-        ordem_decrescente: false,
-        pag_tamanho: 12,
-        pag_atual: 1
-      }
+      keywords: ''
     }
   },
 
@@ -102,6 +106,24 @@ export default {
       this.showFilter = false
 
       const mediaItems = await this.mediaManager.getMediasByHashtag(hashtag)
+
+      if (mediaItems) {
+        this.mediaItems = mediaItems
+        this.loading = false
+      } else {
+        this.loading = false
+        this.$q.notify({
+          type: 'negative',
+          message: this.$t('gallery.alertGenericError')
+        })
+      }
+    },
+
+    async getMediasByKeywords (keywords) {
+      this.loading = true
+      this.showFilter = false
+
+      const mediaItems = await this.mediaManager.getMediasByKeywords(keywords)
 
       if (mediaItems) {
         this.mediaItems = mediaItems

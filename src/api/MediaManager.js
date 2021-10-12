@@ -236,10 +236,10 @@ export const MediaManager = (function () {
       }
     }
 
-    this.getMediasByKeyword = async (keyword, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
+    this.getMediasByKeywords = async (keywords, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
         const { data } = await axios.get(
-          `/acervo/find?keywords=${keyword}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+          `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
         )
         return data
       } catch (error) {
