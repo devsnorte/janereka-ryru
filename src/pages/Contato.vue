@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center q-py-xl">
+  <q-page class="flex flex-center q-py-xl q-px-md">
       <q-form
         ref="contactForm"
         class="q-gutter-sm"

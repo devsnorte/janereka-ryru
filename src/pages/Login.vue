@@ -1,10 +1,10 @@
 <template>
-  <q-page class="column items-center q-py-xl">
+  <q-page class="q-py-xl q-px-md">
 
-    <span class="text-h6 text-center"><strong>{{ $t('login.pageTextTitle') }}</strong></span>
-    <span>{{ $t('login.pageTextSubtitle') }}</span>
+    <div class="text-h6 text-center"><strong>{{ $t('login.pageTextTitle') }}</strong></div>
+    <div class="text-center">{{ $t('login.pageTextSubtitle') }}</div>
 
-    <q-form class="q-pt-lg" style="min-width: 400px;" @submit="login">
+    <q-form class="q-pt-lg q-mx-auto" style="max-width: 400px;" @submit="login">
 
       <div class="q-mt-md col-xs-10 col-sm-7">
         <label for="name" class="text-bold inline-block">
