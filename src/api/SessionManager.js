@@ -11,6 +11,7 @@ export const Session = (function () {
       this.loadFromLocalStorage()
       return {
         user: getters.user(),
+        roles: getters.roles(),
         token: getters.token(),
         issuedAt: this.localStorage.getItem('issuedAt')
       }
@@ -46,24 +47,42 @@ export const Session = (function () {
       }
     }
 
-    this.setSessionState = (user, token, issuedAt = new Date()) => {
+    this.setSessionState = (user, roles, token, issuedAt = new Date()) => {
       axios.defaults.headers.common = { token: token }
       mutations.setUser(user)
+      mutations.setRole(roles)
       mutations.setToken(token)
 
-      // Todo: encrypt token before saving to Local Storage
       this.localStorage.setItem('user', user)
+      this.localStorage.setItem('roles', roles)
       this.localStorage.setItem('token', token)
       this.localStorage.setItem('issuedAt', issuedAt)
     }
 
     this.loadFromLocalStorage = () => {
       const user = this.localStorage.getItem('user')
+      const roles = this.localStorage.getItem('roles')
       const token = this.localStorage.getItem('token')
       const issuedAt = this.localStorage.getItem('issuedAt')
 
-      // Todo: decrypt token before saving
-      this.setSessionState(user || '', token || '', issuedAt || new Date())
+      this.setSessionState(user || '', roles || [], token || '', issuedAt || new Date())
+    }
+
+    this.getAuthenticatedUser = async () => {
+      const { user } = this.getSession()
+
+      if (user) {
+        try {
+          const { data } = await axios({
+            method: 'get',
+            url: `/mocambola/${user}`
+          })
+          return { success: true, userData: data }
+        } catch (error) {
+          console.error(error)
+          return { success: false, userData: undefined }
+        }
+      }
     }
 
     this.login = async (username, password) => {
@@ -77,17 +96,20 @@ export const Session = (function () {
           data: formData
         })
 
-        this.setSessionState(username, data)
+        const { token, mocambola } = data
+        const { roles } = mocambola
+
+        this.setSessionState(username, roles, token)
 
         return { success: true }
       } catch (error) {
-        this.setSessionState('', '')
+        this.setSessionState('', [], '')
         return { error, success: false }
       }
     }
 
     this.logout = async () => {
-      this.setSessionState('', '', '')
+      this.setSessionState('', [], '', '')
     }
   }
 
