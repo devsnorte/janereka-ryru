@@ -149,7 +149,7 @@
 </template>
 
 <script>
-import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+import { MediaManager } from 'src/api/MediaManager'
 
 export default {
   name: 'CreateMedia',
@@ -160,7 +160,7 @@ export default {
 
   data () {
     return {
-      submission: SubmissionManager.getManager(),
+      mediaManager: MediaManager.getManager(),
       newFile: null,
       title: '',
       description: '',
@@ -260,17 +260,18 @@ export default {
         this.loading = false
       // Proceed with submission
       } else {
-        this.submission.makeMediaObject(
+        this.mediaManager.makeMediaObject(
           this.title, this.description, Array.from(this.tags), this.newFile, this.mediaFileType
         )
 
-        const success = await this.submission.performMediaCreation()
+        const success = await this.mediaManager.performMediaCreation()
 
         if (success) {
           this.$q.notify({
             type: 'positive',
             message: this.$t('submission.alertSubmissionSuccess')
           })
+          this.$router.push('/acervo')
         } else {
           this.$q.notify({
             type: 'negative',

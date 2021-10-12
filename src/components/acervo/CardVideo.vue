@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+import { MediaManager } from 'src/api/MediaManager'
 
 export default {
   name: 'CardVideo',
@@ -44,19 +44,19 @@ export default {
 
   data () {
     return {
-      submission: SubmissionManager.getManager(),
+      mediaManager: MediaManager.getManager(),
       videoSrc: ''
     }
   },
 
   async mounted () {
-    this.videoSrc = await this.submission.performMediaDownload(this.$props.media.path)
+    this.videoSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
   },
 
   watch: {
     async media (newMedia) {
       console.log(newMedia)
-      this.imgSrc = await this.submission.performMediaDownload(newMedia.path)
+      this.imgSrc = await this.mediaManager.performMediaDownload(newMedia.path)
     }
   }
 }

@@ -1,11 +1,17 @@
 import { axiosInstance as axios } from 'src/boot/axios'
 import { Session } from './SessionManager'
 
-export const SubmissionManager = (function () {
+export const MediaManager = (function () {
   function MediaHandler () {
     this.session = Session.getSessionManager()
     this.mediaObject = {}
     this.token = null
+
+    // Media query parameters
+    this.fetchMediaType = 'todos'
+    this.pagTamanho = 1000
+    this.pagAtual = 1
+    this.ordemDecrescente = false
 
     this.unmakeMediaObject = () => {
       this.mediaObject = {}
@@ -216,6 +222,124 @@ export const SubmissionManager = (function () {
         console.error(error)
         return false
       }
+    }
+
+    this.getMediasByHashtag = async (hashtag, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?hashtags=${hashtag}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        )
+        return data
+      } catch (error) {
+        console.log(error)
+        return false
+      }
+    }
+
+    this.getMediasByKeywords = async (keywords, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        )
+        return data
+      } catch (error) {
+        console.log(error)
+        return false
+      }
+    }
+
+    this.getAudioMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?tipos=audio&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    this.getFileMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?tipos=arquivo&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    this.getImageMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?tipos=imagem&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    this.getVideoMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?tipos=video&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    this.getAllMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    this.getMediasByContentType = async (
+      fetchMediaType, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
+    ) => {
+      let mediaItems
+
+      switch (fetchMediaType) {
+        case 'audio':
+          this.fetchMediaType = 'audio'
+          mediaItems = await this.getAudioMedias(pagTamanho, pagAtual)
+          break
+        case 'arquivo':
+          this.fetchMediaType = 'arquivo'
+          mediaItems = await this.getFileMedias(pagTamanho, pagAtual)
+          break
+        case 'imagem':
+          this.fetchMediaType = 'imagem'
+          mediaItems = await this.getImageMedias(pagTamanho, pagAtual)
+          break
+        case 'video':
+          this.fetchMediaType = 'video'
+          mediaItems = await this.getVideoMedias(pagTamanho, pagAtual)
+          break
+        case 'todos':
+          this.fetchMediaType = 'todos'
+          mediaItems = await this.getAllMedias(pagTamanho, pagAtual)
+          break
+        default:
+          this.fetchMediaType = 'todos'
+          mediaItems = await this.getAllMedias(pagTamanho, pagAtual)
+      }
+
+      return mediaItems
     }
 
     this.SubmissionException = function (name, message) {

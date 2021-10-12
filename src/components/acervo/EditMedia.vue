@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { SubmissionManager } from 'src/api/MediaSubmissionManager'
+import { MediaManager } from 'src/api/MediaManager'
 
 export default {
   name: 'EditMedia',
@@ -85,7 +85,7 @@ export default {
 
   data () {
     return {
-      submission: SubmissionManager.getManager(),
+      mediaManager: MediaManager.getManager(),
       loading: false,
       newTitle: '',
       newDescription: '',
@@ -118,10 +118,10 @@ export default {
     async submit () {
       this.loading = true
 
-      this.submission.makeMediaObject(
+      this.mediaManager.makeMediaObject(
         this.newTitle, this.newDescription, Array.from(this.tags), '', this.mediaType, this.mediaPath
       )
-      const success = await this.submission.performMediaUpdate(this.mediaFileName)
+      const success = await this.mediaManager.performMediaUpdate(this.mediaFileName)
 
       if (success) {
         this.$q.notify({
