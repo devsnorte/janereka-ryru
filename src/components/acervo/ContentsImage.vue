@@ -12,7 +12,7 @@
       <q-img
         basic
         spinner-color="primary"
-        :src="imgSrc"
+        :src="`${baseUrl}/acervo/download/${media.path}`"
       >
         <!-- <template v-slot:error>
           <div class="absolute-full flex flex-center bg-negative text-white">
@@ -80,14 +80,10 @@ export default {
   data () {
     return {
       mediaManager: MediaManager.getManager(),
-      imgSrc: '',
+      baseUrl: this.$axios.defaults.baseURL,
       editMode: false,
       triggerSubmit: false
     }
-  },
-
-  async mounted () {
-    this.imgSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
   },
 
   methods: {

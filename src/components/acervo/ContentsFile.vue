@@ -11,7 +11,7 @@
     <q-card-section>
       <q-pdfviewer
         :value="true"
-        :src="fileSrc"
+        :src="`${baseUrl}/acervo/download/${media.path}`"
         type="pdfjs"
         content-inner-class="absolute"
         content-style="height: 70vh;"
@@ -24,7 +24,7 @@
         :title="media.titulo"
         :description="media.descricao"
         :rawTags="media.tags"
-        :mediaFileName="media.arquivo"
+        :mediaFileName="media.content[0]"
         :mediaType="media.tipo"
         :mediaPath="media.path"
         :triggerSubmit="triggerSubmit"
@@ -75,14 +75,10 @@ export default {
   data () {
     return {
       mediaManager: MediaManager.getManager(),
-      fileSrc: '',
+      baseUrl: this.$axios.defaults.baseURL,
       editMode: false,
       triggerSubmit: false
     }
-  },
-
-  async mounted () {
-    this.fileSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
   },
 
   methods: {

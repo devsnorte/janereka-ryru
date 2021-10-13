@@ -14,7 +14,7 @@
       color="green-2"
       class="video-wrapper q-mt-md q-mb-sm"
       :bottom-controls="true"
-      :source="videoSrc"
+      :source="`${baseUrl}/acervo/download/${media.path}`"
     />
 
     <q-card-section class="q-pt-none">
@@ -23,7 +23,7 @@
         :title="media.titulo"
         :description="media.descricao"
         :rawTags="media.tags"
-        :mediaFileName="media.arquivo"
+        :mediaFileName="media.content[0]"
         :mediaType="media.tipo"
         :mediaPath="media.path"
         :triggerSubmit="triggerSubmit"
@@ -74,14 +74,10 @@ export default {
   data () {
     return {
       mediaManager: MediaManager.getManager(),
-      videoSrc: '',
+      baseUrl: this.$axios.defaults.baseURL,
       editMode: false,
       triggerSubmit: false
     }
-  },
-
-  async mounted () {
-    this.videoSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
   },
 
   methods: {

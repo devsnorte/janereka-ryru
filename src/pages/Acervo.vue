@@ -2,6 +2,7 @@
 <q-page padding class="row">
 
   <main-table
+    ref="galleryTable"
     :loading="loading"
     :midias="mediaItems"
     :viewingFrom="'mainGallery'"
@@ -46,9 +47,24 @@
 
       <strong>{{ $t('gallery.menuSortBy') }}</strong>
       <div class="column q-my-md">
-        <q-radio v-model="radioPlaceholder" val="alph" :label="$t('gallery.menuSortAlphabetical')" />
-        <q-radio v-model="radioPlaceholder" val="new" :label="$t('gallery.menuSortNewer')" />
-        <q-radio v-model="radioPlaceholder" val="old" :label="$t('gallery.menuSortOlder')" />
+        <q-radio
+          v-model="sortingOption"
+          val="alphabetical"
+          :label="$t('gallery.menuSortAlphabetical')"
+          @input="applySorting(sortingOption)"
+        />
+        <q-radio
+          v-model="sortingOption"
+          val="newer"
+          :label="$t('gallery.menuSortNewer')"
+          @input="applySorting(sortingOption)"
+        />
+        <q-radio
+          v-model="sortingOption"
+          val="older"
+          :label="$t('gallery.menuSortOlder')"
+          @input="applySorting(sortingOption)"
+        />
       </div>
 
       <tag-cloud
@@ -84,7 +100,7 @@ export default {
       hashtags: [],
       loading: false,
       showFilter: false,
-      radioPlaceholder: '',
+      sortingOption: '',
       keywords: ''
     }
   },
@@ -105,6 +121,8 @@ export default {
     async getMediasByHashtag (hashtag) {
       this.loading = true
       this.showFilter = false
+      this.sortingOption = ''
+      this.$refs.galleryTable.defaultTab()
 
       const mediaItems = await this.mediaManager.getMediasByHashtag(hashtag)
 
@@ -123,6 +141,7 @@ export default {
     async getMediasByKeywords (keywords) {
       this.loading = true
       this.showFilter = false
+      this.sortingOption = ''
 
       const mediaItems = await this.mediaManager.getMediasByKeywords(keywords)
 
@@ -143,6 +162,7 @@ export default {
     // media items at a time.
     async filterContent (contentType) {
       this.loading = true
+      this.sortingOption = ''
 
       const mediaItems = await this.mediaManager.getMediasByContentType(contentType)
 
@@ -151,6 +171,24 @@ export default {
         this.loading = false
       } else {
         this.loading = false
+        this.$q.notify({
+          type: 'negative',
+          message: this.$t('gallery.alertGenericError')
+        })
+      }
+    },
+
+    async applySorting (sortingOption) {
+      this.loading = true
+
+      const sortingResult = await this.mediaManager.applyMediaSorting(sortingOption)
+
+      if (sortingResult.success) {
+        this.mediaItems = sortingResult.data
+        this.loading = false
+      } else {
+        this.loading = false
+        this.sortingOption = ''
         this.$q.notify({
           type: 'negative',
           message: this.$t('gallery.alertGenericError')

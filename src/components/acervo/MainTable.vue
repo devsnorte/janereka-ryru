@@ -14,6 +14,7 @@
     <template v-slot:top>
 
       <main-table-tabs
+        ref="mediaTypeNavigationTabs"
         :viewingFrom="viewingFrom"
         @filterContent="$emit('filterContent', $event)"
       />
@@ -23,7 +24,7 @@
           @click="sendMidia()" :label="$t('gallery.buttonLabelSend')"
         />
         <q-btn unelevated icon="search" color="primary" padding="6px" class="q-ml-xs"
-          v-if="viewingFrom === 'mainTable'"
+          v-if="viewingFrom === 'mainGallery'"
           @click="$emit('toggleFilter')"
         />
       </div>
@@ -184,6 +185,10 @@ export default {
   methods: {
     sendMidia () {
       this.$router.push('/submissao')
+    },
+
+    defaultTab () {
+      this.$refs.mediaTypeNavigationTabs.defaultTab()
     }
   }
 }
