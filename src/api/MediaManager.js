@@ -1,22 +1,36 @@
 import { axiosInstance as axios } from 'src/boot/axios'
 import { Session } from './SessionManager'
 
+/**
+ * Media resources orchestrator singleton. Handles all logic related to
+ * media fetching, sorting, validation, posting, updating and deletion
+ * for the entire application.
+ */
 export const MediaManager = (function () {
   function MediaHandler () {
     this.session = Session.getSessionManager()
-    this.mediaObject = {}
     this.token = null
 
-    // Media query parameters
+    // Data holder for handling media resource data in POST and PUT requests
+    this.mediaObject = {}
+
+    // Query parameter defaults for requesting media resources
     this.fetchMediaType = 'todos'
     this.pagTamanho = 1000
     this.pagAtual = 1
     this.lastQuery = ''
 
+    /**
+     * Resets the media data holder to an empty object
+     */
     this.unmakeMediaObject = () => {
       this.mediaObject = {}
     }
 
+    /**
+     * Populates a new media data holder object with necessary data for API
+     * requests orchestration. Media data is reset before populating new data.
+     */
     this.makeMediaObject = (title, description, tags, mediaFile, mediaType, mediaPath) => {
       this.unmakeMediaObject()
 
@@ -25,22 +39,42 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Verifies whether the media data holder object is empty, returning a
+     * boolean. Used by validation fuctions.
+     */
     this.isMediaObjectEmpty = () => {
       if (Object.keys(this.mediaObject).length === 0) return true
       else return false
     }
 
+    /**
+     * Refreshes session data through the Session manager singleton and gets
+     * user data for making authenticated requests.
+     */
     this.refreshToken = () => {
       const sessionData = this.session.getSession()
       this.token = sessionData.token
     }
 
+    /**
+     * Validates whether the current user is authenticated. Unauthenticated
+     * users throw a SubmissionException.
+     */
     this.validateAuthentication = () => {
       if (!this.session.isAuthenticated()) {
         throw new this.SubmissionException('AuthenticationValidationError', 'No user is authenticated.')
       }
     }
 
+    /**
+     * Validates whether the media data holder object contains all metadada
+     * needed for correct subimission to the API. Missing or invalid data
+     * throw a SubmissionException.
+     *
+     * This validation does not cover the media file or any existion API filepaths,
+     * which are instead validated by the `validateForUpload` method.
+     */
     this.validateForSubmission = () => {
       if (this.isMediaObjectEmpty()) {
         throw new this.SubmissionException('MediaDataValidationError', 'Media data is empty. Can not submit.')
@@ -69,6 +103,12 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Validates whether the media data holder object contains a media
+     * file and a media filepath, after calling the metadata validation
+     * function. This data is needed specifically for PUT requests and
+     * POST request for the media upload endpoint.
+     */
     this.validateForUpload = () => {
       this.validateForSubmission()
 
@@ -80,6 +120,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Validates whether the media data holder object contains the
+     * bare data needed for DELETE requests, namely the resource's
+     * API filepath.
+     */
     this.validateForDeletion = () => {
       if (this.isMediaObjectEmpty()) {
         throw new this.SubmissionException('DeletionValidationError', 'Media data is empty. Unable to delete.')
@@ -90,6 +135,12 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Handles media resource metadata submission to the API. Calls needed
+     * validators and dispatches a POST request to the corresponding API
+     * endpoint with the required headers and FormData. Errors upon validation
+     * or request dispatching yield a SubmissionException.
+     */
     this.handleMediaInfoSubmission = async () => {
       try {
         this.validateAuthentication()
@@ -115,6 +166,16 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Handles the media file upload to the API. Calls needed validators
+     * dispatches a POST request to the corresponding API endpoint with
+     * the required headers and FormData. Errors upon validation or
+     * request dispatching yield a SubmissionException.
+     *
+     * On the cases where file upload fails after successful submission
+     * of its metadata, also calls the deletion handler to clear up
+     * previous data.
+     */
     this.handleMediaFileSubmission = async () => {
       try {
         this.validateAuthentication()
@@ -135,6 +196,12 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Handles the update of media resources in the API. Calls needed
+     * validators and dispatches a PUT request to the corresponding API
+     * endpoint with the required headers and FormData. Errors upon
+     * validation or request dispatching yield a SubmissionException.
+     */
     this.handleMediaUpdate = async (fileName) => {
       try {
         this.validateAuthentication()
@@ -156,11 +223,16 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Handles deletion of media resources in the API. Calls needed validators
+     * and dispatches a DELETE request to the corresponding API endpoint with
+     * the required headers. Errors upon validation or request dispatching yield
+     * a SubmissionException.
+     */
     this.handleMediaDeletion = async () => {
       try {
         this.validateAuthentication()
         this.validateForDeletion()
-        console.log(this.mediaObject)
 
         await axios({
           method: 'delete',
@@ -173,6 +245,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Orchestrates requests to submit new media resources to the API.
+     * Calls request handlers for the related endpoints and catches any
+     * errors during the process.
+     */
     this.performMediaCreation = async () => {
       try {
         this.refreshToken()
@@ -185,6 +262,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Orchestrates requests to update existing media resources in the
+     * API. Calls request handlers for the related endpoints and catches
+     * any errors during the process.
+     */
     this.performMediaUpdate = async (fileName) => {
       try {
         this.refreshToken()
@@ -196,6 +278,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Orchestrates requests to delete existing media resources in the
+     * API. Calls request handlers for the related endpoints and catches
+     * any errors during the process.
+     */
     this.performMediaDeletion = async () => {
       try {
         this.refreshToken()
@@ -207,6 +294,10 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Fetches media files from the API download endpoint. The media
+     * file is returned as a Blob object.
+     */
     this.performMediaDownload = async (mediaPath) => {
       try {
         this.refreshToken()
@@ -224,6 +315,47 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Find medias uploaded by a given user, with the given pagination
+     * parameters.
+     */
+    this.getMediasFromUser = async (
+      username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
+    ) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    /**
+     * Find medias uploaded by a given user with published status, with the
+     * given pagination parameters.
+     */
+    this.getSubimissionsFromUser = async (
+      username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
+    ) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&status=published`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    /**
+     * Find medias with a given hashtag and pagination paremeters.
+     * The resulting query string is stored for potential reuse
+     * with sorting parameters.
+     */
     this.getMediasByHashtag = async (hashtag, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
         const query = `/acervo/find?hashtags=${hashtag}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
@@ -238,6 +370,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Find medias using given keywords and pagination paremeters.
+     * The resulting query string is stored for potential reuse
+     * with sorting parameters.
+     */
     this.getMediasByKeywords = async (keywords, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
         const query = `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
@@ -252,6 +389,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Find audio medias with the given pagination paremeters.
+     * The resulting query string is stored for potential reuse
+     * with sorting parameters.
+     */
     this.getAudioMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
         const query = `/acervo/find?tipos=audio&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
@@ -266,6 +408,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Find file medias with the given pagination paremeters.
+     * The resulting query string is stored for potential reuse
+     * with sorting parameters.
+     */
     this.getFileMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
         const query = `/acervo/find?tipos=arquivo&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
@@ -280,6 +427,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Find image medias with the given pagination paremeters.
+     * The resulting query string is stored for potential reuse
+     * with sorting parameters.
+     */
     this.getImageMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
         const query = `/acervo/find?tipos=imagem&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
@@ -294,6 +446,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Find video medias with the given pagination paremeters.
+     * The resulting query string is stored for potential reuse
+     * with sorting parameters.
+     */
     this.getVideoMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
         const query = `/acervo/find?tipos=video&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
@@ -308,6 +465,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Find medias of all file types with the given pagination
+     * paremeters. The resulting query string is stored for
+     * potential reuse with sorting parameters.
+     */
     this.getAllMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
         const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
@@ -322,6 +484,11 @@ export const MediaManager = (function () {
       }
     }
 
+    /**
+     * Gets medias of file type passed as argument by calling its corresponding
+     * fetch method. Unrecognized file types default to `all`, thus requesting
+     * all file types.
+     */
     this.getMediasByContentType = async (
       fetchMediaType, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
     ) => {
@@ -356,6 +523,11 @@ export const MediaManager = (function () {
       return mediaItems
     }
 
+    /**
+     * Reuses the query parameter stored in `this.lastQuery` to request a
+     * sorted result. The sorting method is evaluated through the `sortingType`
+     * argument, which yields the additional query parameters needed.
+     */
     this.applyMediaSorting = async (sortingType) => {
       let sortQuery = this.lastQuery
 
@@ -383,34 +555,6 @@ export const MediaManager = (function () {
           return { success: false }
         }
       } else return { success: false }
-    }
-
-    this.getMediasFromUser = async (
-      username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
-    ) => {
-      try {
-        const { data } = await axios.get(
-          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}`
-        )
-        return data
-      } catch (error) {
-        console.error(error)
-        return false
-      }
-    }
-
-    this.getSubimissionsFromUser = async (
-      username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
-    ) => {
-      try {
-        const { data } = await axios.get(
-          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&status=published`
-        )
-        return data
-      } catch (error) {
-        console.error(error)
-        return false
-      }
     }
 
     this.SubmissionException = function (name, message) {
