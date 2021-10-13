@@ -5,6 +5,9 @@ export default {
     pageTextAboutAwaeteCitationB: 'A common point on the bibliography about this region is that the term “asuriní”, to which Codreau refers to, probably designated a larger quantity of indigenous peoples from this region. While today it is used to refer to the Xingu Asuriní, there is more chance that the word originally referred to the Arawaté indigenous group, because they abundantly used the urucum, a native plant with red fruits and seeds used to create pigments, while the Xingu Asuriní used jenipapo, with a black color.”',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  construction: {
+    pageTextTitle: 'This page is under construction...'
+  },
   contact: {
     buttonLabelSubmit: 'Enter',
     formFieldLabelName: 'Name',
@@ -14,6 +17,10 @@ export default {
     formValidationFieldRequired: 'Please fill in this field',
     pageTextTitle: 'Do you have a file about the Awaete people?',
     pageTextSubtitle: 'Please contact us'
+  },
+  error404: {
+    pageTextTitle: 'This page does not exist...',
+    buttonLabelReturnHome: 'Go to homepage'
   },
   footer: {
     buttonLabelSubmissionTerms: 'SUBMISSION TERMS',
@@ -107,11 +114,8 @@ export default {
     formValidationFieldRequired: 'This field is required.',
     formValidationTagsNumber: 'Please add at least one tag.'
   },
-  construction: {
-    pageTextTitle: 'This page is under construction...'
-  },
-  error404: {
-    pageTextTitle: 'This page does not exist...',
-    buttonLabelReturnHome: 'Go to homepage'
+  user: {
+    galleryCategoryLabelPersonal: 'Personal gallery',
+    galleryCategoryLabelSubimissions: 'Subimissions'
   }
 }

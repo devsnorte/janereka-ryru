@@ -5,6 +5,9 @@ export default {
     pageTextAboutAwaeteCitationB: 'Gyawi uterenui asoreni jawu\nAwa amute awi gy uetcak pajau',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  construction: {
+    pageTextTitle: 'Essa página está em construção...' // Pending translation
+  },
   contact: {
     buttonLabelSubmit: 'Entrar', // Pending translation
     formFieldLabelName: 'Nome', // Pending translation
@@ -14,6 +17,10 @@ export default {
     formValidationFieldRequired: 'Por favor, preencha este campo', // Pending translation
     pageTextTitle: 'Tem algum arquivo sobre a etnia Awaete?', // Pending translation
     pageTextSubtitle: 'Entre em contato conosco' // Pending translation
+  },
+  error404: {
+    pageTextTitle: 'Essa página não existe...', // Pending translation
+    buttonLabelReturnHome: 'Ir para página inicial' // Pending translation
   },
   footer: {
     buttonLabelSubmissionTerms: 'Karupi\'ejaygawi emut',
@@ -107,11 +114,8 @@ export default {
     formValidationFieldRequired: 'Este campo é necessário.', // Pending translation
     formValidationTagsNumber: 'Por favor, adicione ao menos uma tag.' // Pending translation
   },
-  construction: {
-    pageTextTitle: 'Essa página está em construção...' // Pending translation
-  },
-  error404: {
-    pageTextTitle: 'Essa página não existe...', // Pending translation
-    buttonLabelReturnHome: 'Ir para página inicial' // Pending translation
+  user: {
+    galleryCategoryLabelPersonal: 'Acervo pessoal', // Pending translation
+    galleryCategoryLabelSubimissions: 'Submissões' // Pending translation
   }
 }

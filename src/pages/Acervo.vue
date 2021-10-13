@@ -4,7 +4,8 @@
   <main-table
     :loading="loading"
     :midias="mediaItems"
-    @filterContent="filterContent($event)"
+    :viewingFrom="'mainGallery'"
+    @filterContent="filterContent"
     @changePage="requestPage($event)"
     @toggleFilter="showFilter = !showFilter"
     @closeMenus="showFilter = false"
