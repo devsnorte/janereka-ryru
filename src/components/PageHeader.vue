@@ -31,12 +31,26 @@
           />
           <q-route-tab
             exact
+            v-if="sessionData.user"
+            :to="{ name: 'usuario' }"
+            :label="$t('menus.navigationUserArea')"
+          />
+          <q-route-tab
+            exact
             :to="{ name: 'contato' }"
             :label="$t('menus.navigationContact')"
           />
         </q-tabs>
 
         <div class="q-mr-sm" style="position: absolute; right: 0;">
+          <q-btn
+            outline
+            color="grey-8"
+            class="gt-sm q-mr-sm"
+            v-if="!sessionData.user"
+            :to="{ name: 'login' }"
+            :label="$t('menus.buttonLabelLogin')"
+          />
           <q-btn
             outline
             icon="language"
@@ -113,15 +127,20 @@
 </template>
 
 <script>
-import MobileNavigationMenu from './MobileNavigationMenu'
+import { Session } from 'src/api/SessionManager'
+import { getters } from 'src/store/session-store'
 
 export default {
   name: 'PageHeader',
 
-  components: { MobileNavigationMenu },
+  components: {
+    MobileNavigationMenu: () => import('components/MobileNavigationMenu')
+  },
 
   data () {
     return {
+      sessionManager: Session.getSessionManager(),
+      sessionData: getters.session(),
       rightDrawerOpen: false,
       showLanguages: false,
       locale: this.$i18n.locale,
@@ -137,6 +156,11 @@ export default {
     locale: function (newLocale) {
       this.$i18n.locale = newLocale
     }
+  },
+
+  mounted () {
+    // Refresh session data from Local Storage
+    this.sessionManager.getSession()
   },
 
   methods: {

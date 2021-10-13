@@ -55,6 +55,20 @@ const routes = [
         }
       },
       {
+        path: '/usuario',
+        name: 'usuario',
+        component: () => import('pages/Usuario.vue'),
+        beforeEnter (to, from, next) {
+          session.loadFromLocalStorage()
+          if (to.name !== 'login' && !session.isAuthenticated()) {
+            next({
+              name: 'login',
+              query: { goTo: to.fullPath }
+            })
+          } else next()
+        }
+      },
+      {
         path: '/construction',
         name: 'construction',
         component: () => import('pages/UnderConstruction.vue')

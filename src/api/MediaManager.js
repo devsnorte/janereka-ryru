@@ -342,6 +342,34 @@ export const MediaManager = (function () {
       return mediaItems
     }
 
+    this.getMediasFromUser = async (
+      username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
+    ) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    this.getSubimissionsFromUser = async (
+      username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
+    ) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&status=published`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
     this.SubmissionException = function (name, message) {
       this.name = name
       this.message = message

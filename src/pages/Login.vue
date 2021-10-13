@@ -86,7 +86,7 @@ export default {
         this.loading = false
 
         if (goTo) this.$router.push({ path: goTo })
-        else this.$router.push({ name: 'home' })
+        else this.$router.push({ name: 'usuario' })
       } else {
         this.loading = false
         this.$q.notify({

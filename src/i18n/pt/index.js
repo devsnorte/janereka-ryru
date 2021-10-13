@@ -5,6 +5,9 @@ export default {
     pageTextAboutAwaeteCitationB: 'Um ponto comum da bibliografia acerca desta região é de que o termo “asuriní” ao qual Coudreau se refere provavelmente designava uma quantidade maior de povos indígenas que circulavam por essa região. Esse termo tem origem no termo juruna asóreni que designa vermelho. Embora ele seja atualmente aplicado aos Asuriní do Xingu é mais provável que esse termo designasse o grupo indígena Arawaté, pois estes últimos utilizam de forma abundante o urucum, de cor vermelha, enquanto que os Asuriní do Xingu utilizam jenipapo, de cor preta.”',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  construction: {
+    pageTextTitle: 'Essa página está em construção...'
+  },
   contact: {
     buttonLabelSubmit: 'Entrar',
     formFieldLabelName: 'Nome',
@@ -14,6 +17,10 @@ export default {
     formValidationFieldRequired: 'Por favor, preencha este campo',
     pageTextTitle: 'Tem algum arquivo sobre a etnia Awaete?',
     pageTextSubtitle: 'Entre em contato conosco'
+  },
+  error404: {
+    pageTextTitle: 'Essa página não existe...',
+    buttonLabelReturnHome: 'Ir para página inicial'
   },
   footer: {
     buttonLabelSubmissionTerms: 'TERMOS DE SUBMISSÃO',
@@ -76,12 +83,14 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancelar',
+    buttonLabelLogin: 'Login',
     buttonLabelYes: 'Sim',
     langSwitch: 'Idioma',
     navigationAbout: 'Sobre',
     navigationContact: 'Contato',
     navigationGallery: 'Acervo',
-    navigationHome: 'Início'
+    navigationHome: 'Início',
+    navigationUserArea: 'Perfil'
   },
   submission: {
     alertInvalidFile: 'O arquivo selecionado é inválido. Tente outro formato.',
@@ -107,11 +116,8 @@ export default {
     formValidationFieldRequired: 'Este campo é necessário.',
     formValidationTagsNumber: 'Por favor, adicione ao menos uma tag.'
   },
-  construction: {
-    pageTextTitle: 'Essa página está em construção...'
-  },
-  error404: {
-    pageTextTitle: 'Essa página não existe...',
-    buttonLabelReturnHome: 'Ir para página inicial'
+  user: {
+    galleryCategoryLabelPersonal: 'Acervo pessoal',
+    galleryCategoryLabelSubimissions: 'Submissões'
   }
 }

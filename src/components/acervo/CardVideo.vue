@@ -55,7 +55,6 @@ export default {
 
   watch: {
     async media (newMedia) {
-      console.log(newMedia)
       this.imgSrc = await this.mediaManager.performMediaDownload(newMedia.path)
     }
   }

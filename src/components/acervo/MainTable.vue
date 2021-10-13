@@ -13,27 +13,17 @@
 
     <template v-slot:top>
 
-      <q-tabs
-        inline-label
-        outside-arrows
-        align="left"
-        active-color="primary"
-        class="col-grow q-mb-xs"
-        v-model="activeTab"
-        @input="$emit('filterContent', activeTab)"
-      >
-        <q-tab name="all" icon="perm_media" :label="$t('gallery.categoryLabelAll')" />
-        <q-tab name="arquivo" icon="folder" :label="$t('gallery.categoryLabelFiles')" />
-        <q-tab name="imagem" icon="image" :label="$t('gallery.categoryLabelImages')" />
-        <q-tab name="video" icon="theaters" :label="$t('gallery.categoryLabelVideos')" />
-        <q-tab name="audio" icon="volume_up" :label="$t('gallery.categoryLabelAudio')" />
-      </q-tabs>
+      <main-table-tabs
+        :viewingFrom="viewingFrom"
+        @filterContent="$emit('filterContent', $event)"
+      />
 
       <div class="top-side-buttons-wrapper">
         <q-btn unelevated icon="cloud_upload" color="primary" align="between"
           @click="sendMidia()" :label="$t('gallery.buttonLabelSend')"
         />
         <q-btn unelevated icon="search" color="primary" padding="6px" class="q-ml-xs"
+          v-if="viewingFrom === 'mainTable'"
           @click="$emit('toggleFilter')"
         />
       </div>
@@ -105,7 +95,8 @@ export default {
   name: 'MainTable',
 
   components: {
-    CardWrapper: () => import('components/acervo/CardWrapper')
+    CardWrapper: () => import('components/acervo/CardWrapper'),
+    MainTableTabs: () => import('components/acervo/MainTableTabs')
   },
 
   props: {
@@ -117,6 +108,11 @@ export default {
     midias: {
       type: Array,
       required: true
+    },
+    viewingFrom: {
+      type: String,
+      required: true,
+      default: 'mainGallery'
     }
   },
 
@@ -147,7 +143,6 @@ export default {
       },
       activeTab: 'all',
       user: this.$axios.defaults.headers.common.token
-      // isLogged: false
     }
   },
 

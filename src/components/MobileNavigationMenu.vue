@@ -18,6 +18,12 @@
       </q-item-section>
     </q-item>
 
+    <q-item exact clickable :to="{name: 'usuario'}" v-if="sessionData.user">
+      <q-item-section>
+        <q-item-label>{{ $t('menus.navigationUserArea') }}</q-item-label>
+      </q-item-section>
+    </q-item>
+
     <q-item exact clickable :to="{name: 'contato' }">
       <q-item-section>
         <q-item-label>{{ $t('menus.navigationContact') }}</q-item-label>
@@ -27,7 +33,22 @@
 </template>
 
 <script>
+import { Session } from 'src/api/SessionManager'
+import { getters } from 'src/store/session-store'
+
 export default {
-  name: 'MobileNavigationMenu'
+  name: 'MobileNavigationMenu',
+
+  data () {
+    return {
+      sessionManager: Session.getSessionManager(),
+      sessionData: getters.session()
+    }
+  },
+
+  mounted () {
+    // Refresh session data from Local Storage
+    this.sessionManager.getSession()
+  }
 }
 </script>
