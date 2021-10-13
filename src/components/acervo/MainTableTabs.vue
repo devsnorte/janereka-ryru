@@ -75,6 +75,12 @@ export default {
     if (this.viewingFrom === 'mainGallery') this.activeTab = 'all'
     else if (this.viewingFrom === 'userArea') this.activeTab = 'personalMedias'
     else this.activeTab = 'all'
+  },
+
+  methods: {
+    defaultTab () {
+      this.activeTab = 'all'
+    }
   }
 }
 </script>

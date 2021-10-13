@@ -11,7 +11,7 @@ export const MediaManager = (function () {
     this.fetchMediaType = 'todos'
     this.pagTamanho = 1000
     this.pagAtual = 1
-    this.ordemDecrescente = false
+    this.lastQuery = ''
 
     this.unmakeMediaObject = () => {
       this.mediaObject = {}
@@ -226,84 +226,98 @@ export const MediaManager = (function () {
 
     this.getMediasByHashtag = async (hashtag, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
-        const { data } = await axios.get(
-          `/acervo/find?hashtags=${hashtag}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        )
+        const query = `/acervo/find?hashtags=${hashtag}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        const { data } = await axios.get(query)
+        this.lastQuery = query
+
         return data
       } catch (error) {
         console.log(error)
+        this.lastQuery = ''
         return false
       }
     }
 
     this.getMediasByKeywords = async (keywords, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
-        const { data } = await axios.get(
-          `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        )
+        const query = `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        const { data } = await axios.get(query)
+        this.lastQuery = query
+
         return data
       } catch (error) {
         console.log(error)
+        this.lastQuery = ''
         return false
       }
     }
 
     this.getAudioMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
-        const { data } = await axios.get(
-          `/acervo/find?tipos=audio&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        )
+        const query = `/acervo/find?tipos=audio&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        const { data } = await axios.get(query)
+        this.lastQuery = query
+
         return data
       } catch (error) {
         console.error(error)
+        this.lastQuery = ''
         return false
       }
     }
 
     this.getFileMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
-        const { data } = await axios.get(
-          `/acervo/find?tipos=arquivo&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        )
+        const query = `/acervo/find?tipos=arquivo&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        const { data } = await axios.get(query)
+        this.lastQuery = query
+
         return data
       } catch (error) {
         console.error(error)
+        this.lastQuery = ''
         return false
       }
     }
 
     this.getImageMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
-        const { data } = await axios.get(
-          `/acervo/find?tipos=imagem&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        )
+        const query = `/acervo/find?tipos=imagem&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        const { data } = await axios.get(query)
+        this.lastQuery = query
+
         return data
       } catch (error) {
         console.error(error)
+        this.lastQuery = ''
         return false
       }
     }
 
     this.getVideoMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
-        const { data } = await axios.get(
-          `/acervo/find?tipos=video&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        )
+        const query = `/acervo/find?tipos=video&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        const { data } = await axios.get(query)
+        this.lastQuery = query
+
         return data
       } catch (error) {
         console.error(error)
+        this.lastQuery = ''
         return false
       }
     }
 
     this.getAllMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
       try {
-        const { data } = await axios.get(
-          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        )
+        const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+        const { data } = await axios.get(query)
+        this.lastQuery = query
+
         return data
       } catch (error) {
         console.error(error)
+        this.lastQuery = ''
         return false
       }
     }
@@ -340,6 +354,35 @@ export const MediaManager = (function () {
       }
 
       return mediaItems
+    }
+
+    this.applyMediaSorting = async (sortingType) => {
+      let sortQuery = this.lastQuery
+
+      switch (sortingType) {
+        case 'alphabetical':
+          sortQuery = sortQuery + '&ordem_campo=titulo&ordem_decrescente=false'
+          break
+        case 'newer':
+          sortQuery = sortQuery + '&ordem_campo=created&ordem_decrescente=true'
+          break
+        case 'older':
+          sortQuery = sortQuery + '&ordem_campo=created&ordem_decrescente=false'
+          break
+        default:
+          sortQuery = ''
+          break
+      }
+
+      if (sortQuery) {
+        try {
+          const { data } = await axios.get(sortQuery)
+          return { success: true, data }
+        } catch (error) {
+          console.error(error)
+          return { success: false }
+        }
+      } else return { success: false }
     }
 
     this.getMediasFromUser = async (
