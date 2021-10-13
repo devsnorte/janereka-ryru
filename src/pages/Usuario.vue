@@ -1,14 +1,26 @@
 <template>
 <q-page padding class="row">
   <div class="full-width q-pa-md">
-    <p class="text-h4 text-weight-bold">{{ username }}</p>
+    <div class="text-h4 text-weight-bold text-capitalize">{{ username }}</div>
+    <div class="text-body1">
+      <strong>Família:</strong><br>
+      <strong>Aldeia:</strong>
+    </div>
+    <q-btn
+      class="q-mt-lg"
+      outline
+      color="white"
+      text-color="black"
+      type="submit"
+      label="Logout"
+    />
   </div>
   <main-table
     :loading="loading"
     :midias="mediaItems"
     :viewingFrom="'userArea'"
     @filterContent="filterContent"
-    class="fit"
+    class="fit bg-grey-4"
     style="transition: 0.3s ease;"
    />
 </q-page>

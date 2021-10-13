@@ -48,8 +48,8 @@
         />
 
         <div class="column items-center q-my-xl">
-          <q-btn unelevated color="primary" type="submit"
-            :loading="loading" :label="$t('contact.buttonLabelSubmit')"
+          <q-btn unelevated color="primary" type="submit" push
+            no-caps size="lg" :loading="loading" :label="$t('contact.buttonLabelSubmit')"
           >
             <span slot="loading">
               <q-spinner-hourglass />

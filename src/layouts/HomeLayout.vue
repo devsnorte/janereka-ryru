@@ -16,10 +16,6 @@ import PageFooter from 'components/PageFooter'
 
 export default {
   name: 'MainLayout',
-  components: { PageHeader, PageFooter },
-  data () {
-    return {
-    }
-  }
+  components: { PageHeader, PageFooter }
 }
 </script>
