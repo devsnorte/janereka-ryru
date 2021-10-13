@@ -83,12 +83,14 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancel',
+    buttonLabelLogin: 'Login',
     buttonLabelYes: 'Yes',
     langSwitch: 'Language',
     navigationAbout: 'About',
     navigationContact: 'Contact',
     navigationGallery: 'Gallery',
-    navigationHome: 'Home'
+    navigationHome: 'Home',
+    navigationUserArea: 'Profile'
   },
   submission: {
     alertInvalidFile: 'The selected file is invalid. Please try another format.',

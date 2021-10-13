@@ -83,12 +83,14 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancelar', // Pending translation
+    buttonLabelLogin: 'Login', // Pending translation
     buttonLabelYes: 'Sim', // Pending translation
     langSwitch: 'Jeyga',
     navigationAbout: 'Karupi\'etxa',
     navigationContact: 'Contato', // Pending translation
     navigationGallery: 'Janereka Ryru ruma',
-    navigationHome: 'Ypy'
+    navigationHome: 'Ypy',
+    navigationUserArea: 'Perfil' // Pending translation
   },
   submission: {
     alertInvalidFile: 'O arquivo selecionado é inválido. Tente outro formato.', // Pending translation

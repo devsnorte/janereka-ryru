@@ -83,12 +83,14 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancelar',
+    buttonLabelLogin: 'Login',
     buttonLabelYes: 'Sim',
     langSwitch: 'Idioma',
     navigationAbout: 'Sobre',
     navigationContact: 'Contato',
     navigationGallery: 'Acervo',
-    navigationHome: 'Início'
+    navigationHome: 'Início',
+    navigationUserArea: 'Perfil'
   },
   submission: {
     alertInvalidFile: 'O arquivo selecionado é inválido. Tente outro formato.',

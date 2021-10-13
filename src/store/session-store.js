@@ -9,7 +9,8 @@ const sessionState = Vue.observable({
 const getters = {
   user: () => sessionState.user,
   roles: () => sessionState.roles,
-  token: () => sessionState.token
+  token: () => sessionState.token,
+  session: () => sessionState
 }
 
 const mutations = {
