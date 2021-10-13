@@ -10,7 +10,7 @@
 
     <q-media-player
       type="audio"
-      :source="audioSrc"
+      :source="`${baseUrl}/acervo/download/${media.path}`"
       radius='10px'
       color="green-2"
       class="q-ma-md"
@@ -23,7 +23,7 @@
         :title="media.titulo"
         :description="media.descricao"
         :rawTags="media.tags"
-        :mediaFileName="media.arquivo"
+        :mediaFileName="media.content[0]"
         :mediaType="media.tipo"
         :mediaPath="media.path"
         :triggerSubmit="triggerSubmit"
@@ -74,15 +74,10 @@ export default {
   data () {
     return {
       mediaManager: MediaManager.getManager(),
-      audioSrc: '',
       baseUrl: this.$axios.defaults.baseURL,
       editMode: false,
       triggerSubmit: false
     }
-  },
-
-  async mounted () {
-    this.audioSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
   },
 
   methods: {
@@ -108,7 +103,6 @@ export default {
     },
 
     finishSubmit () {
-      console.info('Submission finished.')
       this.triggerSubmit = false
       this.editMode = false
     }

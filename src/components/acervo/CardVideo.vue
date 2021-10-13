@@ -11,7 +11,7 @@
     <div class="q-pa-xs fit">
       <q-media-player
         type="video"
-        :source="videoSrc"
+        :source="`${baseUrl}/acervo/download/${media.path}`"
         :show-big-play-button="false"
         radius='15px'
         background-color="black"
@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import { MediaManager } from 'src/api/MediaManager'
-
 export default {
   name: 'CardVideo',
 
@@ -44,18 +42,7 @@ export default {
 
   data () {
     return {
-      mediaManager: MediaManager.getManager(),
-      videoSrc: ''
-    }
-  },
-
-  async mounted () {
-    this.videoSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
-  },
-
-  watch: {
-    async media (newMedia) {
-      this.imgSrc = await this.mediaManager.performMediaDownload(newMedia.path)
+      baseUrl: this.$axios.defaults.baseURL
     }
   }
 }

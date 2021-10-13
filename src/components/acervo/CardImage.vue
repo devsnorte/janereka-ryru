@@ -1,15 +1,13 @@
 <template>
 <div style="height: 300px;">
   <q-img
-    :src="imgSrc"
+    :src="`${baseUrl}/acervo/download/${media.path}`"
     class="absolute-center"
   />
 </div>
 </template>
 
 <script>
-import { MediaManager } from 'src/api/MediaManager'
-
 export default {
   name: 'CardImage',
 
@@ -22,18 +20,7 @@ export default {
 
   data () {
     return {
-      mediaManager: MediaManager.getManager(),
-      imgSrc: ''
-    }
-  },
-
-  async mounted () {
-    this.imgSrc = await this.mediaManager.performMediaDownload(this.$props.media.path)
-  },
-
-  watch: {
-    async media (newMedia) {
-      this.imgSrc = await this.mediaManager.performMediaDownload(newMedia.path)
+      baseUrl: this.$axios.defaults.baseURL
     }
   }
 }
