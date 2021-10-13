@@ -63,6 +63,49 @@
         @parsedTags="updateTags($event)"
       />
 
+      <!-- Seção do autor / Author section -->
+      <div class="row no-wrap q-mt-xl items-center">
+        <span class="text-h6">{{ $t('submission.formSectionTitleAuthor') }}</span>
+        <div class="col-grow q-mx-md bg-black" style="height: 2px;" />
+      </div>
+
+      <div class="row justify-around">
+        <div class="q-px-lg">
+          <!-- Input do nome / Filename input -->
+          <label for="filename" class="inline-block q-mt-lg">
+            {{ $t('submission.formFieldLabelAuthorname') }}
+          </label>
+          <q-input
+            dense filled
+            id="authorname"
+            v-model="title"
+            :placeholder="$t('submission.formFieldPlaceholderNameAuthor')"
+            :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
+          />
+
+          <q-select
+            outlined clearable dense filled
+            v-model="aldeiaSelected"
+            :options="aldeiasPlaceholder"
+            :label-slot="!aldeiaSelected"
+            popup-content-class="text-weight-medium q-ma-md"
+            popup-content-style="border: 2px solid black; border-radius: 5px;"
+            color="black"
+            class="q-my-sm"
+            style="min-width: 250px;"
+          >
+            <template v-slot:label>
+              <span class="text-black">{{ $t('submission.formDropdownLabelAldeia') }}</span>
+            </template>
+
+            <template v-slot:selected>
+              <span class="text-weight-bold text-body1">{{ aldeiaSelected }}</span>
+            </template>
+          </q-select>
+        </div>
+
+      </div>
+
       <!-- Checkbox de aceite de termos / Accept terms checkbox -->
       <q-checkbox
         dense
@@ -70,69 +113,6 @@
         :label="$t('submission.formFieldLabelAcceptTerms')"
         class="q-mt-lg"
       />
-
-      <!-- Keep hidden until backend is ready -->
-      <!-- Seção do autor / Author section -->
-      <div class="row no-wrap q-my-xl items-center hidden">
-        <span class="text-h6">{{ $t('submission.formSectionTitleAuthor') }}</span>
-        <div class="col-grow q-mx-md bg-black" style="height: 2px;" />
-      </div>
-
-      <!-- Keep hidden until backend is ready -->
-      <div class="row justify-around hidden">
-
-        <div class="column col-grow q-px-xl">
-
-          <q-select
-            outlined clearable
-            v-model="aldeiaSelected"
-            :options="aldeiasPlaceholder"
-            :label-slot="!aldeiaSelected"
-            popup-content-class="text-weight-medium q-ma-md"
-            popup-content-style="border: 2px solid black; border-radius: 5px;"
-            color="black"
-            class="q-my-md"
-            style="min-width: 250px;"
-          >
-            <template v-slot:label>
-              <span class="text-black text-weight-bold">{{ $t('submission.formDropdownLabelAldeia') }}</span>
-            </template>
-
-            <template v-slot:selected>
-              <span class="text-weight-bold text-body1">{{ aldeiaSelected }}</span>
-            </template>
-          </q-select>
-
-          <q-select
-            outlined clearable
-            v-model="autorSelected"
-            :options="autoresPlaceholder"
-            :label-slot="!autorSelected"
-            popup-content-class="text-weight-medium q-my-sm"
-            popup-content-style="border: 2px solid black; border-radius: 5px;"
-            color="black"
-            class="q-my-md"
-            style="min-width: 250px;"
-          >
-            <template v-slot:label>
-              <span class="text-black text-weight-bold">{{ $t('submission.formDropdownLabelAuthor') }}</span>
-            </template>
-
-            <template v-slot:selected>
-              <span class="text-weight-bold text-body1">{{ autorSelected }}</span>
-            </template>
-          </q-select>
-
-        </div>
-
-        <div class="column col-grow justify-center items-center">
-          <span class="text-h6">{{ $t('submission.formTextNotAnAuthor') }}</span>
-          <q-btn unelevated no-caps color="secondary" class="q-mt-md"
-            :label="$t('submission.buttonLabelNewAuthor')"
-          />
-        </div>
-
-      </div>
 
       <div class="column items-center q-my-xl">
         <q-btn unelevated color="primary" type="submit"
@@ -167,7 +147,6 @@ export default {
       tags: new Set(),
       acceptTerms: false,
       aldeiaSelected: null,
-      autorSelected: null,
       loading: false,
       aldeiasPlaceholder: [
         'Gavião',
@@ -175,13 +154,6 @@ export default {
         'Janeraka',
         'Kwatinema',
         'Muyryna'
-      ],
-      autoresPlaceholder: [
-        'Alice Damasceno',
-        'Carla Romano',
-        'Carolina Yamada',
-        'Gabriela Pessoa',
-        'Timei Assurini'
       ]
     }
   },

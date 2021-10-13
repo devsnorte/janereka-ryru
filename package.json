@@ -1,6 +1,6 @@
 {
   "name": "janereka-ryru",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete",
   "productName": "Plataforma Janereka Ryru",
   "authors": [
@@ -12,10 +12,10 @@
   "private": true,
   "scripts": {
     "dev": "quasar dev",
+    "dev:pwa": "quasar dev -m pwa",
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa",
-    "lint": "eslint --ext .js,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "lint": "eslint --ext .js,.vue ./"
   },
   "dependencies": {
     "@quasar/extras": "^1.11.2",

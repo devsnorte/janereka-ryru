@@ -9,7 +9,7 @@ export default {
     pageTextTitle: 'This page is under construction...'
   },
   contact: {
-    buttonLabelSubmit: 'Enter',
+    buttonLabelSubmit: 'Send',
     formFieldLabelName: 'Name',
     formFieldLabelPhone: 'Phone',
     formFieldLabelEmail: 'E-mail',
@@ -107,10 +107,12 @@ export default {
     formFieldLabelAcceptTerms: 'I have read and agree with this platform\'s submission terms',
     formFieldLabelDescription: 'Description:',
     formFieldLabelFilename: 'File name:',
+    formFieldLabelAuthorname: 'Your name: ',
     formFieldLabelFilepicker: 'Pick a file',
     formFieldLabelHashtags: 'Collections (tags):',
     formFieldPlaceholderDescription: 'Input a description for your material here',
     formFieldPlaceholderFilename: 'Input a name for your file here',
+    formFieldPlaceholderNameAuthor: 'Insert your name',
     formSectionTitleAuthor: 'Author data',
     formTextNotAnAuthor: 'Not yet an author?',
     formValidationFieldRequired: 'This field is required.',

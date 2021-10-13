@@ -9,7 +9,7 @@ export default {
     pageTextTitle: 'Essa página está em construção...' // Pending translation
   },
   contact: {
-    buttonLabelSubmit: 'Entrar', // Pending translation
+    buttonLabelSubmit: 'Enviar', // Pending translation
     formFieldLabelName: 'Nome', // Pending translation
     formFieldLabelPhone: 'Telefone', // Pending translation
     formFieldLabelEmail: 'E-mail', // Pending translation
@@ -107,10 +107,12 @@ export default {
     formFieldLabelAcceptTerms: 'Li e aceito os termos de submissão da plataforma', // Pending translation
     formFieldLabelDescription: 'ekuatxa\'au:',
     formFieldLabelFilename: 'nemarytykuara\'rera:',
+    formFieldLabelAuthorname: 'Seu nome: ', // Pending translation
     formFieldLabelFilepicker: 'Selecione um arquivo', // Pending translation
     formFieldLabelHashtags: 'ekuatxa\'au:',
     formFieldPlaceholderDescription: 'Insira uma descrição do seu material aqui', // Pending translation
     formFieldPlaceholderFilename: 'Insira o nome do seu arquivo aqui', // Pending translation
+    formFieldPlaceholderNameAuthor: 'Insira o seu nome', // Pending translation
     formSectionTitleAuthor: 'ejera enum', // Pending translation
     formTextNotAnAuthor: 'Ainda não é um autor?', // Pending translation
     formValidationFieldRequired: 'Este campo é necessário.', // Pending translation

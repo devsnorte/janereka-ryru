@@ -39,12 +39,6 @@
       icon="volume_up"
     />
     <q-tab
-      v-if="viewingFrom === 'mainGallery'"
-      :label="$t('gallery.categoryLabelAudio')"
-      name="audio"
-      icon="volume_up"
-    />
-    <q-tab
       v-if="viewingFrom === 'userArea'"
       :label="$t('user.galleryCategoryLabelPersonal')"
       name="personalMedias"
