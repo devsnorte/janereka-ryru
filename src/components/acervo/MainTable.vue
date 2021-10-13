@@ -23,6 +23,7 @@
           @click="sendMidia()" :label="$t('gallery.buttonLabelSend')"
         />
         <q-btn unelevated icon="search" color="primary" padding="6px" class="q-ml-xs"
+          v-if="viewingFrom === 'mainTable'"
           @click="$emit('toggleFilter')"
         />
       </div>

@@ -1,11 +1,14 @@
 <template>
 <q-page padding class="row">
-  <span>{{ username }}</span>
+  <div class="full-width q-pa-md">
+    <p class="text-h4 text-weight-bold">{{ username }}</p>
+  </div>
   <main-table
     :loading="loading"
     :midias="mediaItems"
     :viewingFrom="'userArea'"
     @filterContent="filterContent"
+    class="fit"
     style="transition: 0.3s ease;"
    />
 </q-page>
