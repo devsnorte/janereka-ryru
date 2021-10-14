@@ -1,3 +1,5 @@
+import { Notify } from 'quasar'
+import { i18n } from 'src/boot/i18n'
 import { Session } from 'src/api/SessionManager'
 
 const session = Session.getSessionManager()
@@ -64,6 +66,31 @@ const routes = [
             next({
               name: 'login',
               query: { goTo: to.fullPath }
+            })
+          } else next()
+        }
+      },
+      {
+        path: '/admin',
+        name: 'admin',
+        component: () => import('pages/Admin.vue'),
+        beforeEnter (to, from, next) {
+          session.loadFromLocalStorage()
+          // if (session.isAdmin())
+          if (to.name !== 'login' && !session.isAuthenticated()) {
+            next({
+              name: 'login',
+              query: { auth: 'admin', goTo: to.fullPath }
+            })
+          } else if (!session.isAuthenticated()) {
+            Notify.create({
+              position: 'center',
+              type: 'warning',
+              multiLine: true,
+              message: i18n.t('login.alertHasNoPerms')
+            })
+            next({
+              name: from.name
             })
           } else next()
         }

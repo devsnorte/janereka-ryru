@@ -13,6 +13,7 @@
       text-color="black"
       type="submit"
       label="Logout"
+      @click="logout"
     />
   </div>
   <main-table
@@ -111,6 +112,11 @@ export default {
           this.getUserMedias()
           break
       }
+    },
+
+    logout () {
+      this.session.logout()
+      this.$router.push({ name: 'home' })
     }
   }
 }

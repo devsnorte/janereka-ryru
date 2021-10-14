@@ -7,7 +7,7 @@
               to="construction"
             />
             <q-btn class="btn-fixed-width" size="md" outline :label="$t('footer.buttonLabelAdminArea')"
-              to="construction"
+              to="admin"
             />
         </div>
         <div class="col-xs-12 col-md-4 ">

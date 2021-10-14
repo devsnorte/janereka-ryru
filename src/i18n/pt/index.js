@@ -74,6 +74,7 @@ export default {
   },
   login: {
     alertLoginFailed: 'Não foi possível fazer login. Tente novamente.',
+    alertHasNoPerms: 'Você não possui permissão para acessar essa área.',
     alertLoginNecessary: 'Login necessário para acessar a plataforma.',
     alertSessionAboutToExpire: 'Sua sessão irá expirar em breve. Por favor, refaça o login para continuar usando a plataforma.',
     buttonLabelEnter: 'Entrar',

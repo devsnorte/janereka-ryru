@@ -47,6 +47,11 @@ export const Session = (function () {
       }
     }
 
+    this.isAdmin = () => {
+      const session = this.getSession()
+      return session.roles.includes('acervo.publisher')
+    }
+
     this.setSessionState = (user, roles, token, issuedAt = new Date()) => {
       axios.defaults.headers.common = { token: token }
       mutations.setUser(user)
