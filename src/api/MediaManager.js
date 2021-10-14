@@ -31,11 +31,11 @@ export const MediaManager = (function () {
      * Populates a new media data holder object with necessary data for API
      * requests orchestration. Media data is reset before populating new data.
      */
-    this.makeMediaObject = (title, description, tags, mediaFile, mediaType, mediaPath) => {
+    this.makeMediaObject = (title, description, tags, authorname, tribe, mediaFile, mediaType, mediaPath) => {
       this.unmakeMediaObject()
 
       this.mediaObject = {
-        title, description, tags, mediaFile, mediaType, mediaPath: mediaPath || null
+        title, description, tags, authorname, tribe, mediaFile, mediaType, mediaPath: mediaPath || null
       }
     }
 
@@ -101,6 +101,14 @@ export const MediaManager = (function () {
           }
         })
       }
+
+      if (!this.mediaObject.authorname) {
+        throw new this.SubmissionException('MediaDataValidationError', 'Author name not found. Can not submit.')
+      }
+
+      if (!this.mediaObject.tribe) {
+        throw new this.SubmissionException('MediaDataValidationError', 'Author indigenous group not found. Can not submit.')
+      }
     }
 
     /**
@@ -151,6 +159,10 @@ export const MediaManager = (function () {
         infoFormData.append('descricao', this.mediaObject.description)
         infoFormData.append('tipo', this.mediaObject.mediaType)
         infoFormData.append('tags', this.mediaObject.tags.join(', '))
+        infoFormData.append('autor', this.mediaObject.authorname)
+        infoFormData.append('mocambo', this.mediaObject.tribe)
+
+        console.log(this.mediaObject)
 
         const { data } = await axios({
           method: 'post',
@@ -210,6 +222,8 @@ export const MediaManager = (function () {
         updateInfoFormData.append('titulo', this.mediaObject.title)
         updateInfoFormData.append('descricao', this.mediaObject.description)
         updateInfoFormData.append('tags', this.mediaObject.tags.join(', '))
+        updateInfoFormData.append('autor', this.mediaObject.authorname)
+        updateInfoFormData.append('mocambo', this.mediaObject.tribe)
 
         await axios({
           method: 'put',

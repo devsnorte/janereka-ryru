@@ -20,7 +20,7 @@
     :midias="mediaItems"
     :viewingFrom="'userArea'"
     @filterContent="filterContent"
-    class="fit bg-grey-4"
+    class="fit"
     style="transition: 0.3s ease;"
    />
 </q-page>

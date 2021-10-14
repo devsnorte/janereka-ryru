@@ -34,6 +34,46 @@
         @parsedTags="updateTags($event)"
       />
 
+      <!-- Seção do autor / Author section -->
+      <div class="row no-wrap q-mt-xl items-center">
+        <span class="text-h6">{{ $t('submission.formSectionTitleAuthor') }}</span>
+        <div class="col-grow q-mx-md bg-black" style="height: 2px;" />
+      </div>
+
+      <!-- Input do nome do autor / Author name input -->
+      <label for="authorname" class="inline-block q-mt-lg">
+        {{ $t('submission.formFieldLabelAuthorName') }}
+      </label>
+      <q-input
+        dense filled
+        id="authorname"
+        v-model="newAuthorname"
+        :placeholder="$t('submission.formFieldPlaceholderNameAuthor')"
+        :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
+      />
+
+      <!-- Seleção de aldeua / Author's indigenous group selection -->
+      <label for="authorname" class="inline-block q-mt-lg">
+        {{ $t('submission.formFieldLabelAuthorOrigin') }}
+      </label>
+      <q-select
+        outlined clearable dense filled
+        v-model="newAldeia"
+        :options="aldeias"
+        :label-slot="!newAldeia"
+        :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
+        popup-content-class="text-weight-medium q-ma-md"
+        popup-content-style="border: 2px solid black; border-radius: 5px;"
+        color="black"
+        class="q-my-sm"
+        style="min-width: 250px;"
+      >
+
+        <template v-slot:selected>
+          <span class="text-body2">{{ newAldeia }}</span>
+        </template>
+      </q-select>
+
     </q-form>
   </div>
 </template>
@@ -49,31 +89,8 @@ export default {
   },
 
   props: {
-    title: {
-      type: [String, null],
-      required: false,
-      default: ''
-    },
-    description: {
-      type: [String, null],
-      required: false,
-      default: ''
-    },
-    rawTags: {
-      type: Array,
-      required: false,
-      default: () => []
-    },
-    mediaFileName: {
-      type: String,
-      required: true
-    },
-    mediaType: {
-      type: String,
-      required: true
-    },
-    mediaPath: {
-      type: String,
+    media: {
+      type: Object,
       required: true
     },
     triggerSubmit: {
@@ -89,7 +106,17 @@ export default {
       loading: false,
       newTitle: '',
       newDescription: '',
-      tags: new Set()
+      newAuthorname: '',
+      newAldeia: '',
+      tags: new Set(),
+      aldeias: [
+        'Gavião',
+        'Itaaka',
+        'Janeraka',
+        'Kwatinema',
+        'Muyryna',
+        'Não pertence a uma aldeia'
+      ]
     }
   },
 
@@ -101,12 +128,18 @@ export default {
   },
 
   mounted () {
-    if (this.title) this.newTitle = this.title
+    if (this.media.titulo) this.newTitle = this.media.titulo
 
-    if (this.description) this.newDescription = this.description
+    if (this.media.descricao) this.newDescription = this.media.descricao
 
-    if (this.rawTags) {
-      this.rawTags.forEach(tag => this.tags.add(tag))
+    if (this.media.autor) this.newAuthorname = this.media.autor
+    else this.newAuthorname = 'Autor não informado'
+
+    if (this.media.mocambo) this.newAldeia = this.media.mocambo
+    this.newAldeia = 'Não pertence a uma aldeia'
+
+    if (this.media.tags) {
+      this.media.tags.forEach(tag => this.tags.add(tag))
     }
   },
 
@@ -119,11 +152,12 @@ export default {
       this.loading = true
 
       this.mediaManager.makeMediaObject(
-        this.newTitle, this.newDescription, Array.from(this.tags), '', this.mediaType, this.mediaPath
+        this.newTitle, this.newDescription, Array.from(this.tags), this.newAuthorname, this.newAldeia, '', this.media.tipo, this.media.path
       )
       const success = await this.mediaManager.performMediaUpdate(this.mediaFileName)
 
       if (success) {
+        this.tags = new Set()
         this.$q.notify({
           type: 'positive',
           multiLine: true,
