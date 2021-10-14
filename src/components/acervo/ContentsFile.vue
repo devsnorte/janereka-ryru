@@ -21,12 +21,6 @@
     <q-card-section class="q-pt-none">
       <edit-media
         v-if="editMode"
-        :title="media.titulo"
-        :description="media.descricao"
-        :rawTags="media.tags"
-        :mediaFileName="media.content[0]"
-        :mediaType="media.tipo"
-        :mediaPath="media.path"
         :media="media"
         :triggerSubmit="triggerSubmit"
         @finished-submission="finishSubmit"

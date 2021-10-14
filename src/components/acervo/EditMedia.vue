@@ -89,33 +89,6 @@ export default {
   },
 
   props: {
-    title: {
-      type: [String, null],
-      required: false,
-      default: ''
-    },
-    description: {
-      type: [String, null],
-      required: false,
-      default: ''
-    },
-    rawTags: {
-      type: Array,
-      required: false,
-      default: () => []
-    },
-    mediaFileName: {
-      type: String,
-      required: true
-    },
-    mediaType: {
-      type: String,
-      required: true
-    },
-    mediaPath: {
-      type: String,
-      required: true
-    },
     media: {
       type: Object,
       required: true
