@@ -71,35 +71,37 @@
 
       <div class="row justify-around">
         <div class="q-px-lg">
-          <!-- Input do nome / Filename input -->
-          <label for="filename" class="inline-block q-mt-lg">
-            {{ $t('submission.formFieldLabelAuthorname') }}
+          <!-- Input do nome do autor / Author name input -->
+          <label for="authorname" class="inline-block q-mt-lg">
+            {{ $t('submission.formFieldLabelAuthorName') }}
           </label>
           <q-input
             dense filled
             id="authorname"
-            v-model="title"
+            v-model="authorname"
             :placeholder="$t('submission.formFieldPlaceholderNameAuthor')"
             :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
           />
 
+          <!-- Seleção de aldeua / Author's indigenous group selection -->
+          <label for="authorname" class="inline-block q-mt-lg">
+            {{ $t('submission.formFieldLabelAuthorOrigin') }}
+          </label>
           <q-select
             outlined clearable dense filled
             v-model="aldeiaSelected"
-            :options="aldeiasPlaceholder"
+            :options="aldeias"
             :label-slot="!aldeiaSelected"
+            :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
             popup-content-class="text-weight-medium q-ma-md"
             popup-content-style="border: 2px solid black; border-radius: 5px;"
             color="black"
             class="q-my-sm"
             style="min-width: 250px;"
           >
-            <template v-slot:label>
-              <span class="text-black">{{ $t('submission.formDropdownLabelAldeia') }}</span>
-            </template>
 
             <template v-slot:selected>
-              <span class="text-weight-bold text-body1">{{ aldeiaSelected }}</span>
+              <span class="text-body2">{{ aldeiaSelected }}</span>
             </template>
           </q-select>
         </div>
@@ -145,15 +147,17 @@ export default {
       title: '',
       description: '',
       tags: new Set(),
+      authorname: '',
+      aldeiaSelected: 'Não pertence a uma aldeia',
       acceptTerms: false,
-      aldeiaSelected: null,
       loading: false,
-      aldeiasPlaceholder: [
+      aldeias: [
         'Gavião',
         'Itaaka',
         'Janeraka',
         'Kwatinema',
-        'Muyryna'
+        'Muyryna',
+        'Não pertence a uma aldeia'
       ]
     }
   },
@@ -233,7 +237,7 @@ export default {
       // Proceed with submission
       } else {
         this.mediaManager.makeMediaObject(
-          this.title, this.description, Array.from(this.tags), this.newFile, this.mediaFileType
+          this.title, this.description, Array.from(this.tags), this.authorname, this.aldeiaSelected, this.newFile, this.mediaFileType
         )
 
         const success = await this.mediaManager.performMediaCreation()

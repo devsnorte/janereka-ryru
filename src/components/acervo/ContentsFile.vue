@@ -27,6 +27,7 @@
         :mediaFileName="media.content[0]"
         :mediaType="media.tipo"
         :mediaPath="media.path"
+        :media="media"
         :triggerSubmit="triggerSubmit"
         @finished-submission="finishSubmit"
       />
@@ -35,10 +36,7 @@
     <q-card-section class="q-pt-none q-mb-xl">
       <media-details
         v-show="!editMode"
-        :description="media.descricao"
-        :created="media.created"
-        :authorName="media.creator"
-        :hashtags="media.tags"
+        :media="media"
       />
     </q-card-section>
 
@@ -84,7 +82,7 @@ export default {
   methods: {
     async deleteMedia () {
       this.mediaManager.makeMediaObject(
-        this.media.titule, this.media.descricao, this.media.tags, '', this.media.tipo, this.media.path
+        this.media.titulo, this.media.descricao, this.media.tags, this.newAuthorname, this.newAldeia, '', this.media.tipo, this.media.path
       )
       const success = await this.mediaManager.performMediaDeletion()
 
@@ -104,7 +102,6 @@ export default {
     },
 
     finishSubmit () {
-      console.info('Submission finished.')
       this.triggerSubmit = false
       this.editMode = false
     }

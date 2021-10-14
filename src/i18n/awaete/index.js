@@ -48,8 +48,10 @@ export default {
     categoryLabelVideos: 'Janeyga ryruruma',
     mainTableTitle: 'Acervo', // Pending translation
     mediaDetailsAuthor: 'Autor:', // Pending translation
+    mediaDetailsAuthorIndigenousGroup: 'Aldeia do autor:', // Pending translation
     mediaDetailsCreated: 'Criado em:', // Pending translation
     mediaDetailsDescription: 'Descrição:', // Pending translation
+    mediaDetailsUploader: 'Enviado por:', // Pending translation
     menuSortAlphabetical: 'iapa\'katuteawa',
     menuSortBy: 'etxak\'katuteawa',
     menuSortNewer: 'kumeti\'u\'u ',
@@ -101,13 +103,12 @@ export default {
     buttonLabelNewAuthor: 'Criar novo autor', // Pending translation
     buttonLabelNewFile: 'iyau',
     buttonLabelSend: 'imana',
-    formDropdownLabelAldeia: 'ereramepe\'ejera nugane',
-    formDropdownLabelAuthor: 'etxakame\'ara',
     formFieldHintHastags: 'Separe cada tag com uma vírgula (,).\nEx: tag1, tag2, tag3', // Pending translation
     formFieldLabelAcceptTerms: 'Li e aceito os termos de submissão da plataforma', // Pending translation
+    formFieldLabelAuthorName: 'etxakame\'ara:',
+    formFieldLabelAuthorOrigin: 'ereramepe\'ejera nugane:',
     formFieldLabelDescription: 'ekuatxa\'au:',
     formFieldLabelFilename: 'nemarytykuara\'rera:',
-    formFieldLabelAuthorname: 'Seu nome: ', // Pending translation
     formFieldLabelFilepicker: 'Selecione um arquivo', // Pending translation
     formFieldLabelHashtags: 'ekuatxa\'au:',
     formFieldPlaceholderDescription: 'Insira uma descrição do seu material aqui', // Pending translation
