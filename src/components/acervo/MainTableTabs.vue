@@ -46,8 +46,8 @@
     />
     <q-tab
       v-if="viewingFrom === 'userArea'"
-      :label="$t('user.galleryCategoryLabelSubimissions')"
-      name="personalSubimissions"
+      :label="$t('user.galleryCategoryLabelSubmissions')"
+      name="personalSubmissions"
       icon="cloud_upload"
     />
   </q-tabs>

@@ -5,6 +5,12 @@ export default {
     pageTextAboutAwaeteCitationB: 'Um ponto comum da bibliografia acerca desta região é de que o termo “asuriní” ao qual Coudreau se refere provavelmente designava uma quantidade maior de povos indígenas que circulavam por essa região. Esse termo tem origem no termo juruna asóreni que designa vermelho. Embora ele seja atualmente aplicado aos Asuriní do Xingu é mais provável que esse termo designasse o grupo indígena Arawaté, pois estes últimos utilizam de forma abundante o urucum, de cor vermelha, enquanto que os Asuriní do Xingu utilizam jenipapo, de cor preta.”',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  admin: {
+    buttonLabelAccept: 'Aceitar',
+    buttonLabelReject: 'Rejeitar',
+    pageTextAdminLabel: 'Administrador',
+    pageTextSubmissionsLabel: 'Submissões'
+  },
   construction: {
     pageTextTitle: 'Essa página está em construção...'
   },
@@ -87,9 +93,11 @@ export default {
   menus: {
     buttonLabelCancel: 'Cancelar',
     buttonLabelLogin: 'Login',
+    buttonLabelLogout: 'Logout',
     buttonLabelYes: 'Sim',
     langSwitch: 'Idioma',
     navigationAbout: 'Sobre',
+    navigationAdmin: 'Admin',
     navigationContact: 'Contato',
     navigationGallery: 'Acervo',
     navigationHome: 'Início',
@@ -122,6 +130,8 @@ export default {
   },
   user: {
     galleryCategoryLabelPersonal: 'Acervo pessoal',
-    galleryCategoryLabelSubimissions: 'Submissões'
+    galleryCategoryLabelSubmissions: 'Submissões',
+    pageTextFamily: 'Família:',
+    pageTextIndigenousGroup: 'Aldeia:'
   }
 }

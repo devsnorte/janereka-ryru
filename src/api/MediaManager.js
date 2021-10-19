@@ -69,7 +69,7 @@ export const MediaManager = (function () {
 
     /**
      * Validates whether the media data holder object contains all metadada
-     * needed for correct subimission to the API. Missing or invalid data
+     * needed for correct submission to the API. Missing or invalid data
      * throw a SubmissionException.
      *
      * This validation does not cover the media file or any existion API filepaths,
@@ -351,12 +351,30 @@ export const MediaManager = (function () {
      * Find medias uploaded by a given user with published status, with the
      * given pagination parameters.
      */
-    this.getSubimissionsFromUser = async (
+    this.getSubmissionsFromUser = async (
       username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
     ) => {
       try {
         const { data } = await axios.get(
           `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&status=published`
+        )
+        return data
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+
+    /**
+     * Find medias from any users with 'draft' status, with the given pagination
+     * parameters.
+     */
+    this.getUnpublishedMedias = async (
+      pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
+    ) => {
+      try {
+        const { data } = await axios.get(
+          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=draft`
         )
         return data
       } catch (error) {

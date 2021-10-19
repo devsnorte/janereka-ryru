@@ -24,6 +24,12 @@
       </q-item-section>
     </q-item>
 
+    <q-item exact clickable :to="{name: 'admin'}" v-if="isAdmin">
+      <q-item-section>
+        <q-item-label>{{ $t('menus.navigationAdmin') }}</q-item-label>
+      </q-item-section>
+    </q-item>
+
     <q-item exact clickable :to="{name: 'contato' }">
       <q-item-section>
         <q-item-label>{{ $t('menus.navigationContact') }}</q-item-label>
@@ -43,6 +49,18 @@ export default {
     return {
       sessionManager: Session.getSessionManager(),
       sessionData: getters.session()
+    }
+  },
+
+  computed: {
+    /**
+     * Returns 'true' or 'false' whether the user has
+     * admin credentials.
+     *
+     * @return {boolean}
+     */
+    isAdmin: function () {
+      return this.sessionData.roles.includes('acervo.publisher')
     }
   },
 

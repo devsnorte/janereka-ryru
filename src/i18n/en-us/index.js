@@ -5,6 +5,12 @@ export default {
     pageTextAboutAwaeteCitationB: 'A common point on the bibliography about this region is that the term “asuriní”, to which Codreau refers to, probably designated a larger quantity of indigenous peoples from this region. While today it is used to refer to the Xingu Asuriní, there is more chance that the word originally referred to the Arawaté indigenous group, because they abundantly used the urucum, a native plant with red fruits and seeds used to create pigments, while the Xingu Asuriní used jenipapo, with a black color.”',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  admin: {
+    buttonLabelAccept: 'Accept',
+    buttonLabelReject: 'Reject',
+    pageTextAdminLabel: 'Administrator',
+    pageTextSubmissionsLabel: 'Submissions'
+  },
   construction: {
     pageTextTitle: 'This page is under construction...'
   },
@@ -87,9 +93,11 @@ export default {
   menus: {
     buttonLabelCancel: 'Cancel',
     buttonLabelLogin: 'Login',
+    buttonLabelLogout: 'Logout',
     buttonLabelYes: 'Yes',
     langSwitch: 'Language',
     navigationAbout: 'About',
+    navigationAdmin: 'Admin',
     navigationContact: 'Contact',
     navigationGallery: 'Gallery',
     navigationHome: 'Home',
@@ -122,6 +130,8 @@ export default {
   },
   user: {
     galleryCategoryLabelPersonal: 'Personal gallery',
-    galleryCategoryLabelSubimissions: 'Subimissions'
+    galleryCategoryLabelSubmissions: 'Submissions',
+    pageTextFamily: 'Family:',
+    pageTextIndigenousGroup: 'Indigenous group:'
   }
 }

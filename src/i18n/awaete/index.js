@@ -5,6 +5,12 @@ export default {
     pageTextAboutAwaeteCitationB: 'Gyawi uterenui asoreni jawu\nAwa amute awi gy uetcak pajau',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  admin: {
+    buttonLabelAccept: 'Iemipyra',
+    buttonLabelReject: 'Itigupyry\'yma',
+    pageTextAdminLabel: 'Administrador', // Pending translation
+    pageTextSubmissionsLabel: 'Etxakawuma'
+  },
   construction: {
     pageTextTitle: 'Essa página está em construção...' // Pending translation
   },
@@ -87,9 +93,11 @@ export default {
   menus: {
     buttonLabelCancel: 'Cancelar', // Pending translation
     buttonLabelLogin: 'Login', // Pending translation
+    buttonLabelLogout: 'E\'m',
     buttonLabelYes: 'Sim', // Pending translation
     langSwitch: 'Jeyga',
     navigationAbout: 'Karupi\'etxa',
+    navigationAdmin: 'Admin', // Pending translation
     navigationContact: 'Contato', // Pending translation
     navigationGallery: 'Janereka Ryru ruma',
     navigationHome: 'Ypy',
@@ -122,6 +130,8 @@ export default {
   },
   user: {
     galleryCategoryLabelPersonal: 'Acervo pessoal', // Pending translation
-    galleryCategoryLabelSubimissions: 'Submissões' // Pending translation
+    galleryCategoryLabelSubmissions: 'Submissões', // Pending translation
+    pageTextFamily: 'Jeretarera:',
+    pageTextIndigenousGroup: 'Jetawa\'rera:'
   }
 }
