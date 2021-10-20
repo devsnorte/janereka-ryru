@@ -113,7 +113,7 @@ export default {
 
   async mounted () {
     await this.getUserData()
-    this.getUnpublishedMedias()
+    this.getAllUnpublishedMedias()
   },
 
   methods: {
@@ -125,10 +125,10 @@ export default {
       }
     },
 
-    async getUnpublishedMedias () {
+    async getAllUnpublishedMedias () {
       this.loading = true
 
-      const mediaItems = await this.mediaManager.getUnpublishedMedias()
+      const mediaItems = await this.mediaManager.getAllUnpublishedMedias()
 
       if (mediaItems) {
         this.mediaItems = mediaItems

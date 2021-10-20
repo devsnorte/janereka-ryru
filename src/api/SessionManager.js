@@ -48,8 +48,10 @@ export const Session = (function () {
     }
 
     this.isAdmin = () => {
-      const session = this.getSession()
-      return session.roles.includes('acervo.publisher')
+      if (this.isAuthenticated()) {
+        const session = this.getSession()
+        return session.roles.includes('acervo.publisher')
+      } else return false
     }
 
     this.setSessionState = (user, roles, token, issuedAt = new Date()) => {
