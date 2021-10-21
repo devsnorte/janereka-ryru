@@ -5,6 +5,18 @@ export default {
     pageTextAboutAwaeteCitationB: 'Um ponto comum da bibliografia acerca desta região é de que o termo “asuriní” ao qual Coudreau se refere provavelmente designava uma quantidade maior de povos indígenas que circulavam por essa região. Esse termo tem origem no termo juruna asóreni que designa vermelho. Embora ele seja atualmente aplicado aos Asuriní do Xingu é mais provável que esse termo designasse o grupo indígena Arawaté, pois estes últimos utilizam de forma abundante o urucum, de cor vermelha, enquanto que os Asuriní do Xingu utilizam jenipapo, de cor preta.”',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  admin: {
+    alertPublicationError: 'Erro durante publicação. Arquivo não publicado.',
+    alertPublicationSuccess: 'Arquivo publicado com sucesso.',
+    alertRejectionError: 'Erro durante rejeição de arquivo. Arquivo não deletado.',
+    alertRejectionSuccess: 'Arquivo rejeitado. Deleção concluída.',
+    buttonLabelAccept: 'Aceitar',
+    buttonLabelReject: 'Rejeitar',
+    pageTextAdminLabel: 'Administrador',
+    pageTextSubmissionsLabel: 'Submissões',
+    pageTextSureToPublish: 'Tem certeza que deseja APROVAR a submissão?',
+    pageTextSureToReject: 'Tem certeza que deseja REJEITAR a submissão? O arquivo será deletado.'
+  },
   construction: {
     pageTextTitle: 'Essa página está em construção...'
   },
@@ -74,6 +86,7 @@ export default {
   },
   login: {
     alertLoginFailed: 'Não foi possível fazer login. Tente novamente.',
+    alertHasNoPerms: 'Você não possui permissão para acessar essa área.',
     alertLoginNecessary: 'Login necessário para acessar a plataforma.',
     alertSessionAboutToExpire: 'Sua sessão irá expirar em breve. Por favor, refaça o login para continuar usando a plataforma.',
     buttonLabelEnter: 'Entrar',
@@ -85,10 +98,14 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancelar',
+    buttonLabelFinish: 'Concluir',
     buttonLabelLogin: 'Login',
+    buttonLabelLogout: 'Logout',
+    buttonLabelNo: 'Não',
     buttonLabelYes: 'Sim',
     langSwitch: 'Idioma',
     navigationAbout: 'Sobre',
+    navigationAdmin: 'Admin',
     navigationContact: 'Contato',
     navigationGallery: 'Acervo',
     navigationHome: 'Início',
@@ -121,6 +138,8 @@ export default {
   },
   user: {
     galleryCategoryLabelPersonal: 'Acervo pessoal',
-    galleryCategoryLabelSubimissions: 'Submissões'
+    galleryCategoryLabelSubmissions: 'Submissões',
+    pageTextFamily: 'Família:',
+    pageTextIndigenousGroup: 'Aldeia:'
   }
 }

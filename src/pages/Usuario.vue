@@ -3,22 +3,24 @@
   <div class="full-width q-pa-md">
     <div class="text-h4 text-weight-bold text-capitalize">{{ username }}</div>
     <div class="text-body1">
-      <strong>Família:</strong><br>
-      <strong>Aldeia:</strong>
+      <strong>{{ $t('user.pageTextFamily') }}</strong><br>
+      <strong>{{ $t('user.pageTextIndigenousGroup') }}</strong>
     </div>
     <q-btn
-      class="q-mt-lg"
       outline
       color="white"
       text-color="black"
+      class="q-mt-lg"
       type="submit"
-      label="Logout"
+      :label="$t('menus.buttonLabelLogout')"
+      @click="logout"
     />
   </div>
   <main-table
     :loading="loading"
     :midias="mediaItems"
     :viewingFrom="'userArea'"
+    :allowMediaEdition="true"
     @filterContent="filterContent"
     class="fit"
     style="transition: 0.3s ease;"
@@ -84,7 +86,7 @@ export default {
     async getUserSubmissions () {
       this.loading = true
 
-      const mediaItems = await this.mediaManager.getSubimissionsFromUser(this.username)
+      const mediaItems = await this.mediaManager.getSubmissionsFromUser(this.username)
 
       if (mediaItems) {
         this.mediaItems = mediaItems
@@ -104,13 +106,18 @@ export default {
         case 'personalMedias':
           this.getUserMedias()
           break
-        case 'personalSubimissions':
+        case 'personalSubmissions':
           this.getUserSubmissions()
           break
         default:
           this.getUserMedias()
           break
       }
+    },
+
+    logout () {
+      this.session.logout()
+      this.$router.push({ name: 'home' })
     }
   }
 }

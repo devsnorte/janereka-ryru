@@ -79,20 +79,35 @@ export default {
   methods: {
     async login () {
       this.loading = true
-      const goTo = this.$route.query.goTo
-      const result = await this.session.login(this.name, this.password)
+      const login = await this.session.login(this.name, this.password)
 
-      if (result.success) {
+      if (login.success) {
         this.loading = false
-
-        if (goTo) this.$router.push({ path: goTo })
-        else this.$router.push({ name: 'usuario' })
+        this.redirect()
       } else {
         this.loading = false
         this.$q.notify({
           type: 'negative',
           message: this.$t('login.alertLoginFailed')
         })
+      }
+    },
+
+    redirect () {
+      const goTo = this.$route.query.goTo
+
+      if (goTo === '/admin') {
+        if (this.session.isAdmin()) this.$router.push({ path: goTo })
+        else {
+          this.$q.notify({
+            type: 'negative',
+            message: this.$t('login.alertHasNoPerms')
+          })
+          this.$router.push({ name: 'home' })
+        }
+      } else {
+        if (goTo) this.$router.push({ path: goTo })
+        else this.$router.push({ name: 'usuario' })
       }
     }
   }

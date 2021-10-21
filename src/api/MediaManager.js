@@ -1,5 +1,5 @@
-import { axiosInstance as axios } from 'src/boot/axios'
 import { Session } from './SessionManager'
+import * as handlers from './handlers'
 
 /**
  * Media resources orchestrator singleton. Handles all logic related to
@@ -19,6 +19,7 @@ export const MediaManager = (function () {
     this.pagTamanho = 1000
     this.pagAtual = 1
     this.lastQuery = ''
+    this.defaultQuery = `/acervo/find?pag_tamanho=${this.pagTamanho}&pag_atual=${this.pagAtual}`
 
     /**
      * Resets the media data holder to an empty object
@@ -40,294 +41,29 @@ export const MediaManager = (function () {
     }
 
     /**
-     * Verifies whether the media data holder object is empty, returning a
-     * boolean. Used by validation fuctions.
+     * Performs creation of new medias in the API.
      */
-    this.isMediaObjectEmpty = () => {
-      if (Object.keys(this.mediaObject).length === 0) return true
-      else return false
-    }
+    this.performMediaCreation = async () => await handlers.handleMediaCreation(this.mediaObject)
 
     /**
-     * Refreshes session data through the Session manager singleton and gets
-     * user data for making authenticated requests.
+     * Performs update of existing medias in the API.
      */
-    this.refreshToken = () => {
-      const sessionData = this.session.getSession()
-      this.token = sessionData.token
-    }
+    this.performMediaUpdate = async () => await handlers.handleMediaUpdate(this.mediaObject)
 
     /**
-     * Validates whether the current user is authenticated. Unauthenticated
-     * users throw a SubmissionException.
+     * Performs publication of existing medias in the API.
      */
-    this.validateAuthentication = () => {
-      if (!this.session.isAuthenticated()) {
-        throw new this.SubmissionException('AuthenticationValidationError', 'No user is authenticated.')
-      }
-    }
+    this.performMediaPublication = async () => await handlers.handleMediaPublication(this.mediaObject)
 
     /**
-     * Validates whether the media data holder object contains all metadada
-     * needed for correct subimission to the API. Missing or invalid data
-     * throw a SubmissionException.
-     *
-     * This validation does not cover the media file or any existion API filepaths,
-     * which are instead validated by the `validateForUpload` method.
+     * Performs deletion of existing medias in the API.
      */
-    this.validateForSubmission = () => {
-      if (this.isMediaObjectEmpty()) {
-        throw new this.SubmissionException('MediaDataValidationError', 'Media data is empty. Can not submit.')
-      }
-
-      if (!this.mediaObject.title) {
-        throw new this.SubmissionException('MediaDataValidationError', 'Media title is empty. Can not submit.')
-      }
-
-      if (!this.mediaObject.description) {
-        throw new this.SubmissionException('MediaDataValidationError', 'Media description is empty. Can not submit.')
-      }
-
-      if (!this.mediaObject.mediaType) {
-        throw new this.SubmissionException('MediaDataValidationError', 'Media file type was not set. Can not submit.')
-      }
-
-      if (!Array.isArray(this.mediaObject.tags)) {
-        throw new this.SubmissionException('MediaDataValidationError', 'Media tags are not set as array. Can not submit.')
-      } else {
-        this.mediaObject.tags.forEach(tag => {
-          if (typeof (tag) !== 'string') {
-            throw new this.SubmissionException('MediaDataValidationError', 'One of the media tags is not a string. Can not submit.')
-          }
-        })
-      }
-
-      if (!this.mediaObject.authorname) {
-        throw new this.SubmissionException('MediaDataValidationError', 'Author name not found. Can not submit.')
-      }
-
-      if (!this.mediaObject.tribe) {
-        throw new this.SubmissionException('MediaDataValidationError', 'Author indigenous group not found. Can not submit.')
-      }
-    }
+    this.performMediaDeletion = async () => await handlers.handleMediaDeletion(this.mediaObject)
 
     /**
-     * Validates whether the media data holder object contains a media
-     * file and a media filepath, after calling the metadata validation
-     * function. This data is needed specifically for PUT requests and
-     * POST request for the media upload endpoint.
+     * Performs download of existing media files from the API.
      */
-    this.validateForUpload = () => {
-      this.validateForSubmission()
-
-      if (!this.mediaObject.mediaFile) {
-        throw new this.SubmissionException('MediaDataValidationError', 'No media file found. Can not upload.')
-      }
-      if (!this.mediaObject.mediaPath) {
-        throw new this.SubmissionException('MediaDataValidationError', 'No media path found. Can not upload.')
-      }
-    }
-
-    /**
-     * Validates whether the media data holder object contains the
-     * bare data needed for DELETE requests, namely the resource's
-     * API filepath.
-     */
-    this.validateForDeletion = () => {
-      if (this.isMediaObjectEmpty()) {
-        throw new this.SubmissionException('DeletionValidationError', 'Media data is empty. Unable to delete.')
-      }
-
-      if (!this.mediaObject.mediaPath) {
-        throw new this.SubmissionException('DeletionValidationError', 'No media path found. Unable to delete.')
-      }
-    }
-
-    /**
-     * Handles media resource metadata submission to the API. Calls needed
-     * validators and dispatches a POST request to the corresponding API
-     * endpoint with the required headers and FormData. Errors upon validation
-     * or request dispatching yield a SubmissionException.
-     */
-    this.handleMediaInfoSubmission = async () => {
-      try {
-        this.validateAuthentication()
-        this.validateForSubmission()
-
-        const infoFormData = new FormData()
-        infoFormData.append('titulo', this.mediaObject.title)
-        infoFormData.append('descricao', this.mediaObject.description)
-        infoFormData.append('tipo', this.mediaObject.mediaType)
-        infoFormData.append('tags', this.mediaObject.tags.join(', '))
-        infoFormData.append('autor', this.mediaObject.authorname)
-        infoFormData.append('mocambo', this.mediaObject.tribe)
-
-        console.log(this.mediaObject)
-
-        const { data } = await axios({
-          method: 'post',
-          url: '/acervo/midia',
-          data: infoFormData,
-          headers: { token: this.token, 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
-
-        this.mediaObject.mediaPath = data.path
-      } catch (error) {
-        console.error(error)
-        throw new this.SubmissionException('MediaInformationSubmissionError', 'Error during the Media information submission process. If error persists, please contact an administrator.')
-      }
-    }
-
-    /**
-     * Handles the media file upload to the API. Calls needed validators
-     * dispatches a POST request to the corresponding API endpoint with
-     * the required headers and FormData. Errors upon validation or
-     * request dispatching yield a SubmissionException.
-     *
-     * On the cases where file upload fails after successful submission
-     * of its metadata, also calls the deletion handler to clear up
-     * previous data.
-     */
-    this.handleMediaFileSubmission = async () => {
-      try {
-        this.validateAuthentication()
-        this.validateForUpload()
-
-        const fileFormData = new FormData()
-        fileFormData.append('arquivo', this.mediaObject.mediaFile)
-
-        await axios({
-          method: 'post',
-          url: `/acervo/upload/${this.mediaObject.mediaPath}`,
-          data: fileFormData,
-          headers: { token: this.token }
-        })
-      } catch (error) {
-        this.handleMediaDeletion()
-        throw new this.SubmissionException('MediaFileUploadError', 'Error during the file upload. Deletion request dispatched for the corresponding path. If error persists, please contact an administrator.')
-      }
-    }
-
-    /**
-     * Handles the update of media resources in the API. Calls needed
-     * validators and dispatches a PUT request to the corresponding API
-     * endpoint with the required headers and FormData. Errors upon
-     * validation or request dispatching yield a SubmissionException.
-     */
-    this.handleMediaUpdate = async (fileName) => {
-      try {
-        this.validateAuthentication()
-
-        const updateInfoFormData = new FormData()
-        updateInfoFormData.append('titulo', this.mediaObject.title)
-        updateInfoFormData.append('descricao', this.mediaObject.description)
-        updateInfoFormData.append('tags', this.mediaObject.tags.join(', '))
-        updateInfoFormData.append('autor', this.mediaObject.authorname)
-        updateInfoFormData.append('mocambo', this.mediaObject.tribe)
-
-        await axios({
-          method: 'put',
-          url: `/acervo/midia/${this.mediaObject.mediaPath}`,
-          data: updateInfoFormData,
-          headers: { token: this.token, 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
-      } catch (error) {
-        console.error(error)
-        throw new this.SubmissionException('MediaUpdateError', 'Error during the update process. If error persists, please contact an administrator.')
-      }
-    }
-
-    /**
-     * Handles deletion of media resources in the API. Calls needed validators
-     * and dispatches a DELETE request to the corresponding API endpoint with
-     * the required headers. Errors upon validation or request dispatching yield
-     * a SubmissionException.
-     */
-    this.handleMediaDeletion = async () => {
-      try {
-        this.validateAuthentication()
-        this.validateForDeletion()
-
-        await axios({
-          method: 'delete',
-          url: `/acervo/midia/${encodeURI(this.mediaObject.mediaPath)}`,
-          headers: { token: this.token }
-        })
-      } catch (error) {
-        console.error(error)
-        throw new this.SubmissionException('MediaDeletionError', 'Error during the deletion process. If error persists, please contact an administrator.')
-      }
-    }
-
-    /**
-     * Orchestrates requests to submit new media resources to the API.
-     * Calls request handlers for the related endpoints and catches any
-     * errors during the process.
-     */
-    this.performMediaCreation = async () => {
-      try {
-        this.refreshToken()
-        await this.handleMediaInfoSubmission()
-        await this.handleMediaFileSubmission()
-        return true
-      } catch (error) {
-        console.error(error)
-        return false
-      }
-    }
-
-    /**
-     * Orchestrates requests to update existing media resources in the
-     * API. Calls request handlers for the related endpoints and catches
-     * any errors during the process.
-     */
-    this.performMediaUpdate = async (fileName) => {
-      try {
-        this.refreshToken()
-        await this.handleMediaUpdate(fileName)
-        return true
-      } catch (error) {
-        console.error(error)
-        return false
-      }
-    }
-
-    /**
-     * Orchestrates requests to delete existing media resources in the
-     * API. Calls request handlers for the related endpoints and catches
-     * any errors during the process.
-     */
-    this.performMediaDeletion = async () => {
-      try {
-        this.refreshToken()
-        await this.handleMediaDeletion()
-        return true
-      } catch (error) {
-        console.error(error)
-        return false
-      }
-    }
-
-    /**
-     * Fetches media files from the API download endpoint. The media
-     * file is returned as a Blob object.
-     */
-    this.performMediaDownload = async (mediaPath) => {
-      try {
-        this.refreshToken()
-        const response = await axios({
-          method: 'get',
-          url: `/acervo/download/${encodeURIComponent(mediaPath)}`,
-          token: this.token,
-          responseType: 'blob'
-        })
-        const url = URL.createObjectURL(response.data)
-        return url
-      } catch (error) {
-        console.error(error)
-        return false
-      }
-    }
+    this.performMediaDownload = async (mediaAPIPath) => await handlers.handleMediaDownload(mediaAPIPath)
 
     /**
      * Find medias uploaded by a given user, with the given pagination
@@ -336,33 +72,33 @@ export const MediaManager = (function () {
     this.getMediasFromUser = async (
       username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
     ) => {
-      try {
-        const { data } = await axios.get(
-          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}`
-        )
-        return data
-      } catch (error) {
-        console.error(error)
-        return false
-      }
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}`
+      const medias = await handlers.handleGetMediaByQuery(query)
+      return medias
     }
 
     /**
      * Find medias uploaded by a given user with published status, with the
      * given pagination parameters.
      */
-    this.getSubimissionsFromUser = async (
+    this.getSubmissionsFromUser = async (
       username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
     ) => {
-      try {
-        const { data } = await axios.get(
-          `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&status=published`
-        )
-        return data
-      } catch (error) {
-        console.error(error)
-        return false
-      }
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&status=published`
+      const medias = await handlers.handleGetMediaByQuery(query)
+      return medias
+    }
+
+    /**
+     * Find medias from any users with 'draft' status, with the given pagination
+     * parameters.
+     */
+    this.getAllUnpublishedMedias = async (
+      pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
+    ) => {
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=draft`
+      const medias = await handlers.handleGetMediaByQuery(query)
+      return medias
     }
 
     /**
@@ -371,17 +107,13 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getMediasByHashtag = async (hashtag, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      try {
-        const query = `/acervo/find?hashtags=${hashtag}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        const { data } = await axios.get(query)
-        this.lastQuery = query
+      const query = `/acervo/find?hashtags=${hashtag}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
+      const medias = await handlers.handleGetMediaByQuery(query)
 
-        return data
-      } catch (error) {
-        console.log(error)
-        this.lastQuery = ''
-        return false
-      }
+      if (medias) this.lastQuery = query
+      else this.lastQuery = ''
+
+      return medias
     }
 
     /**
@@ -390,17 +122,13 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getMediasByKeywords = async (keywords, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      try {
-        const query = `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        const { data } = await axios.get(query)
-        this.lastQuery = query
+      const query = `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
+      const medias = await handlers.handleGetMediaByQuery(query)
 
-        return data
-      } catch (error) {
-        console.log(error)
-        this.lastQuery = ''
-        return false
-      }
+      if (medias) this.lastQuery = query
+      else this.lastQuery = ''
+
+      return medias
     }
 
     /**
@@ -409,17 +137,13 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getAudioMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      try {
-        const query = `/acervo/find?tipos=audio&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        const { data } = await axios.get(query)
-        this.lastQuery = query
+      const query = `/acervo/find?tipos=audio&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
+      const medias = await handlers.handleGetMediaByQuery(query)
 
-        return data
-      } catch (error) {
-        console.error(error)
-        this.lastQuery = ''
-        return false
-      }
+      if (medias) this.lastQuery = query
+      else this.lastQuery = ''
+
+      return medias
     }
 
     /**
@@ -428,17 +152,13 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getFileMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      try {
-        const query = `/acervo/find?tipos=arquivo&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        const { data } = await axios.get(query)
-        this.lastQuery = query
+      const query = `/acervo/find?tipos=arquivo&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
+      const medias = await handlers.handleGetMediaByQuery(query)
 
-        return data
-      } catch (error) {
-        console.error(error)
-        this.lastQuery = ''
-        return false
-      }
+      if (medias) this.lastQuery = query
+      else this.lastQuery = ''
+
+      return medias
     }
 
     /**
@@ -447,17 +167,13 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getImageMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      try {
-        const query = `/acervo/find?tipos=imagem&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        const { data } = await axios.get(query)
-        this.lastQuery = query
+      const query = `/acervo/find?tipos=imagem&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
+      const medias = await handlers.handleGetMediaByQuery(query)
 
-        return data
-      } catch (error) {
-        console.error(error)
-        this.lastQuery = ''
-        return false
-      }
+      if (medias) this.lastQuery = query
+      else this.lastQuery = ''
+
+      return medias
     }
 
     /**
@@ -466,17 +182,13 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getVideoMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      try {
-        const query = `/acervo/find?tipos=video&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        const { data } = await axios.get(query)
-        this.lastQuery = query
+      const query = `/acervo/find?tipos=video&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
+      const medias = await handlers.handleGetMediaByQuery(query)
 
-        return data
-      } catch (error) {
-        console.error(error)
-        this.lastQuery = ''
-        return false
-      }
+      if (medias) this.lastQuery = query
+      else this.lastQuery = ''
+
+      return medias
     }
 
     /**
@@ -485,17 +197,13 @@ export const MediaManager = (function () {
      * potential reuse with sorting parameters.
      */
     this.getAllMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      try {
-        const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
-        const { data } = await axios.get(query)
-        this.lastQuery = query
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
+      const medias = await handlers.handleGetMediaByQuery(query)
 
-        return data
-      } catch (error) {
-        console.error(error)
-        this.lastQuery = ''
-        return false
-      }
+      if (medias) this.lastQuery = query
+      else this.lastQuery = ''
+
+      return medias
     }
 
     /**
@@ -561,19 +269,10 @@ export const MediaManager = (function () {
       }
 
       if (sortQuery) {
-        try {
-          const { data } = await axios.get(sortQuery)
-          return { success: true, data }
-        } catch (error) {
-          console.error(error)
-          return { success: false }
-        }
+        const medias = await handlers.handleGetMediaByQuery(sortQuery)
+        if (medias) return { success: true, data: medias }
+        else return { success: false }
       } else return { success: false }
-    }
-
-    this.SubmissionException = function (name, message) {
-      this.name = name
-      this.message = message
     }
   }
 

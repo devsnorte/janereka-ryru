@@ -36,6 +36,7 @@
         <card-wrapper
           class="column col content-card"
           :card="props.row"
+          :allowMediaEdition="allowMediaEdition"
           @closeMenus="$emit('closeMenus')"
         />
       </div>
@@ -114,6 +115,11 @@ export default {
       type: String,
       required: true,
       default: 'mainGallery'
+    },
+    allowMediaEdition: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
 

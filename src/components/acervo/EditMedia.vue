@@ -52,7 +52,7 @@
         :rules="[val => !!val || $t('submission.formValidationFieldRequired')]"
       />
 
-      <!-- Seleção de aldeua / Author's indigenous group selection -->
+      <!-- Seleção de aldeia / Author's indigenous group selection -->
       <label for="authorname" class="inline-block q-mt-lg">
         {{ $t('submission.formFieldLabelAuthorOrigin') }}
       </label>

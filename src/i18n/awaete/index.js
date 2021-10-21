@@ -5,6 +5,18 @@ export default {
     pageTextAboutAwaeteCitationB: 'Gyawi uterenui asoreni jawu\nAwa amute awi gy uetcak pajau',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  admin: {
+    alertPublicationError: 'Erro durante publicação. Arquivo não publicado.', // Pending translation
+    alertPublicationSuccess: 'Arquivo publicado com sucesso.', // Pending translation
+    alertRejectionError: 'Error durante rejeição de arquivo. Arquivo não deletado.', // Pending translation
+    alertRejectionSuccess: 'Arquivo rejeitado. Deleção concluída.', // Pending translation
+    buttonLabelAccept: 'Iemipyra',
+    buttonLabelReject: 'Itigupyry\'yma',
+    pageTextAdminLabel: 'Administrador', // Pending translation
+    pageTextSubmissionsLabel: 'Etxakawuma',
+    pageTextSureToPublish: 'Tem certeza que deseja APROVAR a submissão?', // Pending translation
+    pageTextSureToReject: 'Tem certeza que deseja REJEITAR a submissão? O arquivo será deletado.' // Pending translation
+  },
   construction: {
     pageTextTitle: 'Essa página está em construção...' // Pending translation
   },
@@ -74,6 +86,7 @@ export default {
   },
   login: {
     alertLoginFailed: 'Não foi possível fazer login. Tente novamente.', // Pending translation
+    alertHasNoPerms: 'Você não possui permissão para acessar essa área.', // Pending translation
     alertLoginNecessary: 'Login necessário para acessar a plataforma.', // Pending translation
     alertSessionAboutToExpire: 'Sua sessão irá expirar em breve. Por favor, refaça o login para continuar usando a plataforma.', // Pending translation
     buttonLabelEnter: 'Entrar', // Pending translation
@@ -85,10 +98,14 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancelar', // Pending translation
+    buttonLabelFinish: 'Finish', // Pending translation
     buttonLabelLogin: 'Login', // Pending translation
+    buttonLabelLogout: 'E\'m',
+    buttonLabelNo: 'Não', // Pending translation
     buttonLabelYes: 'Sim', // Pending translation
     langSwitch: 'Jeyga',
     navigationAbout: 'Karupi\'etxa',
+    navigationAdmin: 'Admin', // Pending translation
     navigationContact: 'Contato', // Pending translation
     navigationGallery: 'Janereka Ryru ruma',
     navigationHome: 'Ypy',
@@ -121,6 +138,8 @@ export default {
   },
   user: {
     galleryCategoryLabelPersonal: 'Acervo pessoal', // Pending translation
-    galleryCategoryLabelSubimissions: 'Submissões' // Pending translation
+    galleryCategoryLabelSubmissions: 'Submissões', // Pending translation
+    pageTextFamily: 'Jeretarera:',
+    pageTextIndigenousGroup: 'Jetawa\'rera:'
   }
 }

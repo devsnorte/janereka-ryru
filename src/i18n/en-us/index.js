@@ -5,6 +5,18 @@ export default {
     pageTextAboutAwaeteCitationB: 'A common point on the bibliography about this region is that the term “asuriní”, to which Codreau refers to, probably designated a larger quantity of indigenous peoples from this region. While today it is used to refer to the Xingu Asuriní, there is more chance that the word originally referred to the Arawaté indigenous group, because they abundantly used the urucum, a native plant with red fruits and seeds used to create pigments, while the Xingu Asuriní used jenipapo, with a black color.”',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
+  admin: {
+    alertPublicationError: 'Error during publication. Media kept unpublished.',
+    alertPublicationSuccess: 'Media successfuly published.',
+    alertRejectionError: 'Error during media rejection. File not deleted.',
+    alertRejectionSuccess: 'Media rejected. Deletion successful.',
+    buttonLabelAccept: 'Accept',
+    buttonLabelReject: 'Reject',
+    pageTextAdminLabel: 'Administrator',
+    pageTextSubmissionsLabel: 'Submissions',
+    pageTextSureToPublish: 'Are you sure to APPROVE the subimission?',
+    pageTextSureToReject: 'Are you sure to REJECT the submission? The media will be deleted.'
+  },
   construction: {
     pageTextTitle: 'This page is under construction...'
   },
@@ -74,6 +86,7 @@ export default {
   },
   login: {
     alertLoginFailed: 'Unable to login. Please try again.',
+    alertHasNoPerms: 'Your credentials do not allow access to this area.',
     alertLoginNecessary: 'Login necessary to access the platform.',
     alertSessionAboutToExpire: 'Your session is about to expire. Please log in again to continue using the platform.',
     buttonLabelEnter: 'Enter',
@@ -85,10 +98,14 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancel',
+    buttonLabelFinish: 'Finish',
     buttonLabelLogin: 'Login',
+    buttonLabelLogout: 'Logout',
+    buttonLabelNo: 'No',
     buttonLabelYes: 'Yes',
     langSwitch: 'Language',
     navigationAbout: 'About',
+    navigationAdmin: 'Admin',
     navigationContact: 'Contact',
     navigationGallery: 'Gallery',
     navigationHome: 'Home',
@@ -121,6 +138,8 @@ export default {
   },
   user: {
     galleryCategoryLabelPersonal: 'Personal gallery',
-    galleryCategoryLabelSubimissions: 'Subimissions'
+    galleryCategoryLabelSubmissions: 'Submissions',
+    pageTextFamily: 'Family:',
+    pageTextIndigenousGroup: 'Indigenous group:'
   }
 }

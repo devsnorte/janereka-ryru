@@ -37,6 +37,12 @@
           />
           <q-route-tab
             exact
+            v-if="isAdmin"
+            :to="{ name: 'admin' }"
+            :label="$t('menus.navigationAdmin')"
+          />
+          <q-route-tab
+            exact
             :to="{ name: 'contato' }"
             :label="$t('menus.navigationContact')"
           />
@@ -149,6 +155,18 @@ export default {
         awaete: 'Awaete Jeyga',
         'en-us': 'English'
       }
+    }
+  },
+
+  computed: {
+    /**
+     * Returns 'true' or 'false' whether the user has
+     * admin credentials.
+     *
+     * @return {boolean}
+     */
+    isAdmin: function () {
+      return this.sessionData.roles.includes('acervo.publisher')
     }
   },
 
