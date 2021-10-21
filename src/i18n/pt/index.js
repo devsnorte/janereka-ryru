@@ -6,10 +6,16 @@ export default {
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
   admin: {
+    alertPublicationError: 'Erro durante publicação. Arquivo não publicado.',
+    alertPublicationSuccess: 'Arquivo publicado com sucesso.',
+    alertRejectionError: 'Erro durante rejeição de arquivo. Arquivo não deletado.',
+    alertRejectionSuccess: 'Arquivo rejeitado. Deleção concluída.',
     buttonLabelAccept: 'Aceitar',
     buttonLabelReject: 'Rejeitar',
     pageTextAdminLabel: 'Administrador',
-    pageTextSubmissionsLabel: 'Submissões'
+    pageTextSubmissionsLabel: 'Submissões',
+    pageTextSureToPublish: 'Tem certeza que deseja APROVAR a submissão?',
+    pageTextSureToReject: 'Tem certeza que deseja REJEITAR a submissão? O arquivo será deletado.'
   },
   construction: {
     pageTextTitle: 'Essa página está em construção...'
@@ -92,8 +98,10 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancelar',
+    buttonLabelFinish: 'Concluir',
     buttonLabelLogin: 'Login',
     buttonLabelLogout: 'Logout',
+    buttonLabelNo: 'Não',
     buttonLabelYes: 'Sim',
     langSwitch: 'Idioma',
     navigationAbout: 'Sobre',

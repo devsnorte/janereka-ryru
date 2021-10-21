@@ -6,10 +6,16 @@ export default {
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
   admin: {
+    alertPublicationError: 'Error during publication. Media kept unpublished.',
+    alertPublicationSuccess: 'Media successfuly published.',
+    alertRejectionError: 'Error during media rejection. File not deleted.',
+    alertRejectionSuccess: 'Media rejected. Deletion successful.',
     buttonLabelAccept: 'Accept',
     buttonLabelReject: 'Reject',
     pageTextAdminLabel: 'Administrator',
-    pageTextSubmissionsLabel: 'Submissions'
+    pageTextSubmissionsLabel: 'Submissions',
+    pageTextSureToPublish: 'Are you sure to APPROVE the subimission?',
+    pageTextSureToReject: 'Are you sure to REJECT the submission? The media will be deleted.'
   },
   construction: {
     pageTextTitle: 'This page is under construction...'
@@ -92,8 +98,10 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancel',
+    buttonLabelFinish: 'Finish',
     buttonLabelLogin: 'Login',
     buttonLabelLogout: 'Logout',
+    buttonLabelNo: 'No',
     buttonLabelYes: 'Yes',
     langSwitch: 'Language',
     navigationAbout: 'About',

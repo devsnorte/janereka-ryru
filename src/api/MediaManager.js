@@ -51,6 +51,11 @@ export const MediaManager = (function () {
     this.performMediaUpdate = async () => await handlers.handleMediaUpdate(this.mediaObject)
 
     /**
+     * Performs publication of existing medias in the API.
+     */
+    this.performMediaPublication = async () => await handlers.handleMediaPublication(this.mediaObject)
+
+    /**
      * Performs deletion of existing medias in the API.
      */
     this.performMediaDeletion = async () => await handlers.handleMediaDeletion(this.mediaObject)

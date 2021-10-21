@@ -6,10 +6,16 @@ export default {
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
   },
   admin: {
+    alertPublicationError: 'Erro durante publicação. Arquivo não publicado.', // Pending translation
+    alertPublicationSuccess: 'Arquivo publicado com sucesso.', // Pending translation
+    alertRejectionError: 'Error durante rejeição de arquivo. Arquivo não deletado.', // Pending translation
+    alertRejectionSuccess: 'Arquivo rejeitado. Deleção concluída.', // Pending translation
     buttonLabelAccept: 'Iemipyra',
     buttonLabelReject: 'Itigupyry\'yma',
     pageTextAdminLabel: 'Administrador', // Pending translation
-    pageTextSubmissionsLabel: 'Etxakawuma'
+    pageTextSubmissionsLabel: 'Etxakawuma',
+    pageTextSureToPublish: 'Tem certeza que deseja APROVAR a submissão?', // Pending translation
+    pageTextSureToReject: 'Tem certeza que deseja REJEITAR a submissão? O arquivo será deletado.' // Pending translation
   },
   construction: {
     pageTextTitle: 'Essa página está em construção...' // Pending translation
@@ -92,8 +98,10 @@ export default {
   },
   menus: {
     buttonLabelCancel: 'Cancelar', // Pending translation
+    buttonLabelFinish: 'Finish', // Pending translation
     buttonLabelLogin: 'Login', // Pending translation
     buttonLabelLogout: 'E\'m',
+    buttonLabelNo: 'Não', // Pending translation
     buttonLabelYes: 'Sim', // Pending translation
     langSwitch: 'Jeyga',
     navigationAbout: 'Karupi\'etxa',

@@ -71,6 +71,7 @@
             <q-btn
               unelevated
               :label="$t('admin.buttonLabelAccept')"
+              @click="selectedMedia = media; showPublish = true"
               icon="done"
               color="green"
               class="q-ma-xs"
@@ -78,6 +79,7 @@
             <q-btn
               unelevated
               :label="$t('admin.buttonLabelReject')"
+              @click="selectedMedia = media; showReject = true"
               icon="close"
               color="negative"
               class="q-ma-xs"
@@ -85,6 +87,20 @@
           </div>
         </div>
       </div>
+
+      <q-dialog v-model="showPublish" persistent>
+        <publish-media
+          :media="selectedMedia"
+          @closePublishModal="showPublish = false"
+        />
+      </q-dialog>
+
+      <q-dialog v-model="showReject" persistent>
+        <reject-media
+          :media="selectedMedia"
+          @closeRejectModal="showReject = false"
+        />
+      </q-dialog>
     </div>
   </div>
 </q-page>
@@ -98,7 +114,9 @@ export default {
   name: 'Admin',
 
   components: {
-    CardWrapper: () => import('components/acervo/CardWrapper')
+    CardWrapper: () => import('components/acervo/CardWrapper'),
+    PublishMedia: () => import('components/admin/PublishMedia.vue'),
+    RejectMedia: () => import('components/admin/RejectMedia.vue')
   },
 
   data () {
@@ -107,7 +125,10 @@ export default {
       mediaManager: MediaManager.getManager(),
       mediaItems: [],
       username: '',
-      loading: false
+      loading: false,
+      selectedMedia: null,
+      showPublish: false,
+      showReject: false
     }
   },
 

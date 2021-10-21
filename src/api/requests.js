@@ -33,7 +33,6 @@ export async function requestMediaMetadataUpload (mediaDataObject, token) {
     mediaDataObject.mediaPath = data.path
     return mediaDataObject
   } catch (error) {
-    // console.error(error)
     throw new APIError('MetadataSubmissionError', 'Error while requesting media metadata submission. If error persists, please contact an administrator.', error)
   }
 }
@@ -61,7 +60,6 @@ export async function requestMediaFileUpload (mediaDataObject, token) {
       headers: { token }
     })
   } catch (error) {
-    // this.handleMediaDeletion()
     throw new APIError('FileUploadError', 'Error during file upload. Deletion request dispatched for the corresponding path. If error persists, please contact an administrator.', error)
   }
 }
@@ -93,7 +91,6 @@ export async function requestMediaUpdate (mediaDataObject, token) {
       headers: { token, 'Content-Type': 'application/x-www-form-urlencoded' }
     })
   } catch (error) {
-    // console.error(error)
     throw new APIError('MediaUpdateError', 'Error while requesting media metadata update. If error persists, please contact an administrator.', error)
   }
 }
@@ -117,7 +114,6 @@ export async function requestMediaDeletion (mediaDataObject, token) {
       headers: { token }
     })
   } catch (error) {
-    // console.error(error)
     throw new APIError('MediaDeletionError', 'Error while requesting media deletion. If error persists, please contact an administrator.', error)
   }
 }
@@ -136,17 +132,12 @@ export async function requestMediaDeletion (mediaDataObject, token) {
  */
 export async function requestMediaPublication (mediaDataObject, token) {
   try {
-    const publishFormData = new FormData()
-    publishFormData.append('status', 'published')
-
     await axios({
       method: 'put',
-      url: `/acervo/midia/${mediaDataObject.mediaPath}`,
-      data: publishFormData,
-      headers: { token, 'Content-Type': 'application/x-www-form-urlencoded' }
+      url: `/acervo/publish/${mediaDataObject.mediaPath}`,
+      headers: { token }
     })
   } catch (error) {
-    // console.error(error)
     throw new APIError('MediaPublicationError', 'Error while requesting media publication. Unable to proceed.', error)
   }
 }

@@ -132,10 +132,10 @@ export function validateMediaDataForDeletion (mediaDataObject) {
  */
 export function validateMediaDataForPublication (mediaDataObject) {
   if (validateMediaDataNotEmpty(mediaDataObject)) {
-    throw new APIError('PublicationValidationError', 'Media data is empty. Unable to delete.', 'Invalid `mediaDataObject`.')
+    throw new APIError('PublicationValidationError', 'Media data is empty. Unable to publish.', 'Invalid `mediaDataObject`.')
   }
 
   if (!mediaDataObject.mediaPath) {
-    throw new APIError('PublicationValidationError', 'No media path found. Unable to delete.', 'Invalid `mediaDataObject`.')
+    throw new APIError('PublicationValidationError', 'No media path found. Unable to publish.', 'Invalid `mediaDataObject`.')
   }
 }
