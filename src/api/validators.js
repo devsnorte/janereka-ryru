@@ -19,7 +19,7 @@ export function validateUserIsAuthenticated () {
  */
 export function validateUserIsAdmin () {
   if (!sessionManager.isAdmin()) {
-    throw new APIError('AuthenticationError', 'The current user does not have administrative permissions.', 'Invalid permissions.')
+    throw new APIError('AuthenticationError', 'The current user does not have administrative permissions.', 'Invalid permissions. User is not admin.')
   }
 }
 
