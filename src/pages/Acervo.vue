@@ -6,6 +6,7 @@
     :loading="loading"
     :midias="mediaItems"
     :viewingFrom="'mainGallery'"
+    :allowMediaEdition="false"
     @filterContent="filterContent"
     @changePage="requestPage($event)"
     @toggleFilter="showFilter = !showFilter"

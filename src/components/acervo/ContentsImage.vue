@@ -22,26 +22,27 @@
       </q-img>
     </q-card-section>
 
-    <q-card-section class="q-pt-none">
+    <q-card-section class="q-pt-none q-mb-xl">
+      <media-details
+        v-show="!showEdit"
+        :media="media"
+      />
+    </q-card-section>
+
+    <q-card-section v-if="allowEdition" class="q-pt-none">
       <edit-media
-        v-if="editMode"
+        v-if="showEdit"
         :media="media"
         :triggerSubmit="triggerSubmit"
         @finished-submission="finishSubmit"
       />
     </q-card-section>
 
-    <q-card-section class="q-pt-none q-mb-xl">
-      <media-details
-        v-show="!editMode"
-        :media="media"
-      />
-    </q-card-section>
-
     <q-card-actions align="right" class="bg-white text-teal fixed-bottom">
       <media-content-buttons
-        :editMode="editMode"
-        @toggleEditMode="editMode = !editMode"
+        :editMode="showEdit"
+        :allowEdition="allowEdition"
+        @toggleEditMode="showEdit = !showEdit"
         @triggerSubmit="triggerSubmit = true"
         @triggerDelete="deleteMedia()"
       />
@@ -66,6 +67,11 @@ export default {
     media: {
       type: Object,
       required: true
+    },
+    allowEdition: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
 
@@ -73,7 +79,7 @@ export default {
     return {
       mediaManager: MediaManager.getManager(),
       baseUrl: this.$axios.defaults.baseURL,
-      editMode: false,
+      showEdit: false,
       triggerSubmit: false
     }
   },
@@ -102,7 +108,7 @@ export default {
 
     finishSubmit () {
       this.triggerSubmit = false
-      this.editMode = false
+      this.showEdit = false
     }
   }
 }

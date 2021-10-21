@@ -51,6 +51,7 @@
         <card-wrapper
           :card="media"
           :class="$q.screen.lt.sm ? 'col-2' : 'col q-mr-md'"
+          :allowMediaEdition="false"
           class="col content-card"
         />
 

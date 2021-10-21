@@ -28,10 +28,10 @@
       persistent
       maximized
     >
-      <contents-file v-if="card.tipo == 'arquivo'" :media="card" />
-      <contents-image v-if="card.tipo == 'imagem'" :media="card" />
-      <contents-video v-if="card.tipo == 'video'" :media="card" />
-      <contents-audio v-if="card.tipo == 'audio'" :media="card" />
+      <contents-file v-if="card.tipo == 'arquivo'" :media="card" :allowEdition="allowMediaEdition" />
+      <contents-image v-if="card.tipo == 'imagem'" :media="card" :allowEdition="allowMediaEdition" />
+      <contents-video v-if="card.tipo == 'video'" :media="card" :allowEdition="allowMediaEdition" />
+      <contents-audio v-if="card.tipo == 'audio'" :media="card" :allowEdition="allowMediaEdition" />
     </q-dialog>
   </div>
 </template>
@@ -55,6 +55,11 @@ export default {
     card: {
       type: Object,
       required: true
+    },
+    allowMediaEdition: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
 

@@ -107,7 +107,7 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getMediasByHashtag = async (hashtag, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      const query = `/acervo/find?hashtags=${hashtag}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+      const query = `/acervo/find?hashtags=${hashtag}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
       const medias = await handlers.handleGetMediaByQuery(query)
 
       if (medias) this.lastQuery = query
@@ -122,7 +122,7 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getMediasByKeywords = async (keywords, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      const query = `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+      const query = `/acervo/find?keywords=${keywords}&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
       const medias = await handlers.handleGetMediaByQuery(query)
 
       if (medias) this.lastQuery = query
@@ -137,7 +137,7 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getAudioMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      const query = `/acervo/find?tipos=audio&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+      const query = `/acervo/find?tipos=audio&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
       const medias = await handlers.handleGetMediaByQuery(query)
 
       if (medias) this.lastQuery = query
@@ -152,7 +152,7 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getFileMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      const query = `/acervo/find?tipos=arquivo&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+      const query = `/acervo/find?tipos=arquivo&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
       const medias = await handlers.handleGetMediaByQuery(query)
 
       if (medias) this.lastQuery = query
@@ -167,7 +167,7 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getImageMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      const query = `/acervo/find?tipos=imagem&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+      const query = `/acervo/find?tipos=imagem&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
       const medias = await handlers.handleGetMediaByQuery(query)
 
       if (medias) this.lastQuery = query
@@ -182,7 +182,7 @@ export const MediaManager = (function () {
      * with sorting parameters.
      */
     this.getVideoMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      const query = `/acervo/find?tipos=video&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+      const query = `/acervo/find?tipos=video&pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
       const medias = await handlers.handleGetMediaByQuery(query)
 
       if (medias) this.lastQuery = query
@@ -197,7 +197,7 @@ export const MediaManager = (function () {
      * potential reuse with sorting parameters.
      */
     this.getAllMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}`
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
       const medias = await handlers.handleGetMediaByQuery(query)
 
       if (medias) this.lastQuery = query

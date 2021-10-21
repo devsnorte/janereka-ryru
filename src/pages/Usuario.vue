@@ -20,6 +20,7 @@
     :loading="loading"
     :midias="mediaItems"
     :viewingFrom="'userArea'"
+    :allowMediaEdition="true"
     @filterContent="filterContent"
     class="fit"
     style="transition: 0.3s ease;"

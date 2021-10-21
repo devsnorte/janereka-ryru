@@ -2,14 +2,14 @@
   <div class="q-gutter-sm">
     <q-btn
       unelevated
-      v-show="editMode"
+      v-show="editMode && allowEdition"
       color="dark"
       :label="$t('gallery.buttonLabelSubmitEdit')"
       @click="$emit('triggerSubmit', true)"
     />
     <q-btn
       unelevated
-      v-show="editMode"
+      v-show="editMode && allowEdition"
       color="dark"
       :label="$t('gallery.buttonLabelCancelEdit')"
       @click="$emit('toggleEditMode')"
@@ -17,13 +17,13 @@
     <q-btn
       unelevated
       color="secondary"
-      v-show="editMode"
+      v-show="editMode && allowEdition"
       :label="$t('gallery.buttonLabelDelete')"
       @click="confirmDelete = true"
     />
     <q-btn
       unelevated
-      v-show="!editMode"
+      v-show="!editMode && allowEdition"
       color="dark"
       :label="$t('gallery.buttonLabelEdit')"
       @click="$emit('toggleEditMode')"
@@ -31,7 +31,6 @@
     <q-btn
       unelevated
       v-close-popup
-      v-show="!editMode"
       color="dark"
       :label="$t('gallery.buttonLabelClose')"
     />
@@ -51,6 +50,11 @@ export default {
 
   props: {
     editMode: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    allowEdition: {
       type: Boolean,
       required: true,
       default: false
