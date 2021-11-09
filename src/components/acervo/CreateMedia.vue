@@ -16,7 +16,7 @@
           v-show="newFile"
           v-model="newFile"
           :label-slot="!newFile"
-          accept="ogg, ogv, avi, mp4, mpeg, webm, jpeg, jpg, png, gif, pdf, ods, odt, odp"
+          accept="ogg, ogv, avi, mp4, mpeg, webm, jpeg, jpg, png, gif, pdf, ods, odt, odp, mp3"
           class="no-pointer-events q-pl-xs q-py-md"
           ref="filePicker"
           @rejected="alertInvalidFile()"

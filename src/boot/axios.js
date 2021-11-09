@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://mucuas.mercadosul.org:8067/rede-mocambos-acervo_65RTX/janeraka_Kdagv',
+  baseURL: 'https://ryru.janeraka.org/bbx/acervo-janeraka-ryru_SKARB/janeraka-nyc1_WNLjm',
   headers: {
     common: {
       token: null
