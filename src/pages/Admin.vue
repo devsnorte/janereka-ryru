@@ -160,7 +160,8 @@ export default {
         this.loading = false
         this.$q.notify({
           type: 'negative',
-          message: this.$t('gallery.alertGenericError')
+          message: this.$t('gallery.alertGenericError'),
+          actions: [{ icon: 'close', color: 'white' }]
         })
       }
     },

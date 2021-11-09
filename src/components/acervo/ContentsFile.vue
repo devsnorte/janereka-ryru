@@ -90,13 +90,15 @@ export default {
         this.$q.notify({
           type: 'positive',
           multiLine: true,
-          message: this.$t('gallery.alertDeleteSuccess')
+          message: this.$t('gallery.alertDeleteSuccess'),
+          actions: [{ icon: 'close', class: 'q-ma-none q-pa-none', color: 'white' }]
         })
       } else {
         this.$q.notify({
           type: 'negative',
           multiLine: true,
-          message: this.$t('gallery.alertDeleteFailed')
+          message: this.$t('gallery.alertDeleteFailed'),
+          actions: [{ icon: 'close', class: 'q-ma-none q-pa-none', color: 'white' }]
         })
       }
     },

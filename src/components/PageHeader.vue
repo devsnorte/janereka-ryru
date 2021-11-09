@@ -4,7 +4,11 @@
       <q-toolbar class="row justify-center text-dark">
 
         <q-toolbar-title shrink class="q-ml-md gt-sm" >
-          <q-img src="~/assets/janeraka.svg" width="3.2em" />
+          <q-img
+            src="~/assets/janeraka.svg"
+            width="3.2em"
+            no-spinner="false"
+          />
         </q-toolbar-title>
 
         <q-tabs

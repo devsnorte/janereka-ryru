@@ -63,12 +63,12 @@ const teamData = [
 
 const logoImg = [
   {
-    name: 'Vue.js Norte',
-    url: require('src/assets/logo_VueNorte.svg')
-  },
-  {
     name: 'Baobáxia',
     url: require('src/assets/LogoBBX_mono.svg')
+  },
+  {
+    name: 'Vue.js Norte',
+    url: require('src/assets/logo_VueNorte.svg')
   }
 ]
 

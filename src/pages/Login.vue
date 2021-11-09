@@ -88,7 +88,8 @@ export default {
         this.loading = false
         this.$q.notify({
           type: 'negative',
-          message: this.$t('login.alertLoginFailed')
+          message: this.$t('login.alertLoginFailed'),
+          actions: [{ icon: 'close', color: 'white' }]
         })
       }
     },
@@ -101,7 +102,8 @@ export default {
         else {
           this.$q.notify({
             type: 'negative',
-            message: this.$t('login.alertHasNoPerms')
+            message: this.$t('login.alertHasNoPerms'),
+            actions: [{ icon: 'close', color: 'white' }]
           })
           this.$router.push({ name: 'home' })
         }
