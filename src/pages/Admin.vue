@@ -1,5 +1,5 @@
 <template>
-<q-page>
+<q-page class="q-py-xl q-px-md">
   <div class="q-mx-md q-pa-md">
     <div class="text-h4 text-weight-bold text-capitalize">{{ username }}</div>
     <div class="text-caption text-weight-bold text-primary">{{ $t('admin.pageTextAdminLabel') }}</div>
@@ -14,16 +14,14 @@
     />
   </div>
 
-  <div ref="adminMediasWrapper" class="bg-grey-2 row full-width">
+  <div ref="adminMediasWrapper">
 
     <div v-if="loading">
       Loading...
     </div>
 
-    <div v-else>
-      <div class="full-width bg-white row no-wrap" style="height: 40px; width: 100vw;">
-        <div class="col-1" />
-
+    <div class="bg-grey-2 row full-width" v-else>
+      <div class="full-width bg-white row wrap">
         <div
           class="custom-tab q-px-lg q-py-sm col-shrink full-height row justify-center bg-grey-2 text-primary text-weight-bold"
         >
@@ -36,27 +34,22 @@
             {{ $t('admin.pageTextSubmissionsLabel') }}
           </span>
         </div>
-
-        <div class="col-grow" />
       </div>
 
       <div
         ref="adminMediaItemWrapper"
         v-for="media in mediaItems"
         :key="media.smid"
-        :class="$q.screen.lt.sm ? 'column' : 'row q-mx-auto'"
-        class="q-mb-xl q-pa-md admin-media-item-wrapper"
+        class="q-mb-xl q-pa-md"
       >
 
         <card-wrapper
           :card="media"
-          :class="$q.screen.lt.sm ? 'col-2' : 'col q-mr-md'"
           :allowMediaEdition="false"
-          class="col content-card"
+          class="col-12"
         />
 
         <div
-          :class="$q.screen.lt.md ? 'col' : 'col-7'"
           class="column justify-between"
         >
           <div
@@ -182,14 +175,5 @@ export default {
 }
 .custom-tab {
   border-radius: 10px 10px 0 0;
-}
-.admin-media-item-wrapper {
-  width: 100%;
-}
-
-@media screen and (min-width: 1439px) {
-  .admin-media-item-wrapper {
-    width: 75%;
-  }
 }
 </style>

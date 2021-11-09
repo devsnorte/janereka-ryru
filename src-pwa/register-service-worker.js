@@ -29,26 +29,17 @@ register(process.env.SERVICE_WORKER_FILE, {
   },
 
   updated (/* registration */) {
+    console.log('Updated is avaible.')
     Notify.create({
-      color: 'negative',
-      icon: 'cloud_download',
       message: 'Nova Atualização Disponível!',
-      timeout: 0,
-      multiLine: true,
-      actions: [
-        {
-          label: 'Atualizar',
-          color: 'yellow',
-          handler: () => {
-            window.location.reload()
-          }
-        },
-        {
-          label: 'Ignorar',
-          color: 'white',
-          handler: () => {}
-        }
-      ]
+      icon: 'mdi-cellphone-arrow-down',
+      closeBtn: 'Atualizar',
+      timeout: 10000,
+      type: 'positive',
+      classes: 'glossy text-white',
+      onDismiss () {
+        window.location.reload(true)
+      }
     })
   },
 
