@@ -13,6 +13,14 @@
                     {{ `${info.name.join('\n')}` }}
                 </div>
             </div>
+            <div class="col-12 q-pb-xs-xl">
+              <div class="text-h5 text-weight-bolder text-primary"> Apoio </div>
+            </div>
+            <div class="fit row justify-center">
+              <div class="col-xs-12 col-md-3 q-pb-xs-xl" v-for="(img, index) in logo" :key="index">
+                <img :src="img.url" :alt="`Logo de ${img.name}`" width="120px" />
+              </div>
+            </div>
         </div>
     </div>
 </template>
@@ -44,10 +52,23 @@ const teamData = [
   {
     role: 'Desenvolvedores',
     name: [
+      'Alice Cruvinel Bonafé',
       'Diego Souza',
       'Luandro Vieira',
-      'Thayana Corrêa Mamoré'
+      'Thayana Corrêa Mamoré',
+      'Vincenzo Tozzi'
     ]
+  }
+]
+
+const logoImg = [
+  {
+    name: 'Vue.js Norte',
+    url: require('src/assets/logo_VueNorte.svg')
+  },
+  {
+    name: 'Baobáxia',
+    url: require('src/assets/LogoBBX_mono.svg')
   }
 ]
 
@@ -55,7 +76,8 @@ export default {
   name: 'Equipe',
   data () {
     return {
-      team: teamData
+      team: teamData,
+      logo: logoImg
     }
   }
 }
