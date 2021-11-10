@@ -53,14 +53,16 @@ export default {
       if (success) {
         this.$q.notify({
           type: 'positive',
-          message: this.$t('admin.alertRejectionSuccess')
+          message: this.$t('admin.alertRejectionSuccess'),
+          actions: [{ icon: 'close', color: 'white' }]
         })
         this.loading = false
         this.$emit('closeRejectModal')
       } else {
         this.$q.notify({
           type: 'negative',
-          message: this.$t('admin.alertRejectionError')
+          message: this.$t('admin.alertRejectionError'),
+          actions: [{ icon: 'close', color: 'white' }]
         })
         this.loading = false
         this.$emit('closeRejectModal')

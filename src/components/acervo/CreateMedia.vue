@@ -209,7 +209,8 @@ export default {
     alertInvalidFile () {
       this.$q.notify({
         type: 'negative',
-        message: this.$t('submission.alertInvalidFile')
+        message: this.$t('submission.alertInvalidFile'),
+        actions: [{ icon: 'close', color: 'white' }]
       })
     },
 
@@ -224,14 +225,16 @@ export default {
       if (!this.newFile) {
         this.$q.notify({
           type: 'negative',
-          message: this.$t('submission.alertNoFileSelected')
+          message: this.$t('submission.alertNoFileSelected'),
+          actions: [{ icon: 'close', color: 'white' }]
         })
         this.loading = false
       // Ensure submission terms are agreed with
       } else if (!this.acceptTerms) {
         this.$q.notify({
           type: 'negative',
-          message: this.$t('submission.alertMustAcceptTerms')
+          message: this.$t('submission.alertMustAcceptTerms'),
+          actions: [{ icon: 'close', color: 'white' }]
         })
         this.loading = false
       // Proceed with submission
@@ -245,13 +248,15 @@ export default {
         if (success) {
           this.$q.notify({
             type: 'positive',
-            message: this.$t('submission.alertSubmissionSuccess')
+            message: this.$t('submission.alertSubmissionSuccess'),
+            actions: [{ icon: 'close', color: 'white' }]
           })
           this.$router.push('/acervo')
         } else {
           this.$q.notify({
             type: 'negative',
-            message: this.$t('submission.alertSubmissionError')
+            message: this.$t('submission.alertSubmissionError'),
+            actions: [{ icon: 'close', color: 'white' }]
           })
         }
 

@@ -31,7 +31,8 @@ export const Session = (function () {
           Notify.create({
             type: 'warning',
             multiLine: true,
-            message: i18n.t('login.alertSessionAboutToExpire')
+            message: i18n.t('login.alertSessionAboutToExpire'),
+            actions: [{ icon: 'close', color: 'white' }]
           })
           return true
         } else {
@@ -40,7 +41,8 @@ export const Session = (function () {
             position: 'center',
             type: 'warning',
             multiLine: true,
-            message: i18n.t('login.alertLoginNecessary')
+            message: i18n.t('login.alertLoginNecessary'),
+            actions: [{ icon: 'close', color: 'white' }]
           })
           return false
         }

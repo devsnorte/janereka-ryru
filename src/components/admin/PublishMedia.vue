@@ -53,14 +53,16 @@ export default {
       if (success) {
         this.$q.notify({
           type: 'positive',
-          message: this.$t('admin.alertPublicationSuccess')
+          message: this.$t('admin.alertPublicationSuccess'),
+          actions: [{ icon: 'close', color: 'white' }]
         })
         this.loading = false
         this.$emit('closePublishModal')
       } else {
         this.$q.notify({
           type: 'negative',
-          message: this.$t('admin.alertPublicationError')
+          message: this.$t('admin.alertPublicationError'),
+          actions: [{ icon: 'close', color: 'white' }]
         })
         this.loading = false
         this.$emit('closePublishModal')
