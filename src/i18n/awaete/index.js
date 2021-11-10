@@ -3,7 +3,8 @@ export default {
     pageTextEthnicity: 'A etnia', // Pending translation
     pageTextAboutAwaeteCitationA: 'yuwy we araka kumeti u\'u tipe gy ure renuemi uékujawi tipe ure\nGyawi assirini i\'i urewe awaete ramu ure mywe jepe\nAraka mywe jepe awa jay\'yma já tapy\'yia ei ure mumawa mywe jepe\nMarytyka ujeup tawyipe mywe jepe\nAeramu má mawa umama e retxaukwata ra\nTapy\'yia juaka awe uta gy pyri mywe marytykaramera',
     pageTextAboutAwaeteCitationB: 'Gyawi uterenui asoreni jawu\nAwa amute awi gy uetcak pajau',
-    pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
+    pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61',
+    pageTextAboutTeam: 'Equipe técnica' // Pending translation
   },
   admin: {
     alertPublicationError: 'Erro durante publicação. Arquivo não publicado.', // Pending translation
@@ -42,11 +43,11 @@ export default {
   },
   gallery: {
     alertDeleteFailed: 'Ocorreu um erro na deleção do arquivo.', // Pending translation
-    alertDeleteSuccess: 'Arquivo deletado com sucesso. Atualize a página para visualizar as mudanças.', // Pending translation
+    alertDeleteSuccess: 'Arquivo deletado com sucesso.', // Pending translation
     alertGenericError: 'Ocorreu um erro.', // Pending translation
     alertSubmissionSuccess: 'Seu arquivo foi submetido com sucesso.', // Pending translation
     alertUpdateFailed: 'Ocorreu um erro na atualização do arquivo.', // Pending translation
-    alertUpdateSuccess: 'Seu aquivo foi atualizado com sucesso. Atualize a página para visualizar as mudanças.', // Pending translation
+    alertUpdateSuccess: 'Seu aquivo foi atualizado com sucesso.', // Pending translation
     buttonLabelCancelEdit: 'Cancelar edição', // Pending translation
     buttonLabelClose: 'Fechar', // Pending translation
     buttonLabelDelete: 'Deletar', // Pending translation
@@ -140,6 +141,7 @@ export default {
     galleryCategoryLabelPersonal: 'Acervo pessoal', // Pending translation
     galleryCategoryLabelSubmissions: 'Submissões', // Pending translation
     pageTextFamily: 'Jeretarera:',
-    pageTextIndigenousGroup: 'Jetawa\'rera:'
+    pageTextIndigenousGroup: 'Jetawa\'rera:',
+    isFilePublished: 'ARQUIVO AINDA NÃO FOI ACEITO PARA PUBLICAÇÃO'
   }
 }

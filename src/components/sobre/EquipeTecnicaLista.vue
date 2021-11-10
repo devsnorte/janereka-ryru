@@ -2,7 +2,7 @@
     <div class="bg-grey-12 q-py-xl q-px-xs-lg">
         <div class="q-px-xs-lg">
             <h1 class="text-h3 text-weight-bolder text-primary text-center">
-                Equipe técnica
+                {{ $t('about.pageTextAboutTeam') }}
             </h1>
         </div>
 

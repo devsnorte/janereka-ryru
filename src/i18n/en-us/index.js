@@ -3,7 +3,8 @@ export default {
     pageTextEthnicity: 'The',
     pageTextAboutAwaeteCitationA: '“Residing at the Xingu River region on the Pará State, in the interior of the Amazon, the Xingu Asuriní, or Awaete as they call themselves, are a people of only 250 individuals and around 40 years of civilized contact. Artisans, builders, hunters, farmers, gatherers and connoisseurs of the local fauna and flora, the Awaete once had their autonomy based on a complex and balanced cultural system. They lived part of the years as nomads, spread among the land in family units, and on the other they found themselves in intense festivities that took place on the Tawywa, or "Great House". In these celebrations they refreshed and built their culture anew, expanding their knowledge about the land and their inhabitants through exchanges among their clans, and many times welcoming travelers as well, in a great knowledge interchange. ',
     pageTextAboutAwaeteCitationB: 'A common point on the bibliography about this region is that the term “asuriní”, to which Codreau refers to, probably designated a larger quantity of indigenous peoples from this region. While today it is used to refer to the Xingu Asuriní, there is more chance that the word originally referred to the Arawaté indigenous group, because they abundantly used the urucum, a native plant with red fruits and seeds used to create pigments, while the Xingu Asuriní used jenipapo, with a black color.”',
-    pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
+    pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61',
+    pageTextAboutTeam: 'Technical team'
   },
   admin: {
     alertPublicationError: 'Error during publication. Media kept unpublished.',
@@ -46,7 +47,7 @@ export default {
     alertGenericError: 'An error has occurred.',
     alertSubmissionSuccess: 'Your file has been successfully submitted.',
     alertUpdateFailed: 'An error has occured during the update process.',
-    alertUpdateSuccess: 'Your file has been successfully updated. Refresh the page to see the changes.',
+    alertUpdateSuccess: 'Your file has been successfully updated.',
     buttonLabelCancelEdit: 'Cancel edit',
     buttonLabelClose: 'Close',
     buttonLabelDelete: 'Delete',
@@ -140,6 +141,7 @@ export default {
     galleryCategoryLabelPersonal: 'Personal gallery',
     galleryCategoryLabelSubmissions: 'Submissions',
     pageTextFamily: 'Family:',
-    pageTextIndigenousGroup: 'Indigenous group:'
+    pageTextIndigenousGroup: 'Indigenous group:',
+    isFilePublished: 'FILE NOT YET ACCEPTED FOR PUBLICATION'
   }
 }

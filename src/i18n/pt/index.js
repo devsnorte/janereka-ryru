@@ -3,7 +3,8 @@ export default {
     pageTextEthnicity: 'A etnia',
     pageTextAboutAwaeteCitationA: '“Localizados no Médio Xingu, no estado do Pará, no interior da Amazônia, os Asuriní do Xingu, ou Awaete como se autodenominam, são um povo de apenas 250 pessoas e 40 anos de contato. Artesãos, construtores, caçadores, agricultores, coletores, conhecedores da fauna e flora local, os Awaete possuíam sua autonomia baseada num sistema cultural complexo e equilibrado. Viviam parte do ano nômades, dispersos pelo território em núcleos familiares e na outra parte encontrava-se numa intensa festa celebrada na Tawywa, casa grande. Nestes encontros construíam e renovavam sua cultura e expandiam seu conhecimento sobre os territórios e seus habitantes pelas trocas entre seus clãs e muitas vezes acolhendo viajantes numa grande troca de saberes.',
     pageTextAboutAwaeteCitationB: 'Um ponto comum da bibliografia acerca desta região é de que o termo “asuriní” ao qual Coudreau se refere provavelmente designava uma quantidade maior de povos indígenas que circulavam por essa região. Esse termo tem origem no termo juruna asóreni que designa vermelho. Embora ele seja atualmente aplicado aos Asuriní do Xingu é mais provável que esse termo designasse o grupo indígena Arawaté, pois estes últimos utilizam de forma abundante o urucum, de cor vermelha, enquanto que os Asuriní do Xingu utilizam jenipapo, de cor preta.”',
-    pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61'
+    pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61',
+    pageTextAboutTeam: 'Equipe técnica'
   },
   admin: {
     alertPublicationError: 'Erro durante publicação. Arquivo não publicado.',
@@ -42,11 +43,11 @@ export default {
   },
   gallery: {
     alertDeleteFailed: 'Ocorreu um erro na deleção do arquivo.',
-    alertDeleteSuccess: 'Arquivo deletado com sucesso. Atualize a página para visualizar as mudanças.',
+    alertDeleteSuccess: 'Arquivo deletado com sucesso.',
     alertGenericError: 'Ocorreu um erro.',
     alertSubmissionSuccess: 'Seu arquivo foi submetido com sucesso.',
     alertUpdateFailed: 'Ocorreu um erro na atualização do arquivo.',
-    alertUpdateSuccess: 'Seu aquivo foi atualizado com sucesso. Atualize a página para visualizar as mudanças.',
+    alertUpdateSuccess: 'Seu aquivo foi atualizado com sucesso.',
     buttonLabelCancelEdit: 'Cancelar edição',
     buttonLabelClose: 'Fechar',
     buttonLabelDelete: 'Deletar',
@@ -140,6 +141,7 @@ export default {
     galleryCategoryLabelPersonal: 'Acervo pessoal',
     galleryCategoryLabelSubmissions: 'Submissões',
     pageTextFamily: 'Família:',
-    pageTextIndigenousGroup: 'Aldeia:'
+    pageTextIndigenousGroup: 'Aldeia:',
+    isFilePublished: 'ARQUIVO AINDA NÃO FOI ACEITO PARA PUBLICAÇÃO'
   }
 }
