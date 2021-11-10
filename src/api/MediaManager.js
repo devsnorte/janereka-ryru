@@ -72,7 +72,7 @@ export const MediaManager = (function () {
     this.getMediasFromUser = async (
       username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
     ) => {
-      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}`
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&ordem_campo=created&ordem_decrescente=true`
       const medias = await handlers.handleGetMediaByQuery(query)
       return medias
     }
@@ -84,7 +84,7 @@ export const MediaManager = (function () {
     this.getSubmissionsFromUser = async (
       username, pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
     ) => {
-      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&status=published`
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&creator=${username}&status=published&ordem_campo=created&ordem_decrescente=true`
       const medias = await handlers.handleGetMediaByQuery(query)
       return medias
     }
@@ -96,7 +96,7 @@ export const MediaManager = (function () {
     this.getAllUnpublishedMedias = async (
       pagTamanho = this.pagTamanho, pagAtual = this.pagAtual
     ) => {
-      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=draft`
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=draft&ordem_campo=created&ordem_decrescente=true`
       const medias = await handlers.handleGetMediaByQuery(query)
       return medias
     }
@@ -197,7 +197,7 @@ export const MediaManager = (function () {
      * potential reuse with sorting parameters.
      */
     this.getAllMedias = async (pagTamanho = this.pagTamanho, pagAtual = this.pagAtual) => {
-      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published`
+      const query = `/acervo/find?pag_tamanho=${pagTamanho}&pag_atual=${pagAtual}&status=published&ordem_campo=created&ordem_decrescente=true`
       const medias = await handlers.handleGetMediaByQuery(query)
 
       if (medias) this.lastQuery = query
