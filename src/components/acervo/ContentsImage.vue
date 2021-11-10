@@ -95,7 +95,10 @@ export default {
         this.$q.notify({
           type: 'positive',
           message: this.$t('gallery.alertDeleteSuccess'),
-          actions: [{ icon: 'close', color: 'white' }]
+          actions: [{ icon: 'close', color: 'white' }],
+          onDismiss () {
+            location.reload()
+          }
         })
       } else {
         this.$q.notify({
