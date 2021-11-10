@@ -4,7 +4,24 @@ export default {
     pageTextAboutAwaeteCitationA: 'yuwy we araka kumeti u\'u tipe gy ure renuemi uékujawi tipe ure\nGyawi assirini i\'i urewe awaete ramu ure mywe jepe\nAraka mywe jepe awa jay\'yma já tapy\'yia ei ure mumawa mywe jepe\nMarytyka ujeup tawyipe mywe jepe\nAeramu má mawa umama e retxaukwata ra\nTapy\'yia juaka awe uta gy pyri mywe marytykaramera',
     pageTextAboutAwaeteCitationB: 'Gyawi uterenui asoreni jawu\nAwa amute awi gy uetcak pajau',
     pageTextAboutAwaeteCitationBibliography: 'NIMUENDAJÚ, 1948, p. 255; RIBEIRO, 2009, p. 61',
-    pageTextAboutTeam: 'Equipe técnica' // Pending translation
+    pageTitleAboutDenomination: 'AUTO DENOMINAÇÃO',
+    pageTitleAboutLanguage: 'LÍNGUA',
+    pageTitleAboutIndigenousLand: 'TERRA INDÍGENA',
+    pageTitleAboutArea: 'ÁREA OFICIAL',
+    pageTitleAboutStatus: 'STATUS TERRITORIAL',
+    pageTitleAboutUnit: 'UNIDADE ADM. FUNAI',
+    pageTitleAboutBiome: 'BIOMA',
+    pageTitleAboutBasin: 'BACIA HIDROGRÁFICA',
+    pageTitleAboutVegetal: 'COBERTURA VEGETAL',
+    pageTitleAboutIndiginousGroup: 'ALDEIAS',
+    pageTitleAboutPopulation: 'POPULAÇÃO',
+    pageTitleAboutKnowledge: 'PRINCIPAIS SABERES TRADICIONAIS',
+    pageTitleAboutTeam: 'Equipe técnica',
+    pageTitleRoleTranslation: 'Produção Cultural e Tradução',
+    pageTitleRoleExecutiveManagement: 'Produção Cultural e Direção Executiva',
+    pageTitleRoleDesigner: 'Designers',
+    pageTitleRoleDev: 'Desenvolvedores',
+    pageTitleAboutTeamRealization: 'Realização'
   },
   admin: {
     alertPublicationError: 'Erro durante publicação. Arquivo não publicado.', // Pending translation
