@@ -1,26 +1,35 @@
 <template>
   <div>
-    <q-card class="cursor-pointer fit" style="overflow: hidden;" @click="toggleModal()">
+    <div @click="toggleModal()">
+      <q-card class="cursor-pointer fit" style="overflow: hidden;">
 
-      <!-- File card -->
-      <card-file v-if="card.tipo == 'arquivo'" :media="card" />
+        <!-- File card -->
+        <card-file v-if="card.tipo == 'arquivo'" :media="card" />
 
-      <!-- Image card -->
-      <card-image v-if="card.tipo == 'imagem'" :media="card" />
+        <!-- Image card -->
+        <card-image v-if="card.tipo == 'imagem'" :media="card" />
 
-      <!-- Video card -->
-      <card-video v-if="card.tipo == 'video'" :media="card" />
+        <!-- Video card -->
+        <card-video v-if="card.tipo == 'video'" :media="card" />
 
-      <!-- Audio card -->
-      <card-audio v-if="card.tipo == 'audio'" :media="card" />
+        <!-- Audio card -->
+        <card-audio v-if="card.tipo == 'audio'" :media="card" />
 
-      <!-- Title/Author overlay -->
-      <q-card-section class="absolute-bottom text-white bottom-overlay">
-        <p class="text-h6">{{ card.titulo }}</p>
-        <strong>{{ $t('gallery.mediaDetailsAuthor') }}</strong> {{ card.creator }}
-      </q-card-section>
+        <!-- Title/Author overlay -->
+        <q-card-section class="text-white bottom-overlay">
+          <p class="text-h6">{{ card.titulo }}</p>
+          <strong>{{ $t('gallery.mediaDetailsAuthor') }}</strong> {{ card.autor }}
+        </q-card-section>
 
-    </q-card>
+      </q-card>
+      <div
+        v-if="this.$route.name === 'usuario' && card.status === 'draft'"
+        align="center"
+        class="text-white text-bold text-uppercase bg-primary q-py-xs"
+      >
+          {{ $t('user.isFilePublished') }}
+      </div>
+    </div>
 
     <!-- Contents view -->
     <q-dialog
