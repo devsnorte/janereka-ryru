@@ -2,10 +2,6 @@
 <q-page padding class="row">
   <div class="full-width q-pa-md">
     <div class="text-h4 text-weight-bold text-capitalize">{{ username }}</div>
-    <div class="text-body1">
-      <strong>{{ $t('user.pageTextFamily') }}</strong><br>
-      <strong>{{ $t('user.pageTextIndigenousGroup') }}</strong>
-    </div>
     <q-btn
       outline
       color="white"

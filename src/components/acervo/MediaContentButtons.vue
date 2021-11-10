@@ -15,6 +15,7 @@
       @click="$emit('toggleEditMode')"
     />
     <q-btn
+      v-if="isAdmin"
       unelevated
       color="secondary"
       v-show="editMode && allowEdition"
@@ -41,6 +42,9 @@
 </template>
 
 <script>
+import { Session } from 'src/api/SessionManager'
+import { getters } from 'src/store/session-store'
+
 export default {
   name: 'MidiaContentButtons',
 
@@ -63,7 +67,20 @@ export default {
 
   data () {
     return {
+      sessionManager: Session.getSessionManager(),
+      sessionData: getters.session(),
       confirmDelete: false
+    }
+  },
+  computed: {
+    /**
+     * Returns 'true' or 'false' whether the user has
+     * admin credentials.
+     *
+     * @return {boolean}
+     */
+    isAdmin: function () {
+      return this.sessionData.roles.includes('acervo.publisher')
     }
   }
 }
