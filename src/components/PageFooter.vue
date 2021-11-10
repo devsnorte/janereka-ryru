@@ -41,14 +41,12 @@
 </template>
 
 <script>
-import { Session } from 'src/api/SessionManager'
 import { getters } from 'src/store/session-store'
 
 export default {
   name: 'PageFooter',
   data () {
     return {
-      sessionManager: Session.getSessionManager(),
       sessionData: getters.session(),
       social_midias: [
         {

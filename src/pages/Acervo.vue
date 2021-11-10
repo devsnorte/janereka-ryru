@@ -6,7 +6,7 @@
     :loading="loading"
     :midias="mediaItems"
     :viewingFrom="'mainGallery'"
-    :allowMediaEdition="false"
+    :allowMediaEdition="isAdmin"
     @filterContent="filterContent"
     @changePage="requestPage($event)"
     @toggleFilter="showFilter = !showFilter"
@@ -85,6 +85,7 @@
 
 <script>
 import { MediaManager } from 'src/api/MediaManager'
+import { getters } from 'src/store/session-store'
 
 export default {
   name: 'Acervo',
@@ -97,6 +98,7 @@ export default {
   data () {
     return {
       mediaManager: MediaManager.getManager(),
+      sessionData: getters.session(),
       mediaItems: [],
       hashtags: [],
       loading: false,
@@ -109,6 +111,18 @@ export default {
   mounted () {
     this.getTopHashtags()
     this.filterContent('todos')
+  },
+
+  computed: {
+    /**
+     * Returns 'true' or 'false' whether the user has
+     * admin credentials.
+     *
+     * @return {boolean}
+     */
+    isAdmin: function () {
+      return this.sessionData.roles.includes('acervo.publisher')
+    }
   },
 
   methods: {

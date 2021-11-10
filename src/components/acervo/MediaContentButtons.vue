@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import { Session } from 'src/api/SessionManager'
 import { getters } from 'src/store/session-store'
 
 export default {
@@ -67,7 +66,6 @@ export default {
 
   data () {
     return {
-      sessionManager: Session.getSessionManager(),
       sessionData: getters.session(),
       confirmDelete: false
     }
