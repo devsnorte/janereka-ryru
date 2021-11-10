@@ -54,7 +54,10 @@ export default {
         this.$q.notify({
           type: 'positive',
           message: this.$t('admin.alertPublicationSuccess'),
-          actions: [{ icon: 'close', color: 'white' }]
+          actions: [{ icon: 'close', color: 'white' }],
+          onDismiss () {
+            location.reload()
+          }
         })
         this.loading = false
         this.$emit('closePublishModal')

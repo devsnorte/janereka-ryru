@@ -94,14 +94,12 @@ export default {
       if (success) {
         this.$q.notify({
           type: 'positive',
-          multiLine: true,
           message: this.$t('gallery.alertDeleteSuccess'),
           actions: [{ icon: 'close', color: 'white' }]
         })
       } else {
         this.$q.notify({
           type: 'negative',
-          multiLine: true,
           message: this.$t('gallery.alertDeleteFailed'),
           actions: [{ icon: 'close', color: 'white' }]
         })
@@ -118,7 +116,7 @@ export default {
 
 <style scoped>
 .image-wrapper {
-  width: 95vw;
+  max-width: 50vw;
   margin-left: auto;
   margin-right: auto;
 }

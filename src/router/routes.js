@@ -86,7 +86,6 @@ const routes = [
             Notify.create({
               position: 'center',
               type: 'warning',
-              multiLine: true,
               message: i18n.t('login.alertHasNoPerms'),
               actions: [{ icon: 'close', color: 'white' }]
             })

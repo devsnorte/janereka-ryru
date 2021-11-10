@@ -54,7 +54,10 @@ export default {
         this.$q.notify({
           type: 'positive',
           message: this.$t('admin.alertRejectionSuccess'),
-          actions: [{ icon: 'close', color: 'white' }]
+          actions: [{ icon: 'close', color: 'white' }],
+          onDismiss () {
+            location.reload()
+          }
         })
         this.loading = false
         this.$emit('closeRejectModal')

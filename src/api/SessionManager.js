@@ -30,7 +30,6 @@ export const Session = (function () {
         } else if (elapsedTimeInSeconds >= 600 && elapsedTimeInSeconds <= 900) {
           Notify.create({
             type: 'warning',
-            multiLine: true,
             message: i18n.t('login.alertSessionAboutToExpire'),
             actions: [{ icon: 'close', color: 'white' }]
           })
@@ -40,7 +39,6 @@ export const Session = (function () {
           Notify.create({
             position: 'center',
             type: 'warning',
-            multiLine: true,
             message: i18n.t('login.alertLoginNecessary'),
             actions: [{ icon: 'close', color: 'white' }]
           })

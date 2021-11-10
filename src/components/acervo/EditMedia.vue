@@ -160,14 +160,15 @@ export default {
         this.tags = new Set()
         this.$q.notify({
           type: 'positive',
-          multiLine: true,
           message: this.$t('gallery.alertUpdateSuccess'),
-          actions: [{ icon: 'close', color: 'white' }]
+          actions: [{ icon: 'close', color: 'white' }],
+          onDismiss () {
+            location.reload()
+          }
         })
       } else {
         this.$q.notify({
           type: 'negative',
-          multiLine: true,
           message: this.$t('gallery.alertUpdateFailed'),
           actions: [{ icon: 'close', color: 'white' }]
         })

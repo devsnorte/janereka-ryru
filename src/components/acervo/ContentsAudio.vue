@@ -88,14 +88,15 @@ export default {
       if (success) {
         this.$q.notify({
           type: 'positive',
-          multiLine: true,
           message: this.$t('gallery.alertDeleteSuccess'),
-          actions: [{ icon: 'close', color: 'white' }]
+          actions: [{ icon: 'close', color: 'white' }],
+          onDismiss () {
+            location.reload()
+          }
         })
       } else {
         this.$q.notify({
           type: 'negative',
-          multiLine: true,
           message: this.$t('gallery.alertDeletFailed'),
           actions: [{ icon: 'close', color: 'white' }]
         })
