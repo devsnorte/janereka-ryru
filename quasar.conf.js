@@ -31,10 +31,10 @@ module.exports = function (/* ctx */) {
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
       // 'ionicons-v4',
-      // 'mdi-v5',
       // 'themify',
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
+      'mdi-v5',
       'eva-icons',
       'fontawesome-v5',
       'material-icons' // optional, you are not bound to it
@@ -68,13 +68,16 @@ module.exports = function (/* ctx */) {
           loader: 'eslint-loader',
           exclude: /node_modules/
         })
+      },
+      env: {
+        VERSION_PLATFORM: require('./package.json').version
       }
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      https: true,
-      port: 8080,
+      https: false,
+      port: 8081,
       open: true // opens browser window automatically
     },
 
@@ -134,9 +137,8 @@ module.exports = function (/* ctx */) {
 
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
-      workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
+      // workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {
-        cleanupOutdatedCaches: true,
         skipWaiting: true,
         clientsClaim: true
       }, // only for GenerateSW
@@ -147,7 +149,7 @@ module.exports = function (/* ctx */) {
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#a40000',
         icons: [
           {
             src: 'icons/icon-128x128.png',
@@ -208,7 +210,7 @@ module.exports = function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'quasar-acervo'
+        appId: 'janereka-ryru'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration

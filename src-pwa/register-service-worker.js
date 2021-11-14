@@ -31,15 +31,14 @@ register(process.env.SERVICE_WORKER_FILE, {
   updated (/* registration */) {
     console.log('Updated is avaible.')
     Notify.create({
+      textColor: 'white',
       message: 'Nova Atualização Disponível!',
       icon: 'mdi-cellphone-arrow-down',
-      closeBtn: 'Atualizar',
       timeout: 10000,
       type: 'positive',
-      classes: 'glossy text-white',
-      onDismiss () {
-        window.location.reload(true)
-      }
+      actions: [
+        { label: 'Atualizar', color: 'white', handler: () => { location.reload(true) } }
+      ]
     })
   },
 
