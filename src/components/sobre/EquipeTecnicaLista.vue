@@ -16,8 +16,8 @@
             <div class="col-12 q-pb-xs-xl">
               <div class="text-h5 text-weight-bolder text-primary"> {{$t('about.pageTitleAboutTeamRealization')}} </div>
             </div>
-            <div class="fit row justify-center self-baseline">
-              <div class="col-xs-12 col-sm-3 col-md-2 q-pb-xs-xl" v-for="(img, index) in logo" :key="index">
+            <div class="fit row justify-center">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 q-pb-xs-xl self-baseline" v-for="(img, index) in logo" :key="index">
                 <img :src="img.url" :alt="`Logo de ${img.name}`" :width="img.width" />
               </div>
             </div>
@@ -28,6 +28,11 @@
 <script>
 
 const logoImg = [
+  {
+    name: 'Agenda Awaete',
+    url: require('src/assets/realizacao/AgendaAwaete.jpg'),
+    width: '150px'
+  },
   {
     name: 'Baobáxia',
     url: require('src/assets/realizacao/LogoBBX_mono.svg'),
@@ -75,8 +80,8 @@ export default {
         {
           role: this.$t('about.pageTitleRoleDesigner'),
           name: [
-            'Gabriela Pessoa',
             'Alice Damasceno',
+            'Gabriela Pessoa',
             'Jamille Santos',
             'Yuka Yamada'
           ]
