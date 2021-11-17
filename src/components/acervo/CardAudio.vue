@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-info q-pa-xs" style="height: 300px;">
+  <div class="q-pa-xs" style="height: 300px;">
     <div class="media-buttons-wrapper fit bg-accent">
       <div class="media-buttons-overlay fit bg-accent">
-        <div class=" row absolute-center text-secondary">
+        <div class="row absolute-center text-secondary">
           <q-icon name="volume_up" style="font-size: 4rem;" />
           <q-icon name="play_arrow" style="font-size: 4rem;" />
         </div>

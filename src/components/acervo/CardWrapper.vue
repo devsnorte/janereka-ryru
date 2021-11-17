@@ -100,7 +100,7 @@ export default {
 .media-buttons-overlay {
   overflow: hidden;
   border-radius: 15px;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 .media-buttons-overlay:hover {
   opacity: 1;
