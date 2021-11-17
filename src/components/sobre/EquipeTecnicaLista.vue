@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-grey-12 q-py-xl q-px-xs-lg">
+    <div class="bg-light q-py-xl q-px-xs-lg">
         <div class="q-px-xs-lg">
             <h1 class="text-h3 text-weight-bolder text-primary text-center">
                 {{ $t('about.pageTitleAboutTeam') }}
@@ -14,10 +14,10 @@
                 </div>
             </div>
             <div class="col-12 q-pb-xs-xl">
-              <div class="text-h5 text-weight-bolder text-primary"> {{$t('about.pageTitleAboutTeamRealization')}} </div>
+              <div class="text-h4 text-weight-bolder text-primary"> {{$t('about.pageTitleAboutTeamRealization')}} </div>
             </div>
             <div class="fit row justify-center">
-              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 q-pb-xs-xl self-baseline" v-for="(img, index) in logo" :key="index">
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 q-pb-xs-xl self-baseline" v-for="(img, index) in logo" :key="index">
                 <img :src="img.url" :alt="`Logo de ${img.name}`" :width="img.width" />
               </div>
             </div>
@@ -29,29 +29,29 @@
 
 const logoImg = [
   {
-    name: 'Agenda Awaete',
-    url: require('src/assets/realizacao/AgendaAwaete.jpg'),
-    width: '150px'
+    name: 'Marytykwawara Awaete',
+    url: require('src/assets/realizacao/marytykwawara.jpg'),
+    width: '170px'
   },
   {
-    name: 'Baobáxia',
-    url: require('src/assets/realizacao/LogoBBX_mono.svg'),
-    width: '110px'
+    name: 'Agenda Awaete',
+    url: require('src/assets/realizacao/AgendaAwaete.jpg'),
+    width: '140px'
   },
   {
     name: 'Inajá Design Permacultural',
     url: require('src/assets/realizacao/inaja.jpg'),
-    width: '110px'
-  },
-  {
-    name: 'Marytykwawara Awaete',
-    url: require('src/assets/realizacao/marytykwawara.jpg'),
-    width: '190px'
+    width: '97px'
   },
   {
     name: 'Vue.js Norte',
     url: require('src/assets/realizacao/logo_VueNorte.svg'),
-    width: '120px'
+    width: '110px'
+  },
+  {
+    name: 'Baobáxia',
+    url: require('src/assets/realizacao/LogoBBX_mono.svg'),
+    width: '100px'
   }
 ]
 

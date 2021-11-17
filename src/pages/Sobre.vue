@@ -36,6 +36,7 @@
       </div>
     </div>
     <Map />
+    <Plataforma />
     <Equipe />
   </q-page>
 </template>
@@ -46,6 +47,7 @@ export default {
   components: {
     Sobre: () => import('components/sobre/SobreImg'),
     Map: () => import('components/sobre/SobreMap'),
+    Plataforma: () => import('components/sobre/SobrePlataforma'),
     Equipe: () => import('components/sobre/EquipeTecnicaLista')
   },
 
