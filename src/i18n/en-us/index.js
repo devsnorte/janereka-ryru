@@ -21,7 +21,7 @@ export default {
     pageTitleRoleExecutiveManagement: 'Cultural Production and Executive Management',
     pageTitleRoleDesigner: 'Designers',
     pageTitleRoleDev: 'Developers',
-    pageTitleAboutTeamRealization: 'Realization'
+    pageTitleAboutTeamRealization: 'Production of the Multimedia Collection Platform'
   },
   admin: {
     alertPublicationError: 'Error during publication. Media kept unpublished.',

@@ -21,7 +21,7 @@ export default {
     pageTitleRoleExecutiveManagement: 'Produção Cultural e Direção Executiva',
     pageTitleRoleDesigner: 'Designers',
     pageTitleRoleDev: 'Desenvolvedores',
-    pageTitleAboutTeamRealization: 'Realização'
+    pageTitleAboutTeamRealization: 'Produção da Plataforma de Acervo Multimídia'
   },
   admin: {
     alertPublicationError: 'Erro durante publicação. Arquivo não publicado.',
