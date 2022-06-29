@@ -1,4 +1,4 @@
-# Plataforma Janereka Ryru
+# Plataforma Janereka Ryru - exemplificando
 
 Plataforma de Salvaguarda e Acervo Multimídia do Patrimônio Awaete
 
